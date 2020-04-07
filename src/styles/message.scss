@@ -1,0 +1,248 @@
+@import './variables.scss';
+
+.sc-message {
+  width: 350px;
+  margin: auto;
+  padding-bottom: 6px;
+  display: flex;
+}
+
+.sc-message--content {
+  width: 100%;
+  display: flex;
+  position: relative;
+
+  &:hover {
+    .sc-message-like-wrapper {
+      display: flex;
+    }
+  }
+}
+
+.sc-message--content.sent {
+  justify-content: flex-end;
+}
+
+.sc-message--content.sent .sc-message--avatar {
+  display: none;
+}
+
+.sc-message--avatar {
+  background-image: url(https://d13yacurqjgara.cloudfront.net/assets/avatar-default-aa2eab7684294781f93bc99ad394a0eb3249c5768c21390163c9f55ea8ef83a4.gif);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  min-width: 30px;
+  min-height: 30px;
+  max-width: 30px;
+  max-height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.sc-message--text {
+  padding: 11px 16px;
+  border-radius: 27.5px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  white-space: pre-wrap;
+  -webkit-font-smoothing: subpixel-antialiased;
+  word-wrap: break-word;
+  width: fit-content;
+  max-width: 266px;
+
+  a {
+    color: #2690ff;
+  }
+}
+
+.sc-message--content.sent .sc-message--text {
+  color: white;
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+.sc-message-and-like-container {
+  max-width: calc(100% - 120px);
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.sc-message--content.received .sc-message--text {
+  color: #263238;
+  margin-right: 40px;
+}
+
+.sc-message_online {
+  height: 12px;
+  width: 12px;
+  min-height: 12px;
+  min-width: 12px;
+  background-color: $onlineGreen;
+  position: absolute;
+  font-size: 12px;
+  color: $lighterFont;
+  top: -20px;
+  border-radius: 50%;
+  left: 50px;
+}
+
+.sc-message_messager {
+  position: absolute;
+  font-size: 12px;
+  color: $lighterFont;
+  top: -22px;
+  left: 67px;
+  padding-bottom: 10px;
+}
+
+.sc-message_avatarWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.sc-message_group {
+  position: relative;
+  margin-bottom: 28px;
+}
+
+.messageList_loadingIcon {
+  width: 50px;
+}
+
+.myGroup.sc-message_group {
+  margin-top: -20px;
+}
+
+.sc-message_spacer {
+  min-width: 52px;
+}
+
+.sc-message--emoji {
+  font-size: 40px;
+  height: 40px;
+}
+
+.sc-message--file {
+  background: white;
+  border: solid 1px #CCCDD1;
+  padding: 15px 20px;
+  border-radius: 5px;
+  display: flex;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.4;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.sc-message--file p {
+  margin: 0px 0px 0px 10px;
+  color: rgba(86, 88, 103, 0.6);
+}
+
+.sc-message-like-wrapper {
+  position: absolute;
+  width: fit-content;
+  bottom: -17px;
+  cursor: pointer;
+  display: none;
+  background-color: white;
+  border: 1px solid $borderColor;
+  z-index: 5;
+  border-radius: 12px;
+  min-height: 23px;
+  min-width: 24px;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+
+  &:hover {
+    .sc-user-input--like-icon.not-liked {
+      fill: #ff6b6b;
+    }
+  }
+}
+
+.sc-message-like-wrapper.show {
+  display: flex !important;
+}
+
+.sent .sc-message-like-wrapper {
+  right: 10px;
+}
+
+.received .sc-message-like-wrapper {
+  left: 10px;
+}
+
+.sc-message-like-container {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  padding-top: 1px;
+
+  p {
+    font-size: 13px;
+    opacity: .6;
+    margin: 0;
+  }
+}
+
+.show .sc-message-like-container {
+  padding: 1px 5px 0 5px;
+}
+
+.sc-message-likers-wrapper {
+  display: flex;
+  position: absolute;
+  left: 40px;
+  background-color: #38383e;
+  font-size: 12px;
+  transition: .2s ease-in-out all;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 2px 12px;
+  border-radius: 12px;
+  z-index: 10;
+  width: fit-content;
+  width: -moz-fit-content;
+  max-width: 230px;
+  text-overflow: ellipsis;
+  min-height: 23px;
+
+  p {
+    color: white;
+    margin: 0;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.likers-separator {
+  margin-right: 3px !important;
+}
+
+.sc-message-likers-wrapper.isMyComment {
+  right: 40px !important;
+}
+
+.sc-message--content.sent .sc-message-likers-wrapper {
+  left: auto;
+}
+
+@media (max-width: 450px) {
+  .sc-message {
+    width: 90%;
+  }
+
+  .sc-message-likers-wrapper {
+    max-width: 218px;
+  }
+}
