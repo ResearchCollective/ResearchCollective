@@ -11,11 +11,11 @@ import {
     isLikeEvent,
     resolveLikes,
     checkIsMobileDevice,
-} from './utils';
+} from '../utils';
 
-import Launcher from './components/Launcher';
-import ChatWindow from './components/ChatWindow';
-import './index.scss';
+import Launcher from './Launcher';
+import ChatWindow from './ChatWindow';
+import '../index.scss';
 
 class ChatBox extends Component {
     constructor(props) {
