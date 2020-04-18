@@ -82,17 +82,15 @@ export default class App extends Component {
             {!this.state.web3enabled && <h6>No MetaMask ❌🦊</h6>}
             {(this.state.web3enabled && !this.state.accounts) && <h6>MetaMask detected; please Authorize Connection 🦊🤝🦄</h6>}
             {this.state.web3enabled && this.state.accounts && <h6> MetaMask connected as {this.state.accounts} </h6>}
-            <div>
-              <ThemedButton theme={props.theme}/>    
-            </div>
+
           </div>
           <div className="container" style={{ paddingTop: '50px' }}>
               <Switch>
                 <Route path="/chat">
-                  <Chat  web3enabled={this.state.web3enabled} box={this.state.box} />
+                  <Chat web3enabled={this.state.web3enabled} box={this.state.box} />
                 </Route>
                 <Route path="/profile">
-                  <Profile address={'0x262b4F07e42BBc33F597fcf0d854e9DAFaf3D469'} accounts={this.state.accounts} web3enabled={this.state.web3enabled}/>
+                  <Profile web3enabled={this.state.web3enabled}/>
                 </Route>
                 <Route path="/about">
                   <About/>
