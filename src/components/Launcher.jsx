@@ -6,8 +6,6 @@ import ChatWindow from './ChatWindow';
 import launcherIconActive from '../assets/close-icon.svg';
 import Chat from '../assets/chat-bubble.svg';
 
-import styles from '../styles';
-
 class Launcher extends Component {
   constructor() {
     super();

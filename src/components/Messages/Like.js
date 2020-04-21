@@ -6,9 +6,7 @@ import { shortenEthAddr } from '../../utils';
 import LikeIcon from "../icons/LikeIcon"
 
 class LikersList extends Component {
-  constructor(props) {
-    super(props)
-  }
+
 
   render() {
     const { likers, showLikers, hideLikers, isMyComment } = this.props

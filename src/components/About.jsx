@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import {Container} from 'react-bootstrap';
 class About extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
       return (

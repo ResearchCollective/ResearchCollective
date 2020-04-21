@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Form, Button, Navbar, Nav, Container, Row, Card } from 'react-bootstrap';
-import ProfileHover from 'profile-hover';
+import { Form, Button, Navbar, Nav } from 'react-bootstrap';
 import Box from '3box';
 import Web3 from 'web3';
 import HDWalletProvider from "@truffle/hdwallet-provider";
@@ -210,19 +209,9 @@ class Notes extends Component {
 }
 
 
-class Home extends Component {
-  render() {
-    return (<>
-      <h1>COVID-19 Resources</h1>
-    </>);
-  }
-}
 
 
 class FormComponent extends Component {
-
-
-
   render() {
     return (
       <Form onSubmit={this.props.handleSubmit}>

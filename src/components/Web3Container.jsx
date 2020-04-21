@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import {Container} from 'react-bootstrap';
 
 class Web3Container extends Component {
-  constructor(props) {
-    super(props);
-  }
+
     render() {
       if (this.web3enabled) {
         return (

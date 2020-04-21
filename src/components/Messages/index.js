@@ -8,9 +8,6 @@ import TextMessage from './TextMessage';
 import Like from './Like'
 
 class Message extends Component {
-  constructor() {
-    super();
-  }
 
   render() {
     const {

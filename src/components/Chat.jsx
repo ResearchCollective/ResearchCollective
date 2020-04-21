@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import {Button, Container, Row, Card} from 'react-bootstrap';
-import Credentials from './Credentials';
+import {Container} from 'react-bootstrap';
 import Web3Container from './Web3Container';
 import ChatBox from "./ChatBoxExtended";
 
 class Chat extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
       return (
@@ -20,7 +16,6 @@ class Chat extends Component {
                 <ChatBox
                     spaceName="3Box"
                     threadName="Research Collective Thread"
-
               />
             </Web3Container>
         </Container>

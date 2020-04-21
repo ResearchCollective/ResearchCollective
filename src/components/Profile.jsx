@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import {Button, Container, Row, Card} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 import Credentials from './Credentials';
 import Web3Container from './Web3Container';
 import ProfileHover from 'profile-hover';
 
 class Profile extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
       return (

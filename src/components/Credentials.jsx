@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import {Button, Container, Row, Card} from 'react-bootstrap';
+import {Container, Row} from 'react-bootstrap';
 
 
 class Credentials extends Component {
-  constructor(props) {
-    super(props);
-  }
 
 
   render() {
