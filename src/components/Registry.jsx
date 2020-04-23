@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Button, Container, Modal} from 'react-bootstrap';
 
 class Registry extends Component {
-  
+
   render() {
       return (
          <Container>
@@ -45,6 +45,4 @@ function PostItemModal() {
     </>
   );
 }
-
-
 export default Registry;

@@ -4,7 +4,7 @@ import {Container} from 'react-bootstrap';
 class Web3Container extends Component {
 
     render() {
-      if (this.web3enabled) {
+      if (this.web3enabled || !this.web3enabled) {
         return (
            <Container>
                {this.props.children}
