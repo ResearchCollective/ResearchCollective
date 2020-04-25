@@ -1,6 +1,7 @@
   import React, { Component } from "react";
   import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
   import { Form, Button, Navbar, Nav } from 'react-bootstrap';
+  import { Main } from '@aragon/ui'
   import Box from '3box';
   import Web3 from 'web3';
   import HDWalletProvider from "@truffle/hdwallet-provider";
@@ -64,45 +65,47 @@
     }
     render() {
       return (
-        <Router>
-          <div>
-            <Navbar bg="light" expand="lg" style={{ minHeight: '40px' }}>
-              <Navbar.Brand href="#home">Research Collective</Navbar.Brand>
-                <Nav fill style={{ width: "100%"}} >
-                  <Nav.Item><Link to="/">Registry</Link></Nav.Item>
-                  <Nav.Item><Link to="/about">About</Link></Nav.Item>
-                  <Nav.Item><Link to="/profile">Profile</Link></Nav.Item>
-                  <Nav.Item><Link to="/notes">Notebook</Link></Nav.Item>
-                  <Nav.Item><Link to="/chat">Chat</Link></Nav.Item>
-                </Nav>
-            </Navbar>
-            <div className="statusBar">
-              {!this.state.web3enabled && <h6>No MetaMask ❌🦊</h6>}
-              {(this.state.web3enabled && !this.state.accounts) && <h6>MetaMask detected: please authorize connection 🦊🤝🦄 in pop up</h6>}
-              {this.state.web3enabled && this.state.accounts && <h6> MetaMask connected as {this.state.accounts} 🦊💚🧬</h6>}
+        <Main>
+          <Router>
+            <div>
+              <Navbar bg="light" expand="lg" style={{ minHeight: '40px' }}>
+                <Navbar.Brand href="#home">Research Collective</Navbar.Brand>
+                  <Nav fill style={{ width: "100%"}} >
+                    <Nav.Item><Link to="/">Registry</Link></Nav.Item>
+                    <Nav.Item><Link to="/about">About</Link></Nav.Item>
+                    <Nav.Item><Link to="/profile">Profile</Link></Nav.Item>
+                    <Nav.Item><Link to="/notes">Notebook</Link></Nav.Item>
+                    <Nav.Item><Link to="/chat">Chat</Link></Nav.Item>
+                  </Nav>
+              </Navbar>
+              <div className="statusBar">
+                {!this.state.web3enabled && <h6>No MetaMask ❌🦊</h6>}
+                {(this.state.web3enabled && !this.state.accounts) && <h6>MetaMask detected: please authorize connection 🦊🤝🦄 in pop up</h6>}
+                {this.state.web3enabled && this.state.accounts && <h6> MetaMask connected as {this.state.accounts} 🦊💚🧬</h6>}
 
-            </div>
-            <div className="container" style={{ paddingTop: '50px' }}>
-                <Switch>
-                  <Route path="/chat">
-                    <Chat web3enabled={this.state.web3enabled} box={this.state.box} />
-                  </Route>
-                  <Route path="/profile">
-                    <Profile web3enabled={this.state.web3enabled}/>
-                  </Route>
-                  <Route path="/about">
-                    <About/>
-                  </Route>
-                  <Route path="/notes">
-                    <Notes web3enabled={this.state.web3enabled} space={this.state.space}/>
-                  </Route>
-                  <Route path="/">
-                  <Registry />
-                  </Route>
-                </Switch>
               </div>
-          </div>
-        </Router>
+              <div className="container" style={{ paddingTop: '50px' }}>
+                  <Switch>
+                    <Route path="/chat">
+                      <Chat web3enabled={this.state.web3enabled} box={this.state.box} />
+                    </Route>
+                    <Route path="/profile">
+                      <Profile web3enabled={this.state.web3enabled}/>
+                    </Route>
+                    <Route path="/about">
+                      <About/>
+                    </Route>
+                    <Route path="/notes">
+                      <Notes web3enabled={this.state.web3enabled} space={this.state.space}/>
+                    </Route>
+                    <Route path="/">
+                    <Registry />
+                    </Route>
+                  </Switch>
+                </div>
+            </div>
+          </Router>
+        </Main>
       );
     }
   }
