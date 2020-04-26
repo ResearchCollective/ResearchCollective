@@ -14,7 +14,7 @@ class Chat extends Component {
                 <p> Previously, this widget was modified so that each message can be optionally published to Ethereum chain. </p>
                 <p> Perhaps this mechanism can be used to create comments on each list item?</p>
                 <ChatBox
-                    spaceName="3Box"
+                    spaceName="3Book"
                     threadName="Research Collective Thread"
               />
             </Web3Container>
