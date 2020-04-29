@@ -11,3 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.pushUp {
+  position: relative;
+  top: -15px;
+}
+
+.sectionText{
+  text-align: center;
+  font-size: .7em;
+}
+
+.sectionTitle {
+
+  font-size: 1.5em;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+
+.sectionSubTitle{
+  font-style: italic;
+  font-size: .9em;
+  text-align: center;
+}

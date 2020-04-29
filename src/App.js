@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Form, Navbar, Nav } from 'react-bootstrap';
-import { Main, Header, Button, Split, Bar, Tag, IconPlus, Box as AragonBox, Help } from '@aragon/ui'
+import { Main, Header, Button, Split, Bar, Tag, IconPlus, Box as AragonBox, Help, useTheme } from '@aragon/ui'
 import Box from '3box';
 import Web3 from 'web3';
 import HDWalletProvider from "@truffle/hdwallet-provider";
 import Profile from "./components/Profile";
-import Registry from "./components/Registry";
+import Votes from "./components/Votes";
+import Resources from "./components/Resources";
 import Web3Container from "./components/Web3Container";
 import ChatBox from "./components/ChatBoxExtended";
 
 export default class App extends Component {
+
+
 
     state = {
       web3enabled: false,
@@ -61,20 +64,24 @@ export default class App extends Component {
         this.setState({space});
       }
     }
+
+
+
     render() {
       return (
         <Main>
           <Router>
             <Header>
-            <Bar  style={{ width: "100%"}}>
-                <Navbar  style={{ width: "100%"}} bg="light">
-                  <Navbar.Brand href="#home">Research Collective</Navbar.Brand>
+             <Bar  style={{ width: "100%"}}>
+                <Navbar  style={{ width: "100%", position: "relative", top: "5px", background: "#FFFFFF!important"}}>
+                  <Navbar.Brand  style={{ fontWeight: "bold"}} href="/">Research Collective</Navbar.Brand>
                     <Nav fill style={{ width: "100%"}} >
-                      <Nav.Item><Link to="/">Registry</Link></Nav.Item>
-                      <Nav.Item><Link to="/profile">Profile</Link></Nav.Item>
+                      <Nav.Item><Link to="/resources">Resources</Link></Nav.Item>
                       <Nav.Item><Link to="/notes">Notebook</Link></Nav.Item>
                       <Nav.Item><Link to="/chat">Chat</Link></Nav.Item>
-                      <Nav.Item>                <div  style={{ width: "100%"}}>             {!this.state.web3enabled && <h6>No MetaMask ❌🦊</h6>}
+                      <Nav.Item><Link to="/votes">Votes</Link></Nav.Item>
+                      <Nav.Item><Link to="/profile">Profile</Link></Nav.Item>
+                      <Nav.Item>                  <div  style={{ width: "100%",  textAlign: "right" }}>             {!this.state.web3enabled && <h6>No MetaMask ❌🦊</h6>}
                                                   {(this.state.web3enabled && !this.state.accounts) && <h6>Authorize MetaMask 🦊🤝🦄</h6>}
                                                   {this.state.web3enabled && this.state.accounts && <h6> Connected 🦊💚🧬</h6>}
                       </div></Nav.Item>
@@ -100,8 +107,11 @@ export default class App extends Component {
                       <Route path="/notes">
                         <Notes web3enabled={this.state.web3enabled} space={this.state.space}/>
                       </Route>
-                      <Route path="/">
-                      <Registry />
+                      <Route path="/votes">
+                        <Votes />
+                      </Route>
+                      <Route path="/resources">
+                      <Resources/>
                       </Route>
                     </Switch>
                   </AragonBox>
@@ -109,8 +119,14 @@ export default class App extends Component {
                 secondary={
                   <>
                     <AragonBox>
-                      <Header> <h1> About </h1> </Header>
-                      <p> Here is some lovely text about the Research Collective. </p>
+                       <h1 className="sectionTitle"> About </h1>
+                        <p className="sectionSubTitle"> the Research Collective</p>
+                        <br/>
+                        <div>
+                          <p className="sectionText"> The colission of crypto and the biological sciences presents itself before you.</p> <br/>
+                          <p className="sectionText"> Our researchers arm themselves with etheric technology to fight the Leviathan's stranglehold on the Truth. </p> <br/>
+                          <p className="sectionText"> The self-sovereignty of genetic information and knowledge production will bring nothing short of a second renaissance. </p>
+                        </div>
                     </AragonBox>
                   </>
                 }
