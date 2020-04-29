@@ -1,24 +1,22 @@
-  import React, { Component } from "react";
-  import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-  import { Form, Navbar, Nav } from 'react-bootstrap';
-  import { Main, Header, Button, Split, Bar, Tag, IconPlus, Box as AragonBox } from '@aragon/ui'
-  import Box from '3box';
-  import Web3 from 'web3';
-  import HDWalletProvider from "@truffle/hdwallet-provider";
-  import Profile from "./components/Profile";
-  import About from "./components/About";
-  import Chat from "./components/Chat";
-  import Registry from "./components/Registry";
-  import Web3Container from "./components/Web3Container";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Form, Navbar, Nav } from 'react-bootstrap';
+import { Main, Header, Button, Split, Bar, Tag, IconPlus, Box as AragonBox, Help } from '@aragon/ui'
+import Box from '3box';
+import Web3 from 'web3';
+import HDWalletProvider from "@truffle/hdwallet-provider";
+import Profile from "./components/Profile";
+import Registry from "./components/Registry";
+import Web3Container from "./components/Web3Container";
+import ChatBox from "./components/ChatBoxExtended";
 
-  export default class App extends Component {
-
+export default class App extends Component {
 
     state = {
       web3enabled: false,
-      box: false,
-      space: false,
-      address: false
+        box: false,
+        space: false,
+        address: false
     }
 
     async getAddressFromMetaMask() {
@@ -32,7 +30,6 @@
       }
     }
 
-
     async getWeb3(){
       const mnemonic = "mountains supernatural bird angle hello monster elegant entangle holy crap excellent manure"; // 12 word mnemonic
       let provider = new HDWalletProvider(mnemonic, "http://localhost:8545");
@@ -41,7 +38,6 @@
       const accounts = web3.defaultAccount;
       this.setState({  accounts, web3 });
     }
-
 
     async auth3box() {
       const address = this.state.accounts[0];
@@ -52,8 +48,6 @@
       await box.syncDone;
       this.setState({box: box });
     }
-
-
 
     async componentDidMount() {
       await this.getAddressFromMetaMask();
@@ -73,51 +67,55 @@
           <Router>
             <Header>
             <Bar  style={{ width: "100%"}}>
-                <Navbar bg="light">
+                <Navbar  style={{ width: "100%"}} bg="light">
                   <Navbar.Brand href="#home">Research Collective</Navbar.Brand>
                     <Nav fill style={{ width: "100%"}} >
                       <Nav.Item><Link to="/">Registry</Link></Nav.Item>
-                      <Nav.Item><Link to="/about">About</Link></Nav.Item>
                       <Nav.Item><Link to="/profile">Profile</Link></Nav.Item>
                       <Nav.Item><Link to="/notes">Notebook</Link></Nav.Item>
                       <Nav.Item><Link to="/chat">Chat</Link></Nav.Item>
+                      <Nav.Item>                <div  style={{ width: "100%"}}>             {!this.state.web3enabled && <h6>No MetaMask ❌🦊</h6>}
+                                                  {(this.state.web3enabled && !this.state.accounts) && <h6>Authorize MetaMask 🦊🤝🦄</h6>}
+                                                  {this.state.web3enabled && this.state.accounts && <h6> Connected 🦊💚🧬</h6>}
+                      </div></Nav.Item>
                     </Nav>
                 </Navbar>
               </Bar>
             </Header>
-            {!this.state.web3enabled && <h6>No MetaMask ❌🦊</h6>}
-            {(this.state.web3enabled && !this.state.accounts) && <h6>MetaMask detected: please authorize connection 🦊🤝🦄 in pop up</h6>}
-            {this.state.web3enabled && this.state.accounts && <h6> MetaMask connected as {this.state.accounts} 🦊💚🧬</h6>}
-
             <Split
                 primary={
                   <AragonBox>
-                  <Switch>
-                    <Route path="/chat">
-                      <Chat web3enabled={this.state.web3enabled} box={this.state.box} />
-                    </Route>
-                    <Route path="/profile">
-                      <Profile box={this.state.box} space={this.state.space} address={this.state.address} web3enabled={this.state.web3enabled}/>
-                    </Route>
-                    <Route path="/about">
-                      <About/>
-                    </Route>
-                    <Route path="/notes">
-                      <Notes web3enabled={this.state.web3enabled} space={this.state.space}/>
-                    </Route>
-                    <Route path="/">
-                    <Registry />
-                    </Route>
-                  </Switch>
+                    <Switch>
+                      <Route path="/chat">
+                      {this.state.box && <ChatBox
+                          spaceName="3Book"
+                          threadName="3BookThread"
+                          box={this.state.box}
+                          currentUserAddr={this.state.accounts[0]}
+                      />}
+                      </Route>
+                      <Route path="/profile">
+                        <Profile box={this.state.box} space={this.state.space} address={this.state.address} web3enabled={this.state.web3enabled}/>
+                      </Route>
+                      <Route path="/notes">
+                        <Notes web3enabled={this.state.web3enabled} space={this.state.space}/>
+                      </Route>
+                      <Route path="/">
+                      <Registry />
+                      </Route>
+                    </Switch>
                   </AragonBox>
                 }
                 secondary={
                   <>
-                    <IconPlus/>
+                    <AragonBox>
+                      <Header> <h1> About </h1> </Header>
+                      <p> Here is some lovely text about the Research Collective. </p>
+                    </AragonBox>
                   </>
                 }
               />
-          </Router>
+            </Router>
         </Main>
       );
     }
@@ -222,6 +220,14 @@
   }
 
 
+  class Chat extends Component {
+    render() {
+      return (<>
+        <h1>Amnesia Chat</h1>
+          {console.log("chat time!")}
+      </>);
+    }
+  }
 
 
   class FormComponent extends Component {
