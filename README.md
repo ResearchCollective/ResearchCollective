@@ -1,20 +1,34 @@
 # Research Collective
 #### A Submission to the DragonQuest Hackathon
 
-The Research Collective is a...
+#### The Research Collective is a...
 - Group of Citizen Scientists 
 - A Wyoming Non-Profit / Aragon DAO Hybrid
-- The first "Knowledge Foundation"; developing curated lists for sensitive topics such as
+- The first "Knowledge Foundation"; developing curated lists for sensitive if not underregulated topics such as
    - Research Chemical Suppliers
    - Pre-print Articles Screening
    - COVID Test Kits
+   
+##### *User Stories for this app:*
+- I want to be able to find testing kits, anti virals, and articles for COVID-19. 
+- I want to know why a particular article or vendor is trustworthy. 
+- I want to be able to post a resource for testing kits or anti virals.
+- I want to be able to challenge some one else's listing, and receive the scammer's stake if arbitration deem it be removed.
+*First use case completed for DragonQuest; others will be developed over future hackathons*
+
+##### *Mockups / Specifications*
+These first three docs were all made in the first two weeks of the DragonQuest hackathon
+- [Backend](https://researchcollective.io/specs/backend.jpg)
+- [User Flow](https://researchcollective.io/specs/site-flow.jpg)
+- [Registry Mockup](https://researchcollective.io/specs/mockup-registry.jpg)
+- [Meta Roadmap (A Part of the Etherize Super Plan)](https://researchcollective.io/specs/etherize-roadmap.jpg)
+
 
 ##### Tech Added for DragonQuest Hackathon:
 - **[Aragon UI](https://ui.aragon.org/)** - a dark theme and Web3-focused styling
 - **[TheGraph](https://thegraph.com/explorer/subgraph/protofire/aragon)** - for accessing Aragon DAO information 
 
-##### Tech Imported from EthDenver 2020 project: 'DMV Demolisher'
-
+##### Tech Included from EthDenver 2020 project: 'DMV Demolisher'
 - **HD wallet** - for generation of pub/priv key pairs
 - **P2P chat** - secure peer 2 peer messaging
 - **React** — frontend framework
@@ -25,7 +39,9 @@ The Research Collective is a...
 
 ## Installation
 npm run build
+
 npm run start
+
 You will need Python 2.7x installed, and...
 
 ### Troubleshooting
