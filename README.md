@@ -1,6 +1,19 @@
 # Research Collective
 #### A Submission to the DragonQuest Hackathon
-##### A Continuance of the EthDenver project: 'DMV Demolisher'
+
+The Research Collective is a...
+- Group of Citizen Scientists 
+- A Wyoming Non-Profit / Aragon DAO Hybrid
+- The first "Knowledge Foundation"; developing curated lists for sensitive topics such as
+   - Research Chemical Suppliers
+   - Pre-print Articles Screening
+   - COVID Test Kits
+
+##### Tech Added for DragonQuest Hackathon:
+- **[Aragon UI](https://ui.aragon.org/)** - a dark theme and Web3-focused styling
+- **[TheGraph](https://thegraph.com/explorer/subgraph/protofire/aragon)** - for accessing Aragon DAO information 
+
+##### Tech Imported from EthDenver 2020 project: 'DMV Demolisher'
 
 - **HD wallet** - for generation of pub/priv key pairs
 - **P2P chat** - secure peer 2 peer messaging
@@ -11,8 +24,10 @@
 - React Bootstrap - UI Library
 
 ## Installation
+npm run build
+npm run start
+You will need Python 2.7x installed, and...
 
 ### Troubleshooting
 If you get Error: ENOENT: no such file or directory, scandir '/home/aitheric/Projects/MultiPass/node_modules/node-sass/vendor'
-try running 
-nodejs node_modules/node-sass/scripts/install.js
+try running: nodejs node_modules/node-sass/scripts/install.js
