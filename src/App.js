@@ -1,85 +1,68 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Form, Navbar, Nav } from 'react-bootstrap';
-import { Main, Header, Button, Split, Bar, Tag, IconPlus, Box as AragonBox, Help, useTheme } from '@aragon/ui'
+import {  Navbar, Nav } from 'react-bootstrap';
+import { Main, Header, Button, Modal, Split, Bar, IconExternal, IconIdentity, Box as AragonBox } from '@aragon/ui'
 import Box from '3box';
 import Web3 from 'web3';
 import HDWalletProvider from "@truffle/hdwallet-provider";
-import Profile from "./components/Profile";
 import Votes from "./components/Votes";
 import Resources from "./components/Resources";
-import Web3Container from "./components/Web3Container";
-import ChatBox from "./components/ChatBoxExtended";
-
+import ProfileHover from 'profile-hover';
+import EditProfile from '3box-profile-edit-react';
 export default class App extends Component {
 
+  state = {
+    web3enabled: false,
+    box: false,
+    space: false,
+    address: false,
+    accounts: false
+}
 
+async getAddressFromMetaMask() {
+  if (typeof window.ethereum == "undefined") {
+    this.setState({ needToAWeb3Browser: true });
+  } else {
+    window.ethereum.autoRefreshOnNetworkChange = false; //silences warning about no autofresh on network change
+    const accounts = await window.ethereum.enable();
+    this.setState({ web3enabled: true });
+    this.setState({accounts: accounts });
+  }
+}
+async auth3box() {
+  const address = this.state.accounts[0];
+  const spaces = ['3Book'];
+  const box = await Box.create(window.ethereum);
+  await box.auth(spaces, { address });
+  await box.syncDone;
+  this.setState({address: address})
+  this.setState({box: box });
+}
 
-    state = {
-      web3enabled: false,
-        box: false,
-        space: false,
-        address: false
-    }
+async componentDidMount() {
+  await this.getAddressFromMetaMask();
+  if (this.state.accounts) {
+    // Now MetaMask's provider has been enabled, we can start working with 3Box
+    await this.auth3box();
+    const space = await this.state.box.openSpace('3Book');
+    await space.syncDone;
+    this.setState({space});
+  }
+}
+  render() {
 
-    async getAddressFromMetaMask() {
-      if (typeof window.ethereum == "undefined") {
-        this.setState({ web3enabled: false });
-      } else {
-        window.ethereum.autoRefreshOnNetworkChange = false; //silences warning about no autofresh on network change
-        const accounts = await window.ethereum.enable();
-        this.setState({ web3enabled: true });
-        this.setState({ accounts });
-      }
-    }
-
-    async getWeb3(){
-      const mnemonic = "mountains supernatural bird angle hello monster elegant entangle holy crap excellent manure"; // 12 word mnemonic
-      let provider = new HDWalletProvider(mnemonic, "http://localhost:8545");
-      // HDWalletProvider is compatible with Web3. Use it at Web3 constructor, just like any other Web3 Provider
-      const web3 = new Web3(provider);
-      const accounts = web3.defaultAccount;
-      this.setState({  accounts, web3 });
-    }
-
-    async auth3box() {
-      const address = this.state.accounts[0];
-      const spaces = ['3Book'];
-      // const box = await Box.create(this.state.web3);
-      const box = await Box.create(window.ethereum);
-      await box.auth(spaces, { address });
-      await box.syncDone;
-      this.setState({box: box });
-    }
-
-    async componentDidMount() {
-      await this.getAddressFromMetaMask();
-      // await this.getWeb3();
-      if (this.state.accounts) {
-        // Now MetaMask's provider has been enabled, we can start working with 3Box
-        await this.auth3box();
-        const space = await this.state.box.openSpace('3Book');
-        await space.syncDone;
-        console.log("hello!");
-        this.setState({space});
-      }
-    }
-
-
-
-    render() {
       return (
-        <Main>
+        <Main theme="dark">
           <Router>
             <Header>
              <Bar  style={{ width: "100%"}}>
-                <Navbar  style={{ width: "100%", position: "relative", top: "5px", background: "#FFFFFF!important"}}>
-                  <Navbar.Brand  style={{ fontWeight: "bold"}} href="/">Research Collective</Navbar.Brand>
+                <Navbar  style={{ width: "100%", position: "relative", top: "5px"}}>
+                  <Navbar.Brand  style={{ fontWeight: "bold", marginLeft: "15px"}} href="/">Research Collective</Navbar.Brand>
                     <Nav fill style={{ width: "100%"}} >
                       <Nav.Item><Link to="/resources">Resources</Link></Nav.Item>
+                      <Nav.Item><Link to="/votes">Votes</Link></Nav.Item>
                       <Nav.Item><Link to="/notes">Notebook</Link></Nav.Item>
                       <Nav.Item><Link to="/chat">Chat</Link></Nav.Item>
-                      <Nav.Item><Link to="/votes">Votes</Link></Nav.Item>
                       <Nav.Item><Link to="/profile">Profile</Link></Nav.Item>
                       <Nav.Item>                  <div  style={{ width: "100%",  textAlign: "right" }}>             {!this.state.web3enabled && <h6>No MetaMask ❌🦊</h6>}
                                                   {(this.state.web3enabled && !this.state.accounts) && <h6>Authorize MetaMask 🦊🤝🦄</h6>}
@@ -94,15 +77,12 @@ export default class App extends Component {
                   <AragonBox>
                     <Switch>
                       <Route path="/chat">
-                      {this.state.box && <ChatBox
-                          spaceName="3Book"
-                          threadName="3BookThread"
-                          box={this.state.box}
-                          currentUserAddr={this.state.accounts[0]}
-                      />}
+                        <Chat/>
                       </Route>
                       <Route path="/profile">
-                        <Profile box={this.state.box} space={this.state.space} address={this.state.address} web3enabled={this.state.web3enabled}/>
+                        {this.state.box &&
+                        <Profile  box={this.state.box} space={this.state.space} address={this.state.address}/>
+                        }
                       </Route>
                       <Route path="/notes">
                         <Notes web3enabled={this.state.web3enabled} space={this.state.space}/>
@@ -112,6 +92,9 @@ export default class App extends Component {
                       </Route>
                       <Route path="/resources">
                       <Resources/>
+                      </Route>
+                      <Route path="/">
+                        <Home/>
                       </Route>
                     </Switch>
                   </AragonBox>
@@ -123,9 +106,13 @@ export default class App extends Component {
                         <p className="sectionSubTitle"> the Research Collective</p>
                         <br/>
                         <div>
-                          <p className="sectionText"> The colission of crypto and the biological sciences presents itself before you.</p> <br/>
-                          <p className="sectionText"> Our researchers arm themselves with etheric technology to fight the Leviathan's stranglehold on the Truth. </p> <br/>
+                          <p className="sectionText"> The collision of crypto and the biological sciences presents itself before you.</p> <br/>
+                          <p className="sectionText"> Our experimentalists arm themselves with etheric technology to prune the Leviathan's stranglehold on the Truth. </p> <br/>
                           <p className="sectionText"> The self-sovereignty of genetic information and knowledge production will bring nothing short of a second renaissance. </p>
+                        </div>
+                        <div className="fatBottomed buttonContainer">
+                          <Button className="pushDown" icon={<IconIdentity/>}  mode="strong" label="Join" onClick={() =>  window.open(
+                             "https://t.me/joinchat/EObaChML8AxqbUZtiyqeKQ", "_blank")} />
                         </div>
                     </AragonBox>
                   </>
@@ -142,130 +129,62 @@ export default class App extends Component {
 
 
 
-
-
-
+  class Chat extends Component {
+    render() {
+      return (<>
+          <h1 className="pushUp sectionTitle">Chat </h1>
+          <h1 className="sectionSubTitle pushUp"><i>🚨Under Construction🚨</i></h1>
+          <AragonBox className="notesContainer" >
+            <p className="pushUp">Researchers will be able to communicate here,
+            <br/> in a relatively secure manner, via 3Box.</p><br/>
+            <p className="pushUp"><i> For now, there is Telegram...</i></p>
+               <Button  mode="strong"  label="Join" icon={<IconIdentity/>}/>
+            </AragonBox>
+      </>);
+    }
+  }
 
   class Notes extends Component {
-
-    state = {
-      view: false
-    }
-
-    publicSave = async (e) => {
-      e.preventDefault();
-      //saves to a public 3Box space
-      await this.props.space.public.set(Date.now(), this.state.publicNoteToSave);
-
-      this.setState({publicNoteToSave : null});
-      console.log("saved")
-      this.getPublicNotes();
-    }
-
-    privateSave = async (e) => {
-      e.preventDefault();
-
-      //saves to a private 3Box space
-  		await this.props.space.private.set(Date.now(), this.state.privateNoteToSave);
-
-      this.setState({privateNoteToSave : null});
-      console.log("saved");
-      this.getPrivateNotes();
-    }
-
-
-    getPublicNotes = async () => {
-      const publicNotes = await this.props.space.public.all();
-      this.setState({ publicNotes });
-    }
-
-    getPrivateNotes = async () => {
-      const privateNotes = await this.props.space.private.all();
-      this.setState({ privateNotes });
-    }
-
-    componentDidUpdate(){
-      if(this.props.space && (!this.state.privateNotes || !this.state.publicNotes)){
-        this.getPublicNotes();
-        this.getPrivateNotes();
-      }
-    }
-
     render() {
       return (
         <div>
-          <h2>Notebook</h2>
-          <p>Your notes here will be accessible via your MetaMask/Ethereum account.</p>
-          <br />
-          <Web3Container>
-            <Button onClick={() => (this.setState({ view: !this.state.view }))}> {this.state.view ? "Add" : "View"}</Button>
-            {!this.state.view && this.props.space && (<>
-              <h3>📖Public</h3>
-              <FormComponent
-                handleSubmit={this.publicSave}
-                onChange={(e)=>(this.setState({publicNoteToSave : e.target.value}))}
-                value={this.state.publicNoteToSave}
-                label="Save a Public Note"
-                text="This text will be saved publicly on 3Box"
-              />
-              <br />
-
-              <h3>🗝Private</h3>
-              <FormComponent
-                handleSubmit={this.privateSave}
-                onChange={(e)=>(this.setState({privateNoteToSave : e.target.value}))}
-                value={this.state.privateNoteToSave}
-                label="Save a Private Note"
-                text="This text will be encrypted and saved with 3Box"
-              />
-            </>)}
-
-            {this.state.view && <>
-              <h2>View</h2>
-              <br />
-              <h3>📖Public</h3>
-              {this.state.publicNotes &&  Object.values(this.state.publicNotes).map(note => <p>{note}</p>)}
-              <br />
-              <h3>🗝Private</h3>
-              {this.state.privateNotes && Object.values(this.state.privateNotes).map(note => <p>{note}</p>)}
-            </>}
-            </Web3Container>
+          <h1 className="sectionTitle pushUp">Notebook </h1>
+          <h1 className="sectionSubTitle pushUp"><i>🚨Under Construction🚨</i></h1>
+          <AragonBox className="notesContainer" >
+            <p className="pushUp"><i>Researchers will be able to stash encypted or public notes here.</i></p><br/>
+               <p className="pushUp"><i>These notes will be 'hashed and stashed' and will be accessible by one's 3box/MetaMask account.
+              </i></p>
+            </AragonBox>
         </div>
       )
     }
   }
 
-
-  class Chat extends Component {
-    render() {
-      return (<>
-        <h1>Amnesia Chat</h1>
-          {console.log("chat time!")}
-      </>);
-    }
+  class Home extends Component {
+      render() {
+        return ( <>
+          <h1 className="bigTitle"> Welcome Home, Researcher </h1>
+          </>
+        )
+      }
   }
 
-
-  class FormComponent extends Component {
+class Profile extends Component {
+    constructor(props) {
+      super(props);
+    }
     render() {
-      return (
-        <Form onSubmit={this.props.handleSubmit}>
-
-          <Form.Group>
-            <Form.Label>{this.props.label}</Form.Label>
-            <Form.Control
-              type="text-area"
-              as="textarea"
-              placeholder="Note text"
-              value={this.props.value || ""}
-              onChange={this.props.onChange} />
-            <Form.Text className="text-muted">
-              {this.props.text}
-            </Form.Text>
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>)
+        return (
+           <div>
+           <h1 className="sectionTitle pushUp"> Profile </h1>
+           <p className="sectionSubTitle pushUp"> Your Ethereal Appearance</p>
+              <AragonBox className="profileContainer">
+              {this.props.address && <div className="pushUp">
+                  <ProfileHover className="pushUp fatBottomed" address={this.props.address} showName={true} /><br/>
+                  <a  rel="noopener noreferrer" target="_blank" href={"https://3box.io/" + this.props.address}><Button className="pushDown" label="Edit on 3Box" icon={<IconExternal/>}/></a>
+                </div>}
+              </AragonBox>
+          </div>
+      );
     }
   }

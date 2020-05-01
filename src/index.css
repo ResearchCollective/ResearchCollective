@@ -17,14 +17,25 @@ code {
   top: -15px;
 }
 
+.pushDown{
+  position: relative;
+  top: 18px;
+}
+
 .sectionText{
   text-align: center;
   font-size: .7em;
 }
 
+.bigTitle {
+  font-size: 2.7em;
+  text-align: center;
+  font-family: "Courier New";
+}
+
 .sectionTitle {
 
-  font-size: 1.5em;
+  font-size: 1.9em;
   font-weight: bold;
   width: 100%;
   text-align: center;
@@ -34,4 +45,57 @@ code {
   font-style: italic;
   font-size: .9em;
   text-align: center;
+}
+
+.cardContainer{
+  height: 100%;
+  margin: 15px;
+}
+
+.fatBottomed{
+  margin-bottom: 21px;
+}
+
+.buttonContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profileContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notesContainer{
+  display: flex;
+  justify-content: center!important;
+  align-items: center;
+  text-align: center;
+}
+
+.txnButton{
+  position: relative;
+  left: 12px;
+}
+
+.navbar-brand{
+  color: white!important;
+}
+
+.navbar-brand:hover{
+  text-decoration: underline;
+}
+
+.a:hover{
+  color: white!important;
+}
+
+.a {
+  color: white;
+}
+
+.threeboxProfileHover__style_boxShortAddress{
+  color: white!important;
 }
