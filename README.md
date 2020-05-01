@@ -1,6 +1,8 @@
 # Research Collective
 #### A Submission to the DragonQuest Hackathon
 
+**[Video Demonstration](https://www.youtube.com/watch?v=PYa-3dqNT7I)**
+
 #### The Research Collective is a...
 - Group of Citizen Scientists 
 - A Wyoming Non-Profit / Aragon DAO Hybrid
