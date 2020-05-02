@@ -1,5 +1,6 @@
+###Name of Project
 # Research Collective
-### Decentralized Science
+### Decentralized Science Platform
 
 ##### Project Description
 
@@ -30,6 +31,7 @@ Tristan Roberts
 - [@aitherick](https://www.twitter.com/aitherick)
 - [Personal page](www.aitheric.com)
 - tristan@aitheric.com
+
 
 
 [Live Demo](www.researchcollective.io)
