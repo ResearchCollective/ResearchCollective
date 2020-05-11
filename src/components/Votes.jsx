@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Box, IconExternal, DataView } from '@aragon/ui';
-import Loading from "./Loading"
-import { ApolloProvider } from '@apollo/react-hooks';
+import Loading from "./Loading";
 import ApolloClient from 'apollo-boost';
 import { gql } from 'apollo-boost';
 

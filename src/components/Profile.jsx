@@ -1,50 +1,46 @@
-import React, { Component } from 'react';
+import React, {  Component } from 'react';
 import ProfileHover from 'profile-hover';
-import {Button, Modal, Box} from '@aragon/ui';
+import {Button, Modal, SidePanel, IconExternal, Box} from '@aragon/ui';
 import EditProfile from '3box-profile-edit-react';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      address: [],
       box: [],
-      space: []
+      space: [],
+      opened: false,
+      setOpened : false
      };
 }
 
   render() {
       return (
          <div>
-         <h1 className="sectionTitle pushUp"> Profile </h1>
-         <p className="sectionSubTitle pushUp"> Your Ethereal Appearance</p>
-            <Box className="profileContainer">
-            {this.address && <div className="pushUp">
-                <ProfileHover address={this.address} showName={true} />
-                <EditProfileModal  box={this.box} space={this.space} address={this.address}/>
-              </div>}
-            </Box>
-        </div>
-    );
+                <h1 className="sectionTitle pushUp"> Profile </h1>
+                <p className="sectionSubTitle pushUp"> Your Ethereal Appearance</p>
+                {this.props.address  && <h6>Address Online</h6>}
+                {this.props.box  && <h6>Box Online</h6>}
+                {this.props.space  && <h6>Space Online</h6>}
+                <Box className="profileContainer">
+                  {!this.props.address && <h1> Plz Install MetaMask Extension 😿 </h1>}
+                  {this.props.address &&
+                   <div className="pushUp">
+                     <ProfileHover className="pushUp fatBottomed" address={this.props.address} showName={true} /><br/>
+                   </div>
+                 }
+                 {this.props.space && this.props.box &&
+                   <EditProfile
+                           box={this.props.box}
+                           space={this.props.space}
+                           address={this.props.address}/>
+                 }
+                </Box>
+              </div>
+     )
   }
 }
 
 
-function EditProfileModal() {
-  const [opened, setOpened] = React.useState(false)
-  const open = () => setOpened(true)
-  const close = () => setOpened(false)
-
-  return (
-    <>
-      <Button label="Edit Profile" onClick={open}/>
-      <Modal visible={opened} onClose={close}>
-         <p> Modal Content </p>
-         <EditProfile
-         />
-      </Modal>
-    </>
-  )
-}
 
 export default Profile;

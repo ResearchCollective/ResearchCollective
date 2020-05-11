@@ -35,7 +35,7 @@ code {
 
 .sectionTitle {
 
-  font-size: 1.9em;
+  font-size: 2.2em;
   font-weight: bold;
   width: 100%;
   text-align: center;
@@ -44,6 +44,15 @@ code {
 .sectionSubTitle{
   font-style: italic;
   font-size: .9em;
+  text-align: center;
+}
+
+.noteButton{
+  position: absolute;
+  left: 600px;
+}
+
+.centerText{
   text-align: center;
 }
 
@@ -56,9 +65,14 @@ code {
   margin-bottom: 21px;
 }
 
+.flexContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .buttonContainer{
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
@@ -92,10 +106,39 @@ code {
   color: white!important;
 }
 
-.a {
-  color: white;
-}
 
 .threeboxProfileHover__style_boxShortAddress{
   color: white!important;
+}
+
+.fullWidth {
+  width: 100%!important;
+}
+
+.sideMargin{
+  margin-left: 30px;
+}
+
+.navLink{
+  font-size: 2.3vm;
+  position: relative;
+  top: -2px;
+}
+
+/* 3box Plugin Reskinning */
+.edit_profile_value--description{
+  color: black!important;
+}
+
+.edit_profile_value{
+  color: black!important;
+}
+
+.edit_formControls_content_save {
+  background: linear-gradient( 190deg, #32FFF5 -100%, #08BEE5 80% );
+    background-image: linear-gradient(190deg, rgb(50, 255, 245) -100%, rgb(8, 190, 229) 80%);
+}
+
+.threeboxProfileHover__style_hoverProfile  {
+  width: 300px!important;
 }

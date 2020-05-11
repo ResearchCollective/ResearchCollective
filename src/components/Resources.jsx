@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Box, Modal, IconPlus, IconExternal, DataView } from '@aragon/ui';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { Button, Box, Modal, IconPlus, IconExternal, DataView, Field, TextInput } from '@aragon/ui';
 import ApolloClient from 'apollo-boost';
 import { gql } from 'apollo-boost';
 import ProfileHover from 'profile-hover';
-import Loading from "./Loading"
+import Loading from "./Loading";
+import ThreeBoxComments from '3box-comments-react';
 
 class Resources extends Component {
 
@@ -47,12 +47,14 @@ render() {
              <Box style={{display: "inline"}}>
              {this.state.graphData &&  <Loading data={this.state.graphData}/>}
              {this.state.graphData.length > 0 &&
+
+
                <DataView
-                  fields={['Description', 'Poster', 'Link']}
+                  fields={['Description', 'Poster', 'Comments', 'Link']}
                   entries={ExtricateData(this.state.graphData)}
                   renderEntry={({ description, owner, url, parsed }) => {
                     if (parsed) {
-                      return [<h1 style={{width: "100%"}}>{description}</h1>,  <ProfileHover address={owner} showName={true}/>, <div  className="buttonContainer txnButton"> <a rel="noopener noreferrer" target="_blank" href={url}><Button label="" icon={<IconExternal/>}/> </a> </div>]
+                      return [<h1 style={{width: "100%"}}>{description}</h1>,  <ProfileHover address={owner} showName={true}/>, <CommentModal box={this.props.box} address={this.props.address}/>, <div  className="buttonContainer txnButton"> <a rel="noopener noreferrer" target="_blank" href={url}><Button label="" icon={<IconExternal/>}/> </a> </div>]
                     } else {
                       return [<h1 style={{width: "100%"}}>{description}</h1>]
                     }
@@ -106,21 +108,39 @@ function ExtricateData(data) {
   return newData;
   }
 
+function CommentModal(box, address){
+  const [opened, setOpened] = React.useState(false)
+  const open = () => setOpened(true)
+  const close = () => setOpened(false)
+  return (
+      <div>
+        <Button  mode="neutral"  icon={<IconPlus/>} onClick={open} label="Comments"/>
+          <Modal visible={opened} onClose={close}>
+            {box && address &&
+             <Box className="notesContainer">
+                <h1> this is where the comments go </h1>
+             </Box>}
+          </Modal>
+      </div>
+  )
+}
+
 function PostItemModal() {
   const [opened, setOpened] = React.useState(false)
   const open = () => setOpened(true)
   const close = () => setOpened(false)
   return (
     <>
-      <Button className="pushDown" mode="neutral"  icon={<IconPlus/>} onClick={open} label="Post Item"/>
-      <Modal visible={opened} onClose={close}>
-          <p> Post to list function will be completed in the next hackathon.</p>
-          <p> Anyone can stake Ether behind a listing.</p>
-          <p> It will generate an Aragon vote to be voted upon by the relevant sub DAO.</p>
-          <p>If listed, it will convert the ETH into interest bearing DAI.</p>
-          <p>That interest could be used to fund research projects for disputed topics.</p>
-          <p> Eventually, each listing will be subjected to dispute via Kleros.</p>
-          <p>If a contestant wins the challenge, the listing is removed, <br/> and they receive the poster's staked Ether or DAI.</p>
+      <Button className="pushDown" mode="neutral"  icon={<IconPlus/>} onClick={open} label="Post Resource"/>
+        <Modal visible={opened} onClose={close}>
+             <Box className="notesContainer">
+               <h1 className="sectionTitle pushUp"> Post Resource</h1>
+               <p className="sectionSubTitle pushUp">on Covid Research</p>
+             <Field label="Name"><TextInput placeholder="Required" wide="true"></TextInput></Field>
+             <Field label="URL"><TextInput placeholder="Optional" wide="true"></TextInput></Field>
+             <Field  label="Description"><TextInput placeholder="Required" wide="true" multiline="true"></TextInput></Field>
+             <Button mode="strong" label="Post"/>
+          </Box>
       </Modal>
     </>
   )
