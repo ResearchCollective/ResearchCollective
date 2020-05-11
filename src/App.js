@@ -32,11 +32,11 @@ async getAddressFromMetaMask() {
 }
 async auth3box() {
   const address = this.state.accounts[0];
+  this.setState({address: address});
   const spaces = ['3Book'];
   const box = await Box.create(window.ethereum);
   await box.auth(spaces, { address });
   await box.syncDone;
-  this.setState({address: address})
   this.setState({box: box });
 }
 
