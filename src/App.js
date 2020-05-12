@@ -110,7 +110,7 @@ async componentDidMount() {
                           <p className="sectionText"> Our experimentalists arm themselves with etheric technology to prune the Leviathan's stranglehold on the Truth. </p> <br/>
                           <p className="sectionText"> The self-sovereignty of genetic information and knowledge production will bring nothing short of a second renaissance. </p>
                         </div>
-                        <div className="fatBottomed buttonContainer">
+                        <div className="fatBottomed centerContainer buttonContainer">
                           <Button className="pushDown" icon={<IconIdentity/>}  mode="strong" label="Join" onClick={() =>  window.open(
                              "https://t.me/joinchat/EObaChML8AxqbUZtiyqeKQ", "_blank")} />
                         </div>
@@ -135,7 +135,7 @@ async componentDidMount() {
           <h1 className="pushUp sectionTitle">Chat </h1>
           <AragonBox className="flexContainer">
           <p className="pushUp centerText"><i> Nobody online? Find us on Telegram...</i></p>
-           <div className="buttonContainer">
+           <div className="centerContainer buttonContainer">
             <Button  mode="strong"  label="Join" icon={<IconIdentity/>}  />
            </div>
              {this.props.address && !this.props.space && <div>

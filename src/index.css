@@ -73,7 +73,12 @@ code {
 
 .buttonContainer{
   display: flex;
+
   align-items: center;
+}
+
+.centerContainer{
+    justify-content: center;
 }
 
 .profileContainer{
