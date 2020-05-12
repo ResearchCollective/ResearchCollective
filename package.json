@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "3box": "^6.14.5",
+    "3box": "1.18.1",
     "3box-chatbox-react": "^0.1.6",
     "3box-comments-react": "^3.0.1",
     "3box-profile-edit-react": "0.0.9",

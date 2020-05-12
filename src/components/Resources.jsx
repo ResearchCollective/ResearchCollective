@@ -1,22 +1,41 @@
 import React, { Component } from 'react';
-import { Button, Box, Modal, IconPlus, IconExternal, DataView, Field, TextInput } from '@aragon/ui';
+import {Button, Box, Modal, IconPlus, IconExternal, DataView, Field, TextInput, Text} from '@aragon/ui';
 import ApolloClient from 'apollo-boost';
 import { gql } from 'apollo-boost';
 import ProfileHover from 'profile-hover';
 import Loading from "./Loading";
-import ThreeBoxComments from '3box-comments-react';
+// import ThreeBoxComments from '3box-comments-react';
+
+
+
 
 class Resources extends Component {
 
-  constructor(props) {
-      super(props);
-       this.state = {
-            client: false,
-            graphData: []
-       };
-   }
+    commentData = {};
 
- componentDidMount() {
+    state = {
+        client: false,
+        graphData: [],
+        box:undefined,
+    };
+
+
+    static getDerivedStateFromProps(props,state){
+        console.log(props);
+    }
+
+    componentDidMount() {
+        this.commentData["0x648e7a1a51db72fc2df3091614e79468feabff40-4"] = ["aitheric - Used their test kit with consistent results.",
+            "Alfonso II - Arrived on time with good documentation.",
+            <Button className="pushDown" mode="neutral"  icon={<IconPlus/>} label="Add Comment" style={{marginBottom:40}}/>
+        ];
+        this.commentData["0x648e7a1a51db72fc2df3091614e79468feabff40-5"] = ["JasonLTV - Now I can vape happily ever after.",
+            "DangerXXX - Not sure this makes sense to start smoking again just with one study so far.",
+            <Button className="pushDown" mode="neutral"  icon={<IconPlus/>} label="Add Comment" style={{marginBottom:40}}/>
+        ];
+     this.setState({
+         box:this.props.box
+     });
      this.loadData();
  };
 
@@ -39,6 +58,7 @@ class Resources extends Component {
      `
    }).then(result =>  this.setState({graphData: result.data.votes, client: client}))}
 
+
 render() {
       return (
           <div>
@@ -50,11 +70,22 @@ render() {
 
 
                <DataView
-                  fields={['Description', 'Poster', 'Comments', 'Link']}
+                  fields={['Description', 'Poster', 'Link']}
+                  // entries is a list of items
                   entries={ExtricateData(this.state.graphData)}
+                  renderEntryExpansion={({description, owner, id }) => {
+                      // if (this.state.box === undefined){
+                      //     return ["loading"]
+                      // }
+                      return this.commentData[id];
+                  }
+                  }
                   renderEntry={({ description, owner, url, parsed }) => {
                     if (parsed) {
-                      return [<h1 style={{width: "100%"}}>{description}</h1>,  <ProfileHover address={owner} showName={true}/>, <CommentModal box={this.props.box} address={this.props.address}/>, <div  className="buttonContainer txnButton"> <a rel="noopener noreferrer" target="_blank" href={url}><Button label="" icon={<IconExternal/>}/> </a> </div>]
+                      return [<h1 style={{width: "100%"}}>{description}</h1>,
+                          <ProfileHover address={owner} showName={true}/>,
+                          // <CommentModal box={this.props.box} address={this.props.address}/>,
+                          <div  className="buttonContainer txnButton"> <a rel="noopener noreferrer" target="_blank" href={url}> <Button label="" icon={<IconExternal/>}/> </a> </div>]
                     } else {
                       return [<h1 style={{width: "100%"}}>{description}</h1>]
                     }
@@ -108,22 +139,22 @@ function ExtricateData(data) {
   return newData;
   }
 
-function CommentModal(box, address){
-  const [opened, setOpened] = React.useState(false)
-  const open = () => setOpened(true)
-  const close = () => setOpened(false)
-  return (
-      <div>
-        <Button  mode="neutral"  icon={<IconPlus/>} onClick={open} label="Comments"/>
-          <Modal visible={opened} onClose={close}>
-            {box && address &&
-             <Box className="notesContainer">
-                <h1> this is where the comments go </h1>
-             </Box>}
-          </Modal>
-      </div>
-  )
-}
+// function CommentModal(box, address){
+//   const [opened, setOpened] = React.useState(false)
+//   const open = () => setOpened(true)
+//   const close = () => setOpened(false)
+//   return (
+//       <div>
+//         <Button  mode="neutral"  icon={<IconPlus/>} onClick={open} label="Comments"/>
+//           <Modal visible={opened} onClose={close}>
+//             {box && address &&
+//              <Box className="notesContainer">
+//                 <h1> this is where the comments go </h1>
+//              </Box>}
+//           </Modal>
+//       </div>
+//   )
+// }
 
 function PostItemModal() {
   const [opened, setOpened] = React.useState(false)
