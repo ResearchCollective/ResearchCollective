@@ -2,6 +2,7 @@
 #### A Submission to the Stop Covid-19 Hackathon
 
 **[Pitch Deck](https://drive.google.com/open?id=11UhpG4ZZo3Ar2gRrUZNXHn3TiNRLEdm0I9YhrRuyjFQ)**
+
 **[Video Demonstration](https://youtu.be/B84uNKVqWOY)**
 
 #### The Research Collective is a...
