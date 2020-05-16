@@ -54,77 +54,110 @@ async componentDidMount() {
 }
   render() {
 
-      return (
-        <Main theme="dark">
+      return(
           <Router>
-            <Header>
-             <Bar  style={{ width: "100%"}}>
-                <Navbar  style={{ width: "100%", position: "relative", top: "5px"}}>
-                  <Navbar.Brand  style={{ fontWeight: "bold", marginLeft: "15px"}} href="/">Research Collective</Navbar.Brand>
-                    <Nav fill style={{ width: "100%"}} >
-                      <Nav.Item><Link to="/resources">Resources</Link></Nav.Item>
-                      <Nav.Item><Link to="/votes">Votes</Link></Nav.Item>
-                      <Nav.Item><Link to="/notes">Notebook</Link></Nav.Item>
-                      <Nav.Item><Link to="/chat">Chat</Link></Nav.Item>
-                      <Nav.Item><Link to="/profile">Profile</Link></Nav.Item>
-                      <Nav.Item>                  <div  style={{ width: "100%",  textAlign: "right" }}>             {!this.state.web3enabled && <h6>No MetaMask ❌🦊</h6>}
-                                                  {(this.state.web3enabled && !this.state.accounts) && <h6>Authorize MetaMask 🦊🤝🦄</h6>}
-                                                  {this.state.web3enabled && this.state.accounts && <h6> Connected 🦊💚🧬</h6>}
-                      </div></Nav.Item>
-                    </Nav>
-                </Navbar>
-              </Bar>
-            </Header>
-            <Split
-                primary={
-                  <AragonBox>
-                    <Switch>
-                      <Route path="/chat">
-                        <Chat/>
-                      </Route>
-                      <Route path="/profile">
-                        {this.state.box &&
-                        <Profile  box={this.state.box} space={this.state.space} address={this.state.address}/>
-                        }
-                      </Route>
-                      <Route path="/notes">
-                        <Notes web3enabled={this.state.web3enabled} space={this.state.space}/>
-                      </Route>
-                      <Route path="/votes">
-                        <Votes />
-                      </Route>
-                      <Route path="/resources">
-                      <Resources/>
-                      </Route>
-                      <Route path="/">
-                        <Home/>
-                      </Route>
-                    </Switch>
-                  </AragonBox>
-                }
-                // secondary={
-                //   <>
-                //     <AragonBox>
-                //        <h1 className="sectionTitle"> About </h1>
-                //         <p className="sectionSubTitle"> the Research Collective</p>
-                //         <br/>
-                //         <div>
-                //           <p className="sectionText"> The collision of crypto and the biological sciences presents itself before you.</p> <br/>
-                //           <p className="sectionText"> Our experimentalists arm themselves with etheric technology to prune the Leviathan's stranglehold on the Truth. </p> <br/>
-                //           <p className="sectionText"> The self-sovereignty of genetic information and knowledge production will bring nothing short of a second renaissance. </p>
-                //         </div>
-                //         <div className="fatBottomed buttonContainer">
-                //           <Button className="pushDown" icon={<IconIdentity/>}  mode="strong" label="Join" onClick={() =>  window.open(
-                //              "https://t.me/joinchat/EObaChML8AxqbUZtiyqeKQ", "_blank")} />
-                //         </div>
-                //     </AragonBox>
-                //   </>
-                // }
-              />
-            </Router>
-        </Main>
-      );
-    }
+              <Header>
+                  <Bar  style={{ width: "100%"}}>
+                    <Navbar  style={{ width: "100%", position: "relative", top: "5px"}}>
+                        <Navbar.Brand  style={{ fontWeight: "bold", marginLeft: "15px"}} href="/">Research Collective</Navbar.Brand>
+                        <Nav fill style={{ width: "100%"}} >
+                            <Nav.Item><Link to="/resources">Resources</Link></Nav.Item>
+                            <Nav.Item><Link to="/votes">Votes</Link></Nav.Item>
+                            <Nav.Item><Link to="/notes">Notebook</Link></Nav.Item>
+                            <Nav.Item><Link to="/chat">Chat</Link></Nav.Item>
+                            <Nav.Item><Link to="/profile">Profile</Link></Nav.Item>
+                            <Nav.Item>
+                                <div  style={{ width: "100%",  textAlign: "right" }}>
+                                    {!this.state.web3enabled && <h6>No MetaMask ❌🦊</h6>}
+                                    {(this.state.web3enabled && !this.state.accounts) &&
+                                        <h6>Authorize MetaMask 🦊🤝🦄</h6>}
+                                    {this.state.web3enabled && this.state.accounts && <h6> Connected 🦊💚🧬</h6>}
+                                </div>
+                            </Nav.Item>
+                        </Nav>
+                    </Navbar>
+                  </Bar>
+              </Header>
+
+              <Switch>
+                  <Route exact path='/' component={Home}/>
+              </Switch>
+
+          </Router>
+      )
+  }
+
+    //   return (
+    //     <Main theme="dark">
+    //       <Router>
+    //         <Header>
+    //          <Bar  style={{ width: "100%"}}>
+    //             <Navbar  style={{ width: "100%", position: "relative", top: "5px"}}>
+    //               <Navbar.Brand  style={{ fontWeight: "bold", marginLeft: "15px"}} href="/">Research Collective</Navbar.Brand>
+    //                 <Nav fill style={{ width: "100%"}} >
+    //                   <Nav.Item><Link to="/resources">Resources</Link></Nav.Item>
+    //                   <Nav.Item><Link to="/votes">Votes</Link></Nav.Item>
+    //                   <Nav.Item><Link to="/notes">Notebook</Link></Nav.Item>
+    //                   <Nav.Item><Link to="/chat">Chat</Link></Nav.Item>
+    //                   <Nav.Item><Link to="/profile">Profile</Link></Nav.Item>
+    //                   <Nav.Item>                  <div  style={{ width: "100%",  textAlign: "right" }}>             {!this.state.web3enabled && <h6>No MetaMask ❌🦊</h6>}
+    //                                               {(this.state.web3enabled && !this.state.accounts) && <h6>Authorize MetaMask 🦊🤝🦄</h6>}
+    //                                               {this.state.web3enabled && this.state.accounts && <h6> Connected 🦊💚🧬</h6>}
+    //                   </div></Nav.Item>
+    //                 </Nav>
+    //             </Navbar>
+    //           </Bar>
+    //         </Header>
+    //         <Split
+    //             primary={
+    //               <AragonBox>
+    //                 <Switch>
+    //                   <Route path="/chat">
+    //                     <Chat/>
+    //                   </Route>
+    //                   <Route path="/profile">
+    //                     {this.state.box &&
+    //                     <Profile  box={this.state.box} space={this.state.space} address={this.state.address}/>
+    //                     }
+    //                   </Route>
+    //                   <Route path="/notes">
+    //                     <Notes web3enabled={this.state.web3enabled} space={this.state.space}/>
+    //                   </Route>
+    //                   <Route path="/votes">
+    //                     <Votes />
+    //                   </Route>
+    //                   <Route path="/resources">
+    //                   <Resources/>
+    //                   </Route>
+    //                   <Route path="/">
+    //                     <Home/>
+    //                   </Route>
+    //                 </Switch>
+    //               </AragonBox>
+    //             }
+    //             // secondary={
+    //             //   <>
+    //             //     <AragonBox>
+    //             //        <h1 className="sectionTitle"> About </h1>
+    //             //         <p className="sectionSubTitle"> the Research Collective</p>
+    //             //         <br/>
+    //             //         <div>
+    //             //           <p className="sectionText"> The collision of crypto and the biological sciences presents itself before you.</p> <br/>
+    //             //           <p className="sectionText"> Our experimentalists arm themselves with etheric technology to prune the Leviathan's stranglehold on the Truth. </p> <br/>
+    //             //           <p className="sectionText"> The self-sovereignty of genetic information and knowledge production will bring nothing short of a second renaissance. </p>
+    //             //         </div>
+    //             //         <div className="fatBottomed buttonContainer">
+    //             //           <Button className="pushDown" icon={<IconIdentity/>}  mode="strong" label="Join" onClick={() =>  window.open(
+    //             //              "https://t.me/joinchat/EObaChML8AxqbUZtiyqeKQ", "_blank")} />
+    //             //         </div>
+    //             //     </AragonBox>
+    //             //   </>
+    //             // }
+    //           />
+    //         </Router>
+    //     </Main>
+    //   );
+    // }
   }
 
 
