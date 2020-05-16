@@ -1,6 +1,44 @@
 .homepage-hero-c1 {
   color: #8CAFFF;
-  font-size: 20pt;
+  font-size: 30pt;
+  font-max-size: 45pt;
+  font-family: Avenir;
+}
+
+.contact-us-btn {
+  border: none;
+  background-color: #617AB2;
+  color: white;
+  border-radius: 25px;
+  width: 50%;
+}
+
+.contact-us-btn:hover {
+  opacity: 80%;
+  background: #617AB2;
+  color: white;
+}
+
+.homepage-hero-c2 {
+  text-align: center;
+  font-family: Avenir;
+  font-size: 12pt;
+}
+
+.call-to-action-btn {
+  margin: 2px;
+  margin-top: 45px;
+  background-color: #38C6FE;
+  color: white;
+  border: none;
+  height: 20%;
+  font-size: 14pt;
+  font-weight: bold;
+}
+
+.call-to-action-btn:hover {
+  border: none;
+  background-color: #617AB2;
 }
 
 /*# sourceMappingURL=style.css.map */
