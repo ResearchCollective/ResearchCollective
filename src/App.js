@@ -9,6 +9,9 @@ import Votes from "./components/Votes";
 import Resources from "./components/Resources";
 import ProfileHover from 'profile-hover';
 import EditProfile from '3box-profile-edit-react';
+import './styles/style.css';
+import Home from './pages/Home'
+
 export default class App extends Component {
 
   state = {
@@ -99,24 +102,24 @@ async componentDidMount() {
                     </Switch>
                   </AragonBox>
                 }
-                secondary={
-                  <>
-                    <AragonBox>
-                       <h1 className="sectionTitle"> About </h1>
-                        <p className="sectionSubTitle"> the Research Collective</p>
-                        <br/>
-                        <div>
-                          <p className="sectionText"> The collision of crypto and the biological sciences presents itself before you.</p> <br/>
-                          <p className="sectionText"> Our experimentalists arm themselves with etheric technology to prune the Leviathan's stranglehold on the Truth. </p> <br/>
-                          <p className="sectionText"> The self-sovereignty of genetic information and knowledge production will bring nothing short of a second renaissance. </p>
-                        </div>
-                        <div className="fatBottomed buttonContainer">
-                          <Button className="pushDown" icon={<IconIdentity/>}  mode="strong" label="Join" onClick={() =>  window.open(
-                             "https://t.me/joinchat/EObaChML8AxqbUZtiyqeKQ", "_blank")} />
-                        </div>
-                    </AragonBox>
-                  </>
-                }
+                // secondary={
+                //   <>
+                //     <AragonBox>
+                //        <h1 className="sectionTitle"> About </h1>
+                //         <p className="sectionSubTitle"> the Research Collective</p>
+                //         <br/>
+                //         <div>
+                //           <p className="sectionText"> The collision of crypto and the biological sciences presents itself before you.</p> <br/>
+                //           <p className="sectionText"> Our experimentalists arm themselves with etheric technology to prune the Leviathan's stranglehold on the Truth. </p> <br/>
+                //           <p className="sectionText"> The self-sovereignty of genetic information and knowledge production will bring nothing short of a second renaissance. </p>
+                //         </div>
+                //         <div className="fatBottomed buttonContainer">
+                //           <Button className="pushDown" icon={<IconIdentity/>}  mode="strong" label="Join" onClick={() =>  window.open(
+                //              "https://t.me/joinchat/EObaChML8AxqbUZtiyqeKQ", "_blank")} />
+                //         </div>
+                //     </AragonBox>
+                //   </>
+                // }
               />
             </Router>
         </Main>
@@ -160,14 +163,14 @@ async componentDidMount() {
     }
   }
 
-  class Home extends Component {
-      render() {
-        return ( <>
-          <h1 className="bigTitle"> Welcome Home, Researcher </h1>
-          </>
-        )
-      }
-  }
+  // class Home extends Component {
+  //     render() {
+  //       return ( <>
+  //         <h1 className="bigTitle"> Welcome Home, Researcher </h1>
+  //         </>
+  //       )
+  //     }
+  // }
 
 class Profile extends Component {
     constructor(props) {
