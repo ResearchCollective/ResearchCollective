@@ -10,7 +10,7 @@ const Home = () => {
                     <Row>
                         <Col className='homepage-hero-c1'>
                             <p>What is</p>
-                            <p>Research Collective</p>
+                            <p>Research Collective?</p>
                             <Button className='contact-us-btn'>Contact Us</Button>
                         </Col>
                         <Col className='homepage-hero-c2'>

@@ -1,3 +1,8 @@
+.homepage-hero{
+  margin-top: 2%;
+  clip-path: polygon(100% 100%, 100% 100%, 50% 100%, 100% 100%);
+}
+
 .homepage-hero-c1{
     color: #8CAFFF;
     font-size: 30pt;
@@ -25,8 +30,12 @@
   font-size: 14pt;
 }
 
+.about-rs{
+  color: white;
+}
+
 .call-to-action-btn{
-  margin: 2px;
+  margin: 5px;
   margin-top: 45px;
   background-color: #38C6FE;
   color: white;
