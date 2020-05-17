@@ -3,8 +3,41 @@ body {
   font-family: Avenir;
 }
 
+.navbar {
+  background-color: #708CCC !important;
+  height: 10vh;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 20pt;
+  font-style: italic;
+}
+
+.login-btn {
+  background-color: #39C6FF;
+  border-radius: 25px;
+  width: 10%;
+  border: none;
+  font-weight: bold;
+  color: white;
+  height: 60%;
+  margin: 1%;
+}
+
+.newsletter-btn {
+  color: white !important;
+  font-weight: bold;
+  margin: 1%;
+}
+
+.login-btn:hover {
+  border: 2px solid #39C6FF;
+  background-color: #617AB2;
+}
+
 .homepage-hero {
-  margin-top: 2%;
+  margin-top: 18vh;
 }
 
 .homepage-hero-c1 {

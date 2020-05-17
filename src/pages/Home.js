@@ -1,6 +1,8 @@
 import React from 'react'
 import {Container, Row, Col, Button} from 'react-bootstrap'
+
 const Home = () => {
+
     return(
         //this div represents the 'whole' homepage//
         <div className='homepage'>
@@ -26,5 +28,4 @@ const Home = () => {
         </div>
     )
 }
-
 export default Home;
