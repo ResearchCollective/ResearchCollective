@@ -1,5 +1,5 @@
 import React from 'react'
-import {Container, Row, Col, Button} from 'react-bootstrap'
+import {Container, Row, Col, Button, Image} from 'react-bootstrap'
 import  {Card} from "react-bootstrap";
 
 const Home = () => {
@@ -29,7 +29,7 @@ const Home = () => {
 
             {/*this section is for "Why Research Collective"*/}
             <div className='homepage-why'>
-                <p>Why Research Collective ?</p>
+                <p className='section-header'>Why Research Collective ?</p>
                 <Container>
                     <Row>
                         {/*Resilient*/}
@@ -83,6 +83,21 @@ const Home = () => {
                     </Row>
                 </Container>
             </div>
+
+
+            {/*this section is for 'Resources'*/}
+            <Container>
+                <div className='resources-section'>
+                    <p className='section-header'>Resources</p>
+                        <p className='homepage-resources-text'>
+                            It is a long established fact that a reader will be distracted by the readable content
+                            of a page when looking at its layout. The point of using Lorem Ipsum is that it has a
+                            more-or-less normal distribution of letters
+                        </p>
+                        <Image src='homepage-glyph/resources-image.png' fluid={true}/>
+                        <Button>Check Out Our Resources</Button>
+                </div>
+            </Container>
         </div>
     )
 }

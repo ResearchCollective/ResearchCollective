@@ -52,18 +52,16 @@
 //Why Research Creative //
 
 .homepage-why{
-  margin: 10%;
+  margin: 5%;
 }
-.homepage-why p:first-child{
+.section-header{
   margin: auto;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
   color: #8CAFFD;
   font-size: 25pt;
   font-weight: bolder;
   text-align: center;
-  //for underline effect//
-  border-bottom: 2px solid #8CAFFD;
-  width: 50%;
+  text-decoration: underline;
 }
 
 .card{
@@ -97,4 +95,28 @@
   margin-bottom: 10%;
 }
 
+//Resources Section//
+.homepage-resources-text{
+  color: white;
+  font-size: 16pt;
+  text-align: center;
+  margin: 5%;
+}
+
+.resources-section{
+  text-align: center;
+}
+
+.resources-section .btn{
+  margin: 5%;
+  border: none;
+  background-color: #617AB2;
+  color: white;
+  border-radius: 25px;
+  width: 25%;
+}
+
+.resources-section .btn:hover{
+  background-color: #38C6FE;
+}
 
