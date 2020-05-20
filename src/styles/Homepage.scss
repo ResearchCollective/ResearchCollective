@@ -1,13 +1,12 @@
 .homepage-hero{
-  margin-top: 2%;
-  clip-path: polygon(100% 100%, 100% 100%, 50% 100%, 100% 100%);
+  margin-top: 18vh;
 }
 
 .homepage-hero-c1{
-    color: #8CAFFF;
-    font-size: 30pt;
-    font-max-size: 45pt;
-    font-family: Avenir;
+  color: #8CAFFF;
+  font-size: 30pt;
+  font-weight: bolder;
+  font-max-size: 45pt;
 }
 
 .contact-us-btn{
@@ -48,5 +47,76 @@
 .call-to-action-btn:hover{
   border: none;
   background-color: #617AB2;
+}
+
+//Why Research Creative //
+
+.homepage-why{
+  margin: 5%;
+}
+.section-header{
+  margin: auto;
+  margin-bottom: 5%;
+  color: #8CAFFD;
+  font-size: 25pt;
+  font-weight: bolder;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.card{
+  width: 18rem;
+  background-color: #617AB2;
+  text-align: center;
+  color: #29334B;
+}
+
+.why-rs-title{
+  color: #29334B;
+  font-weight: bold;
+  margin: 10%;
+}
+
+.why-rs-body{
+  color: white;
+  font-weight: normal;
+  font-size: 12pt;
+}
+
+.card-body{
+  text-align: center !important;
+}
+
+.glyph{
+  height: 150px;
+  width: 150px;
+  margin: auto;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+//Resources Section//
+.homepage-resources-text{
+  color: white;
+  font-size: 16pt;
+  text-align: center;
+  margin: 5%;
+}
+
+.resources-section{
+  text-align: center;
+}
+
+.resources-section .btn{
+  margin: 5%;
+  border: none;
+  background-color: #617AB2;
+  color: white;
+  border-radius: 25px;
+  width: 25%;
+}
+
+.resources-section .btn:hover{
+  background-color: #38C6FE;
 }
 

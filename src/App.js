@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import {  Navbar, Nav } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
 import { Main, Header, Button, Modal, Split, Bar, IconExternal, IconIdentity, Box as AragonBox } from '@aragon/ui'
 import Box from '3box';
 import Web3 from 'web3';
@@ -10,9 +10,10 @@ import Resources from "./components/Resources";
 import ProfileHover from 'profile-hover';
 import EditProfile from '3box-profile-edit-react';
 import './styles/style.css';
+import Navbar from './components/Shared/Header'
 import Home from './pages/Home'
 
-export default class App extends Component {
+class App extends Component {
 
     state = {
         web3enabled: false,
@@ -56,33 +57,10 @@ export default class App extends Component {
 
         return(
             <Router>
-                <Header>
-                    <Bar  style={{ width: "100%"}}>
-                        <Navbar  style={{ width: "100%", position: "relative", top: "5px"}}>
-                            <Navbar.Brand  style={{ fontWeight: "bold", marginLeft: "15px"}} href="/">Research Collective</Navbar.Brand>
-                            <Nav fill style={{ width: "100%"}} >
-                                <Nav.Item><Link to="/resources">Resources</Link></Nav.Item>
-                                <Nav.Item><Link to="/votes">Votes</Link></Nav.Item>
-                                <Nav.Item><Link to="/notes">Notebook</Link></Nav.Item>
-                                <Nav.Item><Link to="/chat">Chat</Link></Nav.Item>
-                                <Nav.Item><Link to="/profile">Profile</Link></Nav.Item>
-                                <Nav.Item>
-                                    <div  style={{ width: "100%",  textAlign: "right" }}>
-                                        {!this.state.web3enabled && <h6>No MetaMask ❌🦊</h6>}
-                                        {(this.state.web3enabled && !this.state.accounts) &&
-                                        <h6>Authorize MetaMask 🦊🤝🦄</h6>}
-                                        {this.state.web3enabled && this.state.accounts && <h6> Connected 🦊💚🧬</h6>}
-                                    </div>
-                                </Nav.Item>
-                            </Nav>
-                        </Navbar>
-                    </Bar>
-                </Header>
-
+                <Navbar />
                 <Switch>
                     <Route exact path='/' component={Home}/>
                 </Switch>
-
             </Router>
         )
     }
@@ -224,3 +202,5 @@ class Profile extends Component {
         );
     }
 }
+
+export default App
