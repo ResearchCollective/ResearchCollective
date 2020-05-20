@@ -43,8 +43,8 @@ body {
 .homepage-hero-c1 {
   color: #8CAFFF;
   font-size: 30pt;
+  font-weight: bolder;
   font-max-size: 45pt;
-  font-family: Avenir;
 }
 
 .contact-us-btn {
@@ -85,6 +85,52 @@ body {
 .call-to-action-btn:hover {
   border: none;
   background-color: #617AB2;
+}
+
+.homepage-why {
+  margin: 10%;
+}
+
+.homepage-why p:first-child {
+  margin: auto;
+  margin-bottom: 10%;
+  color: #8CAFFD;
+  font-size: 25pt;
+  font-weight: bolder;
+  text-align: center;
+  border-bottom: 2px solid #8CAFFD;
+  width: 50%;
+}
+
+.card {
+  width: 18rem;
+  background-color: #617AB2;
+  text-align: center;
+  color: #29334B;
+}
+
+.why-rs-title {
+  color: #29334B;
+  font-weight: bold;
+  margin: 10%;
+}
+
+.why-rs-body {
+  color: white;
+  font-weight: normal;
+  font-size: 12pt;
+}
+
+.card-body {
+  text-align: center !important;
+}
+
+.glyph {
+  height: 150px;
+  width: 150px;
+  margin: auto;
+  margin-top: 10%;
+  margin-bottom: 10%;
 }
 
 /*# sourceMappingURL=style.css.map */
