@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import {Button, Box, Modal, IconPlus, IconExternal, DataView, Field, TextInput, Text} from '@aragon/ui';
+import {Button, Box, Modal, IconPlus, IconExternal, DataView, Field, TextInput} from '@aragon/ui';
 import ApolloClient from 'apollo-boost';
 import { gql } from 'apollo-boost';
 import ProfileHover from 'profile-hover';
 import Loading from "./Loading";
-// import ThreeBoxComments from '3box-comments-react';
+
+import ThreeBoxComments from '3box-comments-react';
 
 
 
@@ -17,6 +18,8 @@ class Resources extends Component {
         client: false,
         graphData: [],
         box:undefined,
+        space:undefined,
+        address:undefined
     };
 
 
@@ -34,7 +37,9 @@ class Resources extends Component {
             <Button className="pushDown" mode="neutral"  icon={<IconPlus/>} label="Add Comment" style={{marginBottom:40}}/>
         ];
      this.setState({
-         box:this.props.box
+         box:this.props.box,
+         space: this.props.space,
+         address: this.props.adress
      });
      this.loadData();
  };
@@ -65,6 +70,7 @@ render() {
             <h1 className="sectionTitle pushUp"> Resources </h1>
             <p className="sectionSubTitle pushUp"> passed by the expert DAO <a  rel="noopener noreferrer" target="_blank" href="https://mainnet.aragon.org/#/covidresearch">'Covid Research' <IconExternal style={{position: "relative", top: "-2px"}} size="small"/> </a>   </p>
              <Box style={{display: "inline"}}>
+                            <ItemComment   box={this.state.box} space={this.state.space} address={this.state.address} />
              {this.state.graphData &&  <Loading data={this.state.graphData}/>}
              {this.state.graphData.length > 0 &&
 
@@ -98,7 +104,6 @@ render() {
     );
   }
 }
-
 
 function ExtricateData(data) {
   var newData = [];
@@ -155,6 +160,29 @@ function ExtricateData(data) {
 //       </div>
 //   )
 // }
+
+
+  class ItemComment extends Component {
+    render() {
+      return (<>
+          {this.props.box && this.props.space &&
+            <ThreeBoxComments
+                // required
+                spaceName="researchCollective"
+                threadName="testThread"
+                adminEthAddr={this.props.address}
+
+
+                // Required props for context A) & B)
+                box={this.props.box}
+                currentUserAddr={this.props.address}
+            />
+      }
+      </>
+    )
+  }
+}
+
 
 function PostItemModal() {
   const [opened, setOpened] = React.useState(false)

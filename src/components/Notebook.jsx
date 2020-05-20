@@ -10,7 +10,9 @@ class Notebook extends Component {
             view: false,
             singleChecked: false,
             opened: false,
-            setOpened: false
+            setOpened: false,
+            privateNotes: [],
+            publicNotes: []
        };
    }
 
@@ -23,39 +25,50 @@ class Notebook extends Component {
      }
    }
 
-   publicSave = async (e) => {
-     e.preventDefault();
+   publicSave = async () => {
      //saves to a public 3Box space
-     await this.props.space.public.set(Date.now(), this.state.publicNoteToSave);
-
+     await this.props.space.public.set("foo", "bar");
      this.setState({publicNoteToSave : null});
      console.log("public save: " + this.publicNoteToSave);
      this.getPublicNotes();
+      this.setState({opened: false })
    }
 
-   privateSave = async (e) => {
-     e.preventDefault();
-
+  privateSave = async () => {
      //saves to a private 3Box space
-     await this.props.space.private.set(Date.now(), this.state.privateNoteToSave);
-
+     //await this.props.space.private.set("Date.now()", this.state.privateNoteToSave);
+     // set(noteTitle, noteContent)
+     await this.props.space.private.set("foo2", "bar2");
      this.setState({privateNoteToSave : null});
      console.log("private save: " + this.privateNoteToSave);
      this.getPrivateNotes();
+     this.setState({opened: false })
    }
 
 
-   getPublicNotes = async () => {
+   getPublicNotes = async (e) => {
        const publicNotes = await this.props.space.public.all();
        this.setState({ publicNotes });
       console.log("public load: " + this.publicNotes);
      }
 
-     getPrivateNotes = async () => {
+     getPrivateNotes = async (e) => {
        const privateNotes = await this.props.space.private.all();
        this.setState({ privateNotes });
        console.log("private load: " + this.privateNotes);
      }
+
+
+   alertPrivateNote  = async (e) => {
+     const note = await this.props.space.private.get('foo2');
+      alert(note);
+   }
+
+
+   alertPublicNote  = async (e) => {
+     const note = await this.props.space.private.get('foo');
+      alert(note);
+   }
 
 
 
@@ -71,30 +84,33 @@ render() {
              <TextInput className="fullWidth" style={{minHeight: "300px"}} placeholder="Note" wide="true" multiline="true"/>
              <TextInput className="fullWidth" style={{minHeight: "120px"}} placeholder="Attachments" wide="true" multiline="true"/>
              <div className="buttonContainer">
-              <Button style={{maxWidth: "45px"}} label="Save Note" size="medium" mode="strong" onClick={() => this.setState({opened: false }) }>
-              </Button>          <Button  label="Discard" style={{marginLeft: "70px"}} size="medium" mode="negative" onClick={() => this.setState({opened: false }) }>
-                       </Button>
+              <Button style={{maxWidth: "45px"}} label="Save Private Note" size="medium" mode="strong" onClick={() => this.privateSave() }>
+              </Button>
+              <Button style={{maxWidth: "45px"}} label="Save Public Note" size="medium" mode="strong" onClick={() => this.publicSave() }>
+              </Button>
+              <Button  label="Discard" style={{marginLeft: "70px"}} size="medium" mode="negative" onClick={() => this.setState({opened: false }) }>
+              </Button>
              </div>
           </SidePanel>
           <div className="fullWidth">
-            <Button className="noteButton" label="New Note" size="medium" mode="strong" onClick={() => this.setState({opened: true }) }>
-            </Button>
+               <Button label="Alert Public Note" size="medium" mode="strong" onClick={() => this.alertPublicNote() || null}>
+               </Button>
+               <Button label="Alert Private Note" size="medium" mode="strong" onClick={() => this.alertPrivateNote() || null}>
+               </Button>
+               <Button label="Get Private Notes" size="medium" mode="strong" onClick={() => this.getPrivateNotes() || null}>
+               </Button>
+
+                <Button label="New Note" size="medium" mode="strong" onClick={() => this.setState({opened: true }) }>
+               </Button>
           </div>
         <AragonBox>
-
           <DataView style={{position: "absolute", top: "500px"}}
             fields={['Title', 'Labels', 'Date', 'Read']}
-            entries={[
-              { account: 'Test Note Title', amount: 'Public, Test', date: '1/2/2020',noteId: '' },
-              { account: 'Feelings from 6-APB', amount: 'Private, Exp.1.3', date: '5/2/2020', noteId:''},
-              { account: 'Ten Reasons Why I Never Humble Brag', amount: 'Public, Journal',date: '5/5/2020',noteId: '' },
-            ]}
+            entries={this.state.privateNotes}
             renderEntry={({ account, amount, date, noteId }) => {
               return [<p>{account}</p>, <p>{amount}</p>,<p>{date}</p>,<div  className="buttonContainer txnButton"> <Button label={noteId} icon={<IconMaximize/>}/>  </div>]
             }}
           />
-
-
       </AragonBox>
       </div>
     )

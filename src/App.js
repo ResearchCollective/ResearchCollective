@@ -9,6 +9,8 @@ import Resources from "./components/Resources";
 import ProfileHover from 'profile-hover';
 import EditProfile from '3box-profile-edit-react';
 import ChatBox from '3box-chatbox-react';
+import ThreeBoxComments from '3box-comments-react';
+
 export default class App extends Component {
 
   state = {
@@ -33,7 +35,7 @@ async getAddressFromMetaMask() {
 async auth3box() {
   const address = this.state.accounts[0];
   this.setState({address: address});
-  const spaces = ['3Book'];
+  const spaces = ['researchCollective'];
   const box = await Box.create(window.ethereum);
   await box.auth(spaces, { address });
   await box.syncDone;
@@ -46,7 +48,7 @@ async componentDidMount() {
     // Now MetaMask's provider has been enabled, we can start working with 3Box
     await this.auth3box();
     await Box.listSpaces(this.state.address);
-    const space = await this.state.box.openSpace('MyFollowing');
+    const space = await this.state.box.openSpace('researchCollective');
     await space.syncDone;
     this.setState({space});
   }
@@ -70,7 +72,7 @@ async componentDidMount() {
                     <Link className="fullWidth navLink" to="/profile">Profile</Link>
                </div>
             }
-            secondary={     <Navbar.Brand  style={{ fontWeight: "bold", fontSize: "1.8em", width: "100%", position: "relative", top: "-2px", marginRight: "15px"}} href="/">Research Collective</Navbar.Brand>} />
+            secondary={<Navbar.Brand  style={{ fontWeight: "bold", fontSize: "1.8em", width: "100%", position: "relative", top: "-2px", marginRight: "15px"}} href="/">Research Collective</Navbar.Brand>} />
             </Bar>
 
             <Split
@@ -85,7 +87,7 @@ async componentDidMount() {
                       </Route>
                       <Route path="/notes">
                         {this.state.address &&
-                        <Notebook web3enabled={this.state.web3enabled} space={this.state.space}/>
+                        <Notebook web3enabled={this.state.web3enabled} box={this.state.box} space={this.state.space}/>
                       }
                       </Route>
                       <Route path="/votes">
@@ -95,6 +97,7 @@ async componentDidMount() {
                       <Resources  box={this.state.box} space={this.state.space} address={this.state.address} />
                       </Route>
                       <Route path="/">
+                        <ItemComment   box={this.state.box} space={this.state.space} address={this.state.address} />
                         <Resources/>
                       </Route>
                     </Switch>
@@ -125,7 +128,26 @@ async componentDidMount() {
   }
 
 
+  class ItemComment extends Component {
+    render() {
+      return (<>
+          {this.props.box && this.props.space &&
+            <ThreeBoxComments
+                // required
+                spaceName="researchCollective"
+                threadName="testThread"
+                adminEthAddr={this.props.address}
 
+
+                // Required props for context A) & B)
+                box={this.props.box}
+                currentUserAddr={this.props.address}
+            />
+      }
+      </>
+    )
+  }
+}
 
 
 
