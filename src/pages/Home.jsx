@@ -28,9 +28,9 @@ const Home = () => {
             </div>
 
             {/*this section is for "Why Research Collective"*/}
-            <div className='homepage-why'>
-                <p className='section-header'>Why Research Collective ?</p>
-                <Container>
+            <Container>
+                <div className='homepage-why'>
+                    <p className='section-header'>Why Research Collective ?</p>
                     <Row>
                         {/*Resilient*/}
                         <Col>
@@ -81,8 +81,8 @@ const Home = () => {
                             </Card>
                         </Col>
                     </Row>
-                </Container>
-            </div>
+                </div>
+            </Container>
 
 
             {/*this section is for 'Resources'*/}
