@@ -1,8 +1,11 @@
 # Research Collective
 #### A Submission to the Stop Covid-19 Hackathon
 
+**[Live Site](https://researchcollective)**
+
 **[Pitch Deck](https://drive.google.com/open?id=11UhpG4ZZo3Ar2gRrUZNXHn3TiNRLEdm0I9YhrRuyjFQ)**
-**[Video Demonstration](https://www.youtube.com/watch?v=PYa-3dqNT7I)**
+
+**[Video Demonstration](https://youtu.be/B84uNKVqWOY)**
 
 #### The Research Collective is a...
 - Group of Citizen Scientists
