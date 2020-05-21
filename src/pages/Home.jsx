@@ -1,8 +1,6 @@
 import React from 'react'
-import {Container, Row, Col, Button, Image, InputGroup, FormControl, Form} from 'react-bootstrap'
+import {Container, Row, Col, Button, Image, InputGroup, FormControl, Form, Link} from 'react-bootstrap'
 import  {Card} from "react-bootstrap";
-import TextMessage from "../components/Messages/TextMessage";
-import {TextInput} from "@aragon/ui";
 
 const Home = () => {
 
@@ -96,8 +94,8 @@ const Home = () => {
                             of a page when looking at its layout. The point of using Lorem Ipsum is that it has a
                             more-or-less normal distribution of letters
                         </p>
+                        <Button className='resources-link'>Check Out Our Resources</Button>
                         <Image src='homepage-glyph/resources-image.png' fluid={true}/>
-                        <Button>Check Out Our Resources</Button>
                 </div>
             </Container>
 

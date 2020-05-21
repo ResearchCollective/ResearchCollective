@@ -1,6 +1,7 @@
 body {
   background-color: #29334B;
   font-family: Avenir;
+  margin-bottom: 0px !important;
 }
 
 .navbar {
@@ -92,7 +93,9 @@ body {
 }
 
 .section-header {
-  margin: auto;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 5%;
   color: #8CAFFD;
   font-size: 25pt;
@@ -136,20 +139,18 @@ body {
   color: white;
   font-size: 16pt;
   text-align: center;
-  margin: 5%;
 }
 
 .resources-section {
   text-align: center;
 }
 
-.resources-section .btn {
-  margin: 5%;
+.resources-link {
+  margin: 2%;
+  background-color: #29334B;
   border: none;
-  background-color: #617AB2;
-  color: white;
-  border-radius: 25px;
-  width: 25%;
+  color: #38C6FE;
+  text-decoration: underline;
 }
 
 .resources-section .btn:hover {
