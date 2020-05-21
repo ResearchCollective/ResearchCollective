@@ -1,6 +1,8 @@
 import React from 'react'
-import {Container, Row, Col, Button, Image} from 'react-bootstrap'
+import {Container, Row, Col, Button, Image, InputGroup, FormControl, Form} from 'react-bootstrap'
 import  {Card} from "react-bootstrap";
+import TextMessage from "../components/Messages/TextMessage";
+import {TextInput} from "@aragon/ui";
 
 const Home = () => {
 
@@ -157,6 +159,31 @@ const Home = () => {
                             </Card>
                         </Col>
                     </Row>
+                </div>
+            </Container>
+
+            {/* this is contact form section*/}
+            <Container>
+                <div className='contact-us'>
+                    <p className='section-header'>Contact Us</p>
+                        <InputGroup className='contact-form-input mb-3'>
+                            <FormControl
+                                placeholder='Enter Your Name'
+                                aria-label='Enter Your Name'
+                                aria-describedby='basic-addon2'
+                            />
+                        </InputGroup>
+                        <InputGroup className='contact-form-input mb-3'>
+                            <FormControl
+                                placeholder='Enter Your Email'
+                                aria-label='Enter Your Email'
+                                aria-describedby='basic-addon2'
+                            />
+                        </InputGroup>
+                        <Form.Group className='contact-form-input'>
+                            <Form.Control as='textarea' rows='5' placeholder='Enter Your Message'/>
+                        </Form.Group>
+                        <Button className='contact-send-btn'>Send</Button>
                 </div>
             </Container>
         </div>

@@ -144,3 +144,34 @@
   color: white;
 }
 
+//Contact Form//
+
+.contact-us{
+  text-align: center;
+}
+
+.contact-form-input{
+  width: 50%;
+  margin: auto;
+}
+
+.contact-form-input:focus{
+  border: none;
+}
+
+.contact-send-btn{
+  color: white;
+  background-color: #169363;
+  border-radius: 25px;
+  width: 20%;
+  height: 50%;
+  opacity: 70%;
+  border: 0px solid #169363;
+  margin: 3%;
+}
+
+.contact-send-btn:hover{
+  border: 0px solid #169363;
+  background-color: #169363;
+  opacity: 100%;
+}
