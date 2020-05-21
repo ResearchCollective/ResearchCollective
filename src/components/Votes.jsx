@@ -25,7 +25,7 @@ class Votes extends Component {
    client.query({
      query: gql`
      {
-         votes(first: 2, orderBy: created, orderDirection: desc, where: {creator: "0xc6c1725868210736c3bcb784b4c13c6412823096"}){
+         votes(orderBy: created, orderDirection: desc, where: {creator: "0xc6c1725868210736c3bcb784b4c13c6412823096"}){
            metadata
            createdAtTransaction
            created

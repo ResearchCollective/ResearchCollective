@@ -1,0 +1,177 @@
+.homepage-hero{
+  margin-top: 18vh;
+}
+
+.homepage-hero-c1{
+  color: #8CAFFF;
+  font-size: 30pt;
+  font-weight: bolder;
+  font-max-size: 45pt;
+}
+
+.contact-us-btn{
+  border: none;
+  background-color: #617AB2;
+  color: white;
+  border-radius: 25px;
+  width: 50%;
+}
+
+.contact-us-btn:hover{
+  opacity: 80%;
+  background: #617AB2;
+  color: white;
+}
+
+.homepage-hero-c2{
+  text-align: center;
+  font-family: Avenir;
+  font-size: 14pt;
+}
+
+.about-rs{
+  color: white;
+}
+
+.call-to-action-btn{
+  margin: 5px;
+  margin-top: 45px;
+  background-color: #38C6FE;
+  color: white;
+  border: none;
+  height: 20%;
+  font-size: 14pt;
+  font-weight: bold;
+}
+
+.call-to-action-btn:hover{
+  border: none;
+  background-color: #617AB2;
+}
+
+//Why Research Creative //
+
+.homepage-why{
+  margin: 5%;
+}
+.section-header{
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5%;
+  color: #8CAFFD;
+  font-size: 25pt;
+  font-weight: bolder;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.card{
+  width: 18rem;
+  background-color: #617AB2;
+  text-align: center;
+  color: #29334B;
+}
+
+.why-rs-title{
+  color: #29334B;
+  font-weight: bold;
+  margin: 10%;
+}
+
+.why-rs-body{
+  color: white;
+  font-weight: normal;
+  font-size: 12pt;
+}
+
+.card-body{
+  text-align: center !important;
+}
+
+.glyph{
+  height: 150px;
+  width: 150px;
+  margin: auto;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+//Resources Section//
+.homepage-resources-text{
+  color: white;
+  font-size: 16pt;
+  text-align: center;
+}
+
+.resources-section{
+  text-align: center;
+}
+
+.resources-link{
+  margin: 2%;
+  background-color: #29334B;
+  border: none;
+  color:  #38C6FE;
+  text-decoration: underline;
+}
+
+.resources-section .btn:hover{
+  background-color: #38C6FE;
+}
+
+//How it works section//
+
+.hiw-card{
+  margin-top: 5%;
+  background-color: #29334B;
+  border: none;
+}
+
+.hiw-glyph{
+  height: 100px;
+  width: 100px;
+  margin: auto;
+}
+
+.hiw-title{
+  color: #8CAFFD;
+  font-weight: bold;
+  margin: 10%;
+}
+
+.hiw-body{
+  color: white;
+}
+
+//Contact Form//
+
+.contact-us{
+  text-align: center;
+}
+
+.contact-form-input{
+  width: 50%;
+  margin: auto;
+}
+
+.contact-form-input:focus{
+  border: none;
+}
+
+.contact-send-btn{
+  color: white;
+  background-color: #169363;
+  border-radius: 25px;
+  width: 20%;
+  height: 50%;
+  opacity: 70%;
+  border: 0px solid #169363;
+  margin: 3%;
+}
+
+.contact-send-btn:hover{
+  border: 0px solid #169363;
+  background-color: #169363;
+  opacity: 100%;
+}
