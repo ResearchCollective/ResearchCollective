@@ -156,4 +156,26 @@ body {
   background-color: #38C6FE;
 }
 
+.hiw-card {
+  margin-top: 5%;
+  background-color: #29334B;
+  border: none;
+}
+
+.hiw-glyph {
+  height: 100px;
+  width: 100px;
+  margin: auto;
+}
+
+.hiw-title {
+  color: #8CAFFD;
+  font-weight: bold;
+  margin: 10%;
+}
+
+.hiw-body {
+  color: white;
+}
+
 /*# sourceMappingURL=style.css.map */
