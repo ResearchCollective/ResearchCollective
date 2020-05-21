@@ -1,6 +1,7 @@
 body {
   background-color: #29334B;
   font-family: Avenir;
+  margin-bottom: 0px !important;
 }
 
 .navbar {
@@ -92,7 +93,9 @@ body {
 }
 
 .section-header {
-  margin: auto;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 5%;
   color: #8CAFFD;
   font-size: 25pt;
@@ -136,24 +139,74 @@ body {
   color: white;
   font-size: 16pt;
   text-align: center;
-  margin: 5%;
 }
 
 .resources-section {
   text-align: center;
 }
 
-.resources-section .btn {
-  margin: 5%;
+.resources-link {
+  margin: 2%;
+  background-color: #29334B;
   border: none;
-  background-color: #617AB2;
-  color: white;
-  border-radius: 25px;
-  width: 25%;
+  color: #38C6FE;
+  text-decoration: underline;
 }
 
 .resources-section .btn:hover {
   background-color: #38C6FE;
+}
+
+.hiw-card {
+  margin-top: 5%;
+  background-color: #29334B;
+  border: none;
+}
+
+.hiw-glyph {
+  height: 100px;
+  width: 100px;
+  margin: auto;
+}
+
+.hiw-title {
+  color: #8CAFFD;
+  font-weight: bold;
+  margin: 10%;
+}
+
+.hiw-body {
+  color: white;
+}
+
+.contact-us {
+  text-align: center;
+}
+
+.contact-form-input {
+  width: 50%;
+  margin: auto;
+}
+
+.contact-form-input:focus {
+  border: none;
+}
+
+.contact-send-btn {
+  color: white;
+  background-color: #169363;
+  border-radius: 25px;
+  width: 20%;
+  height: 50%;
+  opacity: 70%;
+  border: 0px solid #169363;
+  margin: 3%;
+}
+
+.contact-send-btn:hover {
+  border: 0px solid #169363;
+  background-color: #169363;
+  opacity: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */

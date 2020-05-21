@@ -60,6 +60,23 @@ class App extends Component {
                 <Navbar />
                 <Switch>
                     <Route exact path='/' component={Home}/>
+                    <Route path="/chat">
+                        <Chat/>
+                    </Route>
+                    <Route path="/profile">
+                        {this.state.box &&
+                            <Profile  box={this.state.box} space={this.state.space} address={this.state.address}/>
+                        }
+                    </Route>
+                    <Route path="/notes">
+                        <Notes web3enabled={this.state.web3enabled} space={this.state.space}/>
+                    </Route>
+                    <Route path="/votes">
+                        <Votes />
+                    </Route>
+                    <Route path="/resources">
+                        <Resources/>
+                    </Route>
                 </Switch>
             </Router>
         )

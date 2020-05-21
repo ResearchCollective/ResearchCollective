@@ -1,5 +1,5 @@
 import React from 'react'
-import {Container, Row, Col, Button, Image} from 'react-bootstrap'
+import {Container, Row, Col, Button, Image, InputGroup, FormControl, Form, Link} from 'react-bootstrap'
 import  {Card} from "react-bootstrap";
 
 const Home = () => {
@@ -7,9 +7,9 @@ const Home = () => {
     return(
         //this div represents the 'whole' homepage//
         <div className='homepage'>
+            <Container>
             {/*this div represents the first element (hero) of the landing page*/}
-            <div className='homepage-hero'>
-                <Container>
+                <div className='homepage-hero'>
                     <Row>
                         <Col className='homepage-hero-c1'>
                             <p>What is</p>
@@ -24,13 +24,13 @@ const Home = () => {
                             </span>
                         </Col>
                     </Row>
-                </Container>
-            </div>
+                </div>
+            </Container>
 
             {/*this section is for "Why Research Collective"*/}
-            <div className='homepage-why'>
-                <p className='section-header'>Why Research Collective ?</p>
-                <Container>
+            <Container>
+                <div className='homepage-why'>
+                    <p className='section-header'>Why Research Collective ?</p>
                     <Row>
                         {/*Resilient*/}
                         <Col>
@@ -81,8 +81,8 @@ const Home = () => {
                             </Card>
                         </Col>
                     </Row>
-                </Container>
-            </div>
+                </div>
+            </Container>
 
 
             {/*this section is for 'Resources'*/}
@@ -94,8 +94,94 @@ const Home = () => {
                             of a page when looking at its layout. The point of using Lorem Ipsum is that it has a
                             more-or-less normal distribution of letters
                         </p>
+                        <Button className='resources-link'>Check Out Our Resources</Button>
                         <Image src='homepage-glyph/resources-image.png' fluid={true}/>
-                        <Button>Check Out Our Resources</Button>
+                </div>
+            </Container>
+
+            {/*this is how it works section*/}
+            <Container>
+                <div className='hiw-section'>
+                    <p className='section-header'>How It Works</p>
+                    <Row>
+                        <Col>
+                            <Card className='hiw-card'>
+                                <Card.Img className='hiw-glyph' variant='top' src='homepage-glyph/propose.png' />
+                                <Card.Body>
+                                    <Card.Title className='hiw-title'>Propose</Card.Title>
+                                    <Card.Text className='hiw-body'>
+                                        Protocols are drafted by
+                                        researchers and posted for
+                                        approval by the community.
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col>
+                            <Card className='hiw-card'>
+                                <Card.Img className='hiw-glyph' variant='top' src='homepage-glyph/test.png' />
+                                <Card.Body>
+                                    <Card.Title className='hiw-title'>Test</Card.Title>
+                                    <Card.Text className='hiw-body'>
+                                        The experiment’s data is
+                                        stashed on immutable,
+                                        distributed ledgers.
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col>
+                            <Card className='hiw-card'>
+                                <Card.Img className='hiw-glyph' variant='top' src='homepage-glyph/review.png' />
+                                <Card.Body>
+                                    <Card.Title className='hiw-title'>Review</Card.Title>
+                                    <Card.Text className='hiw-body'>
+                                        The results of the
+                                        experiment are analyzed
+                                        by the community.
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col>
+                            <Card className='hiw-card'>
+                                <Card.Img className='hiw-glyph' variant='top' src='homepage-glyph/gift.png' />
+                                <Card.Body>
+                                    <Card.Title className='hiw-title'>Gift</Card.Title>
+                                    <Card.Text className='hiw-body'>
+                                        Notes on the method are
+                                        made open source at the
+                                        conclusion of the project.
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </div>
+            </Container>
+
+            {/* this is contact form section*/}
+            <Container>
+                <div className='contact-us'>
+                    <p className='section-header'>Contact Us</p>
+                        <InputGroup className='contact-form-input mb-3'>
+                            <FormControl
+                                placeholder='Enter Your Name'
+                                aria-label='Enter Your Name'
+                                aria-describedby='basic-addon2'
+                            />
+                        </InputGroup>
+                        <InputGroup className='contact-form-input mb-3'>
+                            <FormControl
+                                placeholder='Enter Your Email'
+                                aria-label='Enter Your Email'
+                                aria-describedby='basic-addon2'
+                            />
+                        </InputGroup>
+                        <Form.Group className='contact-form-input'>
+                            <Form.Control as='textarea' rows='5' placeholder='Enter Your Message'/>
+                        </Form.Group>
+                        <Button className='contact-send-btn'>Send</Button>
                 </div>
             </Container>
         </div>
