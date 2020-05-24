@@ -89,7 +89,7 @@ class App extends Component {
                         <Resources/>
                     </Route>
                     <Route path='/notebook'>
-                        <Notebook />
+                        <Notebook web3enabled={this.state.web3enabled} space={this.state.space}/>
                     </Route>
                 </Switch>
                 </Main>
