@@ -1,13 +1,35 @@
 import { Button, TextInput } from '@aragon/ui';
-import React from 'react';
+import React, { useState } from 'react';
 
 const NotebookForm = () => {
+
+    let [note, setNote] = useState({
+        title: '',
+        labels: '',
+        description: '',
+        attachment: ''
+    })
+    // let [title, setTitle] = useState('')
+    // let [labels, setLabel] = useState('')
+    // let [note, setNote] = useState('')
+    // let [attachment, setAttachment] = useState('')
+
+    let handleOnChange = (e) => {
+        let {name, value} = e.target
+        setNote(prevState => ({
+            ...prevState,
+            [name]: value
+        }))
+    }
+    
+    console.log('State: ',note)
+        
     return(
         <div>
-            <TextInput className="fullWidth" placeholder="Note Title" wide="true" /> 
-            <TextInput className="fullWidth" placeholder="Comma, Separated, Labels" wide="true" />
-            <TextInput className="fullWidth" style={{minHeight: "300px"}} placeholder="Note" wide="true" multiline="true"/>
-            <TextInput className="fullWidth" style={{minHeight: "120px"}} placeholder="Attachments" wide="true" multiline="true"/>
+            <TextInput className="fullWidth" name='title' value={note.title} onChange={e => handleOnChange(e)} placeholder="Note Title" wide="true" /> 
+            <TextInput className="fullWidth" name='labels' value={note.label} onChange={e => handleOnChange(e)} placeholder="Comma, Separated, Labels" wide="true" />
+            <TextInput className="fullWidth" name='description' value={note.description} onChange={e => handleOnChange(e)} style={{minHeight: "300px"}} placeholder="Note" wide="true" multiline="true"/>
+            <TextInput className="fullWidth" name='attachment' value={note.attachment} onChange={e => handleOnChange(e)} style={{minHeight: "120px"}} placeholder="Attachments" wide="true" multiline="true"/>
             <div className="buttonContainer">
                 <Button style={{maxWidth: "45px"}} label="Save Private Note" size="medium" mode="strong" onClick={() => this.privateSave() } />
                 <Button style={{maxWidth: "45px"}} label="Save Public Note" size="medium" mode="strong" onClick={() => this.publicSave() } />
