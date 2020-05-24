@@ -1,5 +1,7 @@
-import { Box as AragonBox, Button, DataView, IconMaximize, SidePanel, TextInput } from '@aragon/ui';
+import { Box as AragonBox, Button, DataView, IconMaximize, SidePanel } from '@aragon/ui';
 import React, { Component } from 'react';
+
+import NotebookForm from './NotebookForm';
 
 class Notebook extends Component {
   constructor(props) {
@@ -12,7 +14,7 @@ class Notebook extends Component {
             opened: false,
             setOpened: false,
             privateNotes: [],
-            publicNotes: []
+            publicNotes: [],
        };
 
       // TODO: need to get 'space' in App.js//
@@ -86,19 +88,9 @@ render() {
           <h1 className="sectionTitle pushUp"><i>Notebook</i></h1>
           <h1 className="sectionSubTitle pushUp"><i>🚨Under Construction🚨</i></h1>
           <p className="pushUp sectionSubTitle"><i>Researchers will be able to stash public or encrypted notes on IPFS here.</i><br/><i>Eventually they will be able to log experimental data,<br/> or wrap their potentially patentable idea in a Series LLC for a few DAI.</i></p><br/>
-          <SidePanel className="fullWidth" title={<TextInput className="fullWidth" placeholder="Note Title"/> } opened={this.state.opened}>
+          <SidePanel className="fullWidth">
             {/* //TODO: */}
-             <TextInput className="fullWidth" placeholder="Comma, Separated, Labels" wide="true"  ></TextInput>
-             <TextInput className="fullWidth" style={{minHeight: "300px"}} placeholder="Note" wide="true" multiline="true"/>
-             <TextInput className="fullWidth" style={{minHeight: "120px"}} placeholder="Attachments" wide="true" multiline="true"/>
-             <div className="buttonContainer">
-              <Button style={{maxWidth: "45px"}} label="Save Private Note" size="medium" mode="strong" onClick={() => this.privateSave() }>
-              </Button>
-              <Button style={{maxWidth: "45px"}} label="Save Public Note" size="medium" mode="strong" onClick={() => this.publicSave() }>
-              </Button>
-              <Button  label="Discard" style={{marginLeft: "70px"}} size="medium" mode="negative" onClick={() => this.setState({opened: false }) }>
-              </Button>
-             </div>
+             <NotebookForm />
           </SidePanel>
           <div className="fullWidth">
             <Button label="New Note" size="medium" mode="strong" onClick={() => this.setState({opened: true }) } />
