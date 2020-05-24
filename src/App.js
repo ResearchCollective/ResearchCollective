@@ -1,15 +1,16 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Nav } from 'react-bootstrap';
-import { Main, Header, Button, Modal, Split, Bar, IconExternal, IconIdentity, Box as AragonBox } from '@aragon/ui'
-import Box from '3box';
-import Votes from "./components/Votes";
-import Notebook from "./components/Notebook";
-import Resources from "./components/Resources";
-import ProfileHover from 'profile-hover';
-import EditProfile from '3box-profile-edit-react';
 import './styles/style.css';
+
+import Box from '3box';
+import { Box as AragonBox, Button, IconExternal, Main } from '@aragon/ui';
+import ProfileHover from 'profile-hover';
+import React, { Component } from 'react';
+import { Nav } from 'react-bootstrap';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+
+import Notebook from './components/Notebook';
+import Resources from './components/Resources';
 import Navbar from './components/Shared/Header';
+import Votes from './components/Votes';
 import Home from './pages/Home';
 
 class App extends Component {
@@ -86,6 +87,9 @@ class App extends Component {
                     </Route>
                     <Route path="/resources">
                         <Resources/>
+                    </Route>
+                    <Route path='/notebook'>
+                        <Notebook />
                     </Route>
                 </Switch>
                 </Main>

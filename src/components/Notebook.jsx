@@ -1,5 +1,5 @@
+import { Box as AragonBox, Button, DataView, IconMaximize, SidePanel, TextInput } from '@aragon/ui';
 import React, { Component } from 'react';
-import { Button, TextInput, SidePanel, Box as AragonBox, IconMaximize, DataView } from '@aragon/ui';
 
 class Notebook extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class Notebook extends Component {
        };
    }
 
-   componentDidUpdate(){
+   componentDidMount(){
      if(this.props.space && (!this.state.privateNotes || !this.state.publicNotes)){
             //TODO: Make sure this actually is called ... right now I think the conditions after && are not right
             // they will need to be updated once we figure out the right way to declare privateNotes & publicNotes
@@ -97,7 +97,7 @@ render() {
              </div>
           </SidePanel>
           <div className="fullWidth">
-          //TODO: Remove these buttons; they are just for testing
+          {/* //TODO: Remove these buttons; they are just for testing */}
                <Button label="Alert Public Note" size="medium" mode="strong" onClick={() => this.alertPublicNote() || null}>
                </Button>
                <Button label="Alert Private Note" size="medium" mode="strong" onClick={() => this.alertPrivateNote() || null}>
