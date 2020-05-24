@@ -45,8 +45,8 @@ render() {
        }
       return (
           <div>
-            <h1 className="sectionTitle pushUp"> Votes </h1>
-            <p className="sectionSubTitle pushUp"> passed by the Non-Profit/DAO <a  rel="noopener noreferrer" target="_blank" href="https://mainnet.aragon.org/#/research">'Research Collective' <IconExternal style={{position: "relative", top: "-2px"}} size="small"/> </a>   </p>
+            <h1 className="sectionTitle"> Votes </h1>
+            <p className="sectionSubTitle"> passed by the Non-Profit/DAO <a  rel="noopener noreferrer" target="_blank" href="https://mainnet.aragon.org/#/research">'Research Collective' <IconExternal style={{position: "relative", top: "-2px"}} size="small"/> </a>   </p>
              <Box>
               {this.state.voteData &&  <Loading data={this.state.voteData}/>}
               {this.state.voteData.length > 0 &&  <div>

@@ -9,8 +9,8 @@ import Resources from "./components/Resources";
 import ProfileHover from 'profile-hover';
 import EditProfile from '3box-profile-edit-react';
 import './styles/style.css';
-import Navbar from './components/Shared/Header'
-import Home from './pages/Home'
+import Navbar from './components/Shared/Header';
+import Home from './pages/Home';
 
 class App extends Component {
 
@@ -53,10 +53,21 @@ class App extends Component {
         }
     }
     render() {
-
         return(
             <Router>
-                <Navbar />
+            <Main  theme={'dark'}>
+            <Navbar bg="light" expand="lg" style={{ minHeight: '40px' }}>
+              {this.state.accounts && (
+                <Nav fill style={{ width: "100%" }} >
+                  <Nav.Item><Link to="/">Home</Link></Nav.Item>
+                  <Nav.Item><Link to="/votes">Votes</Link></Nav.Item>
+                  <Nav.Item><Link to="/notes">Notes</Link></Nav.Item>
+                  <Nav.Item><Link to="/chat">Chat</Link></Nav.Item>
+                  <Nav.Item><Link to="/docs">Docus</Link></Nav.Item>
+                  <Nav.Item><Link to="/login">🦊</Link></Nav.Item>
+                </Nav>
+              )}
+            </Navbar>
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route path="/chat">
@@ -77,10 +88,10 @@ class App extends Component {
                         <Resources/>
                     </Route>
                 </Switch>
+                </Main>
             </Router>
         )
     }
-
 }
 
 
@@ -110,13 +121,12 @@ class App extends Component {
 class Chat extends Component {
     render() {
         return (<>
-            <h1 className="pushUp sectionTitle">Chat </h1>
-            <h1 className="sectionSubTitle pushUp"><i>🚨Under Construction🚨</i></h1>
+            <h1 className="sectionTitle">Chat </h1>
+            <h1 className="sectionSubTitle"><i>🚨Under Construction🚨</i></h1>
             <AragonBox className="notesContainer" >
-                <p className="pushUp">Researchers will be able to communicate here,
-                    <br/> in a relatively secure manner, via 3Box.</p><br/>
-                <p className="pushUp"><i> For now, there is Telegram...</i></p>
-                <Button  mode="strong"  label="Join" icon={<IconIdentity/>}/>
+                <p className="pushUp">Communicate with other researchers here anonymously.</p><br/>
+                <p><i> Or join us on</i></p>
+                <Button  mode="strong"  label="Telegram"/>
             </AragonBox>
         </>);
     }
@@ -126,11 +136,11 @@ class Notes extends Component {
     render() {
         return (
             <div>
-                <h1 className="sectionTitle pushUp">Notebook </h1>
-                <h1 className="sectionSubTitle pushUp"><i>🚨Under Construction🚨</i></h1>
+                <h1 className="sectionTitle">Notebook </h1>
+                <h1 className="sectionSubTitle"><i>🚨Under Construction🚨</i></h1>
                 <AragonBox className="notesContainer" >
-                    <p className="pushUp"><i>Researchers will be able to stash encypted or public notes here.</i></p><br/>
-                    <p className="pushUp"><i>These notes will be 'hashed and stashed' and will be accessible by one's 3box/MetaMask account.
+                    <p><i>Researchers will be able to stash encypted or public notes here.</i></p><br/>
+                    <p><i>These notes will be 'hashed and stashed' and will be accessible by one's 3box/MetaMask account.
                     </i></p>
                 </AragonBox>
             </div>

@@ -67,8 +67,8 @@ class Resources extends Component {
 render() {
       return (
           <div>
-            <h1 className="sectionTitle pushUp"> Resources </h1>
-            <p className="sectionSubTitle pushUp"> passed by the expert DAO <a  rel="noopener noreferrer" target="_blank" href="https://mainnet.aragon.org/#/covidresearch">'Covid Research' <IconExternal style={{position: "relative", top: "-2px"}} size="small"/> </a>   </p>
+            <h1 className="sectionTitle"> Resources </h1>
+            <p className="sectionSubTitle"> passed by the expert DAO <a  rel="noopener noreferrer" target="_blank" href="https://mainnet.aragon.org/#/covidresearch">'Covid Research' <IconExternal style={{position: "relative", top: "-2px"}} size="small"/> </a>   </p>
              <Box style={{display: "inline"}}>
                             <ItemComment   box={this.state.box} space={this.state.space} address={this.state.address} />
              {this.state.graphData &&  <Loading data={this.state.graphData}/>}
@@ -193,8 +193,8 @@ function PostItemModal() {
       <Button className="pushDown" mode="neutral"  icon={<IconPlus/>} onClick={open} label="Post Resource"/>
         <Modal visible={opened} onClose={close}>
              <Box className="notesContainer">
-               <h1 className="sectionTitle pushUp"> Post Resource</h1>
-               <p className="sectionSubTitle pushUp">on Covid Research</p>
+               <h1 className="sectionTitle"> Post Resource</h1>
+               <p className="sectionSubTitle">on Covid Research</p>
              <Field label="Name"><TextInput placeholder="Required" wide="true"></TextInput></Field>
              <Field label="URL"><TextInput placeholder="Optional" wide="true"></TextInput></Field>
              <Field  label="Description"><TextInput placeholder="Required" wide="true" multiline="true"></TextInput></Field>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Container, Row, Col, Button, Image, InputGroup, FormControl, Form, Link} from 'react-bootstrap'
+import {Container, Row, Col, Button, Image, InputGroup, FormControl, Form} from 'react-bootstrap'
 import  {Card} from "react-bootstrap";
 
 const Home = () => {
@@ -19,8 +19,8 @@ const Home = () => {
                         <Col className='homepage-hero-c2'>
                             <p className='about-rs'>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. </p>
                             <span className='call-to-action'>
-                                <Button className='call-to-action-btn'>I am here to publish</Button>
-                                <Button className='call-to-action-btn'>I am here to research</Button>
+                                <a href="https://tristanerr.typeform.com/to/VOEZ4F"><Button className='call-to-action-btn'>Curate</Button></a>
+                                <Button className='call-to-action-btn'>Research</Button>
                             </span>
                         </Col>
                     </Row>
