@@ -201,6 +201,7 @@ body {
   opacity: 70%;
   border: 0px solid #169363;
   margin: 3%;
+  margin-bottom: 50px;
 }
 
 .contact-send-btn:hover {

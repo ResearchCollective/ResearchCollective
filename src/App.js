@@ -55,19 +55,10 @@ class App extends Component {
     render() {
         return(
             <Router>
-            <Main  theme={'dark'}>
-            <Navbar bg="light" expand="lg" style={{ minHeight: '40px' }}>
-              {this.state.accounts && (
-                <Nav fill style={{ width: "100%" }} >
-                  <Nav.Item><Link to="/">Home</Link></Nav.Item>
-                  <Nav.Item><Link to="/votes">Votes</Link></Nav.Item>
-                  <Nav.Item><Link to="/notes">Notes</Link></Nav.Item>
-                  <Nav.Item><Link to="/chat">Chat</Link></Nav.Item>
-                  <Nav.Item><Link to="/docs">Docus</Link></Nav.Item>
-                  <Nav.Item><Link to="/login">🦊</Link></Nav.Item>
-                </Nav>
-              )}
+            <Navbar bg="light" expand="lg"   ethAddress={this.props.address} style={{ minHeight: '40px' }}>
             </Navbar>
+            <Main  theme={'dark'}>
+
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route path="/chat">
@@ -164,11 +155,11 @@ class Profile extends Component {
     render() {
         return (
             <div>
-                <h1 className="sectionTitle pushUp"> Profile </h1>
-                <p className="sectionSubTitle pushUp"> Your Ethereal Appearance</p>
+                <h1 className="sectionTitle"> Profile </h1>
+                <p className="sectionSubTitle"> Your Ethereal Appearance</p>
                 <AragonBox className="profileContainer">
                     {this.props.address && <div className="pushUp">
-                        <ProfileHover className="pushUp fatBottomed" address={this.props.address} showName={true} /><br/>
+                        <ProfileHover className="fatBottomed" address={this.props.address} showName={true} /><br/>
                         <a  rel="noopener noreferrer" target="_blank" href={"https://3box.io/" + this.props.address}><Button className="pushDown" label="Edit on 3Box" icon={<IconExternal/>}/></a>
                     </div>}
                 </AragonBox>
