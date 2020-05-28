@@ -14,9 +14,9 @@ const Home = () => {
                 <div className='homepage-hero'>
                     <Row>
                         <Col className='homepage-hero-c1'>
-                            <h1>Meta </h1>
-                            <p>Experimental</p>
-                            <p>Research</p>
+                            <h1>the web3 </h1>
+                            <p>scientific</p>
+                            <p>society</p>
                             <a target="_blank" rel="noopener noreferrer"  href="https://luisivan.net/posts/expert-daos"><Button className='contact-us-btn'>What is an Expert DAO?</Button></a>
                         </Col>
                         <Col className='homepage-hero-c2'>

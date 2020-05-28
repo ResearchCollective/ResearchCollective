@@ -74,10 +74,10 @@ class App extends Component {
                         <Notes web3enabled={this.state.web3enabled} space={this.state.space}/>
                     </Route>
                     <Route path="/votes">
-                        <Votes   box={this.state.box} space={this.state.space} address={this.state.address} />
+                        <Votes   box={this.state.box} address={this.state.address} />
                     </Route>
                     <Route path="/resources">
-                        <Resources   box={this.state.box} space={this.state.space} address={this.state.address} />
+                        <Resources   box={this.state.box} address={this.state.address} />
                     </Route>
                 </Switch>
                 </Main>
@@ -138,11 +138,9 @@ class Profile extends Component {
         return (
             <div>
                 <h1 className="sectionTitle"> Profile </h1>
-                <p className="sectionSubTitle"> Your Ethereal Appearance</p>
+                <p className="sectionSubTitle"> Edit your 3Box and Research Collective Persona</p>
                 <AragonBox className="profileContainer">
-                    {this.props.address && <div className="pushUp">
-                        <ProfileHover className="fatBottomed" address={this.props.address} showName={true} /><br/>
-                      {this.props.space && this.props.box &&
+                {this.props.space && this.props.box &&
                         <EditProfile
                         // required
                         box={this.props.box}
@@ -150,8 +148,6 @@ class Profile extends Component {
                         currentUserAddr={this.props.address}
                     />
                     }
-                        <a  rel="noopener noreferrer"  target="_blank" href={"https://3box.io/" + this.props.address}><Button className="pushDown" label="Edit on 3Box" icon={<IconExternal/>}/></a>
-                    </div>}
                 </AragonBox>
             </div>
         );
