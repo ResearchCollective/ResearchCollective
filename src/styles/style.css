@@ -5,14 +5,28 @@ body {
 }
 
 .navbar {
-  background-color: #708CCC !important;
+  background-color: #425176 !important;
   height: 10vh;
+  border-bottom: 2px solid #8dd79a;
 }
 
 .navbar-brand {
   font-weight: bold;
-  font-size: 20pt;
-  font-style: italic;
+  font-size: 21pt;
+  text-decoration: none!important;
+}
+
+.navbar-brand:active{
+    text-shadow: 1px 1px 1px rgba(141,215,154,0.37);
+}
+
+.nav-item:hover {
+  color: #C4F1BE!important;
+}
+
+a:hover{
+    color: #C4F1BE!important;
+    text-decoration: none!important;
 }
 
 .login-btn {
@@ -127,6 +141,10 @@ body {
   text-align: center !important;
 }
 
+.centerText{
+    text-align: center !important;
+}
+
 .glyph {
   height: 150px;
   width: 150px;
@@ -209,5 +227,26 @@ body {
   background-color: #169363;
   opacity: 100%;
 }
+
+.input_commentAs{
+  color: black!important;
+}
+
+.threebox-comments-react{
+  color:black!important;
+}
+
+.comments_footer {
+  display: none;
+}
+
+.telegramBox {
+  border:0px;
+  height:500px;
+  width:200px;
+  margin:5px;
+  box-shadow: 0 0 16px 3px rgba(0,0,0,.2);
+}
+
 
 /*# sourceMappingURL=style.css.map */

@@ -1,48 +1,51 @@
 import React, { Component } from 'react';
-import {Button, Box, Modal, IconPlus, IconExternal, DataView, Field, TextInput} from '@aragon/ui';
+import {Button, Box, Modal, DropDown, IconPlus, IconExternal, DataView, Field, TextInput} from '@aragon/ui';
 import ApolloClient from 'apollo-boost';
 import { gql } from 'apollo-boost';
 import ProfileHover from 'profile-hover';
 import Loading from "./Loading";
-
 import ThreeBoxComments from '3box-comments-react';
 
-
-
-
 class Resources extends Component {
-
     commentData = {};
-
     state = {
         client: false,
         graphData: [],
-        box:undefined,
-        space:undefined,
-        address:undefined
+        visibleGraphData: [],
+        box:false,
+        address:false,
+        labels: ["entity", "event"]
     };
 
 
-    static getDerivedStateFromProps(props,state){
+  static getDerivedStateFromProps(props,state){
         console.log(props);
     }
 
     componentDidMount() {
-        this.commentData["0x648e7a1a51db72fc2df3091614e79468feabff40-4"] = ["aitheric - Used their test kit with consistent results.",
-            "Alfonso II - Arrived on time with good documentation.",
-            <Button className="pushDown" mode="neutral"  icon={<IconPlus/>} label="Add Comment" style={{marginBottom:40}}/>
-        ];
-        this.commentData["0x648e7a1a51db72fc2df3091614e79468feabff40-5"] = ["JasonLTV - Now I can vape happily ever after.",
-            "DangerXXX - Not sure this makes sense to start smoking again just with one study so far.",
-            <Button className="pushDown" mode="neutral"  icon={<IconPlus/>} label="Add Comment" style={{marginBottom:40}}/>
-        ];
+    //    this.commentData["0x648e7a1a51db72fc2df3091614e79468feabff40-4"] = ["aitheric - Used their test kit with consistent results.",
+      //      "Alfonso II - Arrived on time with good documentation.",
+    //        <Button className="pushDown" mode="neutral"  icon={<IconPlus/>} label="Add Comment" style={{marginBottom:40}}/>
+    //    ];
+  //      this.commentData["0x648e7a1a51db72fc2df3091614e79468feabff40-5"] = ["JasonLTV - Now I can vape happily ever after.",
+  //          "DangerXXX - Not sure this makes sense to start smoking again just with one study so far.",
+    //        <Button className="pushDown" mode="neutral"  icon={<IconPlus/>} label="Add Comment" style={{marginBottom:40}}/>
+  //      ];
      this.setState({
          box:this.props.box,
          space: this.props.space,
          address: this.props.adress
      });
-     this.loadData();
+     if (this.state.graphData.length === undefined  || this.state.graphData.length < 1) {
+       this.loadData();
+     }
  };
+
+ toggleLabel(label) {
+    //  var newLabels = [];
+    //  this.state.labels = newLabels;
+    };
+
 
 
  loadData() {
@@ -61,41 +64,38 @@ class Resources extends Component {
          }
        }
      `
-   }).then(result =>  this.setState({graphData: result.data.votes, client: client}))}
-
+   }).then(result =>  this.setState({graphData: result.data.votes, client: client}))};
 
 render() {
+
       return (
           <div>
             <h1 className="sectionTitle"> Resources </h1>
             <p className="sectionSubTitle"> passed by the expert DAO <a  rel="noopener noreferrer" target="_blank" href="https://mainnet.aragon.org/#/covidresearch">'Covid Research' <IconExternal style={{position: "relative", top: "-2px"}} size="small"/> </a>   </p>
+            <Button onClick={this.toggleLabel("entity", this.state.labels)} label="Entities"/>
+            <Button onClick={this.toggleLabel("event", this.state.labels)} label="Events"/>
              <Box style={{display: "inline"}}>
-                            <ItemComment   box={this.state.box} space={this.state.space} address={this.state.address} />
              {this.state.graphData &&  <Loading data={this.state.graphData}/>}
              {this.state.graphData.length > 0 &&
 
-
-               <DataView
+               <DataView  theme={'light'}
                   fields={['Description', 'Poster', 'Link']}
                   // entries is a list of items
-                  entries={ExtricateData(this.state.graphData)}
-                  renderEntryExpansion={({description, owner, id }) => {
-                      // if (this.state.box === undefined){
-                      //     return ["loading"]
-                      // }
-                      return this.commentData[id];
+                  entries={processGraph(this.state.labels, this.state.graphData)}
+                  renderEntryExpansion={({did}) => {
+	                      return <ItemComment   box={this.props.box} address={this.props.address} did={did} />;
                   }
                   }
-                  renderEntry={({ description, owner, url, parsed }) => {
-                    if (parsed) {
+                  renderEntry={({ description, owner, url, labels, flags}) => {
+                    if (flags.parsed && flags.visible ) {
                       return [<h1 style={{width: "100%"}}>{description}</h1>,
                           <ProfileHover address={owner} showName={true}/>,
-                          // <CommentModal box={this.props.box} address={this.props.address}/>,
                           <div  className="buttonContainer txnButton"> <a rel="noopener noreferrer" target="_blank" href={url}> <Button label="" icon={<IconExternal/>}/> </a> </div>]
-                    } else {
+                    } else if (flags.visible) {
                       return [<h1 style={{width: "100%"}}>{description}</h1>]
                     }
-                  }}
+                   }
+                 }
                 />
               }
               <PostItemModal/>
@@ -105,13 +105,14 @@ render() {
   }
 }
 
-function ExtricateData(data) {
+
+
+function processGraph(labels, data) {
   var newData = [];
-  var newDataIndex = 0;
   if (typeof data[0] !== "undefined") {
-    data.forEach(myFunction);
-    function myFunction(item, index) {
-        console.log("Extricate Loop @:  " + index + item);
+    data.forEach(parseData);
+    function parseData(item, index) {
+        console.log("process Graph Loop @:  " + index + item);
            try {
                 console.log("Trying to make  JSON object for " + item.metadata);
                 var metadata = JSON.parse(item.metadata);
@@ -119,14 +120,21 @@ function ExtricateData(data) {
                 item.description = metadata.description;
                 item.owner = metadata.owner;
                 item.url = metadata.url;
+                item.did =  metadata.url.split("//");
                 item.staked = metadata.staked;
-                item.parsed = true;
-                  if (!item.url.includes("http")) {
+                item.flags = {parsed: false, visible: false};
+                item.labels = ["entity", "event"];
+                for (index = 0; index < item.labels.length; index++) {
+                    if (labels.includes(item.labels[index])) {
+                      item.flags.visible = true;
+                    }
+                }
+                if (!item.url.includes("http")) {
                     item.url = "https://" + item.url
                   }
-                if (!item.description.includes("test vote")) {
-                  newData[newDataIndex] = item;
-                  newDataIndex++;
+                if (item.flags.visible && !item.description.includes("test vote")) {
+                item.flags.parsed = true;
+                  newData[newData.length] = item;
                 }
             } catch (e) {
               item.description = item.metadata;
@@ -134,44 +142,27 @@ function ExtricateData(data) {
               item.url = "N/A";
               item.staked = "N/A";
               item.parsed = false;
+              item.flags = {parsed: false, visible:true};
               console.log("Vote item " + index + " failed; resulting object:");
               console.log(item);
             }
           }
         }
-  console.log("old data at end of Extricate: " +  data);
-  console.log("new data at end of Extricate: " + newData);
   return newData;
   }
 
-// function CommentModal(box, address){
-//   const [opened, setOpened] = React.useState(false)
-//   const open = () => setOpened(true)
-//   const close = () => setOpened(false)
-//   return (
-//       <div>
-//         <Button  mode="neutral"  icon={<IconPlus/>} onClick={open} label="Comments"/>
-//           <Modal visible={opened} onClose={close}>
-//             {box && address &&
-//              <Box className="notesContainer">
-//                 <h1> this is where the comments go </h1>
-//              </Box>}
-//           </Modal>
-//       </div>
-//   )
-// }
 
 
   class ItemComment extends Component {
     render() {
       return (<>
-          {this.props.box && this.props.space &&
+
+          {this.props.box && this.props.address &&
             <ThreeBoxComments
                 // required
                 spaceName="researchCollective"
-                threadName="testThread"
+                threadName={this.props.did[1]}
                 adminEthAddr={this.props.address}
-
 
                 // Required props for context A) & B)
                 box={this.props.box}
@@ -188,16 +179,24 @@ function PostItemModal() {
   const [opened, setOpened] = React.useState(false)
   const open = () => setOpened(true)
   const close = () => setOpened(false)
+  const [selected, setSelected] = React.useState()
   return (
     <>
-      <Button className="pushDown" mode="neutral"  icon={<IconPlus/>} onClick={open} label="Post Resource"/>
+      <Button className="pushDown" mode="outline"  icon={<IconPlus/>} onClick={open} label="Post Resource"/>
         <Modal visible={opened} onClose={close}>
              <Box className="notesContainer">
                <h1 className="sectionTitle"> Post Resource</h1>
-               <p className="sectionSubTitle">on Covid Research</p>
+               <Field label="Type">
+                 <DropDown
+                    items={['Vendor', 'Article', 'Registry', 'Experiment']}
+                    selected={selected}
+                    onChange={setSelected}
+                  />
+                </Field>
              <Field label="Name"><TextInput placeholder="Required" wide="true"></TextInput></Field>
-             <Field label="URL"><TextInput placeholder="Optional" wide="true"></TextInput></Field>
              <Field  label="Description"><TextInput placeholder="Required" wide="true" multiline="true"></TextInput></Field>
+             <Field label="URL or DOI"><TextInput placeholder="Optional" wide="true"></TextInput></Field>
+             <Field label="Owner"><TextInput placeholder="EthAddress or Email; Optional" wide="true"></TextInput></Field>
              <Button mode="strong" label="Post"/>
           </Box>
       </Modal>

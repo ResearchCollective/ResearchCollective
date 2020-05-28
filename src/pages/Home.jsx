@@ -14,10 +14,10 @@ const Home = () => {
                 <div className='homepage-hero'>
                     <Row>
                         <Col className='homepage-hero-c1'>
-                            <h1>Decentralized Science</h1>
-                            <p>Powered by Self-Sovereign Researchers & </p>
-                            <p>a Swarm of Expert DAOs</p>
-                            <a target="_blank" href="https://luisivan.net/posts/expert-daos"><Button className='contact-us-btn'>What is an Expert DAO?</Button></a>
+                            <h1>Meta </h1>
+                            <p>Experimental</p>
+                            <p>Research</p>
+                            <a target="_blank" rel="noopener noreferrer"  href="https://luisivan.net/posts/expert-daos"><Button className='contact-us-btn'>What is an Expert DAO?</Button></a>
                         </Col>
                         <Col className='homepage-hero-c2'>
                             <p className='about-rs'>Develop your expertise. </p>

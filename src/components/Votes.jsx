@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Box, IconExternal, DataView } from '@aragon/ui';
+import { Button, Box, IconExternal, Split, DataView } from '@aragon/ui';
 import Loading from "./Loading";
 import ApolloClient from 'apollo-boost';
 import { gql } from 'apollo-boost';
@@ -47,23 +47,36 @@ render() {
           <div>
             <h1 className="sectionTitle"> Votes </h1>
             <p className="sectionSubTitle"> passed by the Non-Profit/DAO <a  rel="noopener noreferrer" target="_blank" href="https://mainnet.aragon.org/#/research">'Research Collective' <IconExternal style={{position: "relative", top: "-2px"}} size="small"/> </a>   </p>
-             <Box>
-              {this.state.voteData &&  <Loading data={this.state.voteData}/>}
-              {this.state.voteData.length > 0 &&  <div>
-                  <DataView
-                     fields={['Description', 'Link']}
-                     entries={this.state.voteData}
-                     renderEntry={({ metadata, createdAtTransaction }) => {
-                       if (metadata) {
-                        return [<h1>{metadata} </h1>, <div  className="buttonContainer txnButton"> <a rel="noopener noreferrer" target="_blank" href={"https://etherscan.io/tx/" + createdAtTransaction}><Button icon={<IconExternal/>}  /> </a> </div>
-                       ]
-                     } else {
-                       return [<></>];
-                     }
-                     }}
-                   />
-                </div>}
-            </Box>
+
+            <Split
+             primary={                        <Box>
+                           {this.state.voteData &&  <Loading data={this.state.voteData}/>}
+                           {this.state.voteData.length > 0 &&  <div>
+                               <DataView
+                                  fields={['Description', 'Link']}
+                                  entries={this.state.voteData}
+                                  renderEntry={({ metadata, createdAtTransaction }) => {
+                                    if (metadata) {
+                                     return [<h1>{metadata} </h1>, <div  className="buttonContainer txnButton"> <a rel="noopener noreferrer" target="_blank" href={"https://etherscan.io/tx/" + createdAtTransaction}><Button icon={<IconExternal/>}  /> </a> </div>
+                                    ]
+                                  } else {
+                                    return [<></>];
+                                  }
+                                  }}
+                                />
+                             </div>}
+                         </Box>}
+             secondary={
+               <>
+                 <Box>
+                    <h3 className=" fullWidth centerText"><i> Announcements</i></h3>
+                    <iframe title="Research Collective Telegram channel feed - not the same as group chat"  id="preview" className="telegramBox" src="https://xn--r1a.website/s/ResearchCollective"></iframe>
+                 </Box>
+               </>
+             }> </Split>
+
+
+
             </div>
     );
   }
