@@ -75,11 +75,13 @@ render() {
              {this.state.graphData &&  <Loading data={this.state.graphData}/>}
              {this.state.graphData.length > 0 &&
                <DataView  theme={'light'}
-                  fields={['Description', 'Poster', 'Link']}
+                  fields={this.props.columns}
                   // entries is a list of items
                   entries={processGraph(this.state.labels, this.state.graphData)}
                   renderEntryExpansion={({did}) => {
+                        if (!did == null){
 	                      return <ItemComment box={this.props.box} address={this.props.address} did={did} />;
+                      }
                       }
                   }
                   renderEntry={({ description, owner, url, labels, flags}) => {
@@ -88,13 +90,12 @@ render() {
                           <ProfileHover address={owner} showName={true}/>,
                           <div  className="buttonContainer txnButton"> <a rel="noopener noreferrer" target="_blank" href={url}> <Button label="" icon={<IconExternal/>}/> </a> </div>]
                     } else if (flags.visible) {
-                      return [<h1 style={{width: "100%"}}>{description}</h1>]
+                      return [<h1 style={{width: "100%"}}>{description}</h1>,   <div  className="buttonContainer txnButton"> <a rel="noopener noreferrer" target="_blank" href={url}> <Button label="" icon={<IconExternal/>}/> </a> </div>]
                     }
                    }
                  }
                 />
               }
-            <PostItemModal/>
           </div>
     );
   }
@@ -136,6 +137,9 @@ function processGraph(labels, data) {
               item.owner = "N/A";
               item.url = "N/A";
               item.staked = "N/A";
+              if (!item.createdAtTransaction == null) {
+                item.url = "https://etherscan.io/tx/" + item.createdAtTransaction;
+              }
               item.parsed = false;
               item.flags = {parsed: false, visible: true};
               console.log("Vote item " + index + " failed; resulting object:");
@@ -173,33 +177,5 @@ function processGraph(labels, data) {
 }
 
 
-function PostItemModal() {
-  const [opened, setOpened] = React.useState(false)
-  const open = () => setOpened(true)
-  const close = () => setOpened(false)
-  const [selected, setSelected] = React.useState()
-  return (
-    <>
-      <Button className="pushDown" mode="outline"  icon={<IconPlus/>} onClick={open} label="Post Resource"/>
-        <Modal visible={opened} onClose={close}>
-             <Box className="notesContainer">
-               <h1 className="sectionTitle"> Post Resource</h1>
-               <Field label="Type">
-                 <DropDown
-                    items={['Vendor', 'Article', 'Registry', 'Experiment']}
-                    selected={selected}
-                    onChange={setSelected}
-                  />
-                </Field>
-             <Field label="Name"><TextInput placeholder="Required" wide="true"></TextInput></Field>
-             <Field  label="Description"><TextInput placeholder="Required" wide="true" multiline="true"></TextInput></Field>
-             <Field label="URL or DOI"><TextInput placeholder="Optional" wide="true"></TextInput></Field>
-             <Field label="Owner"><TextInput placeholder="EthAddress or Email; Optional" wide="true"></TextInput></Field>
-             <Button mode="strong" label="Post"/>
-          </Box>
-      </Modal>
-    </>
-  )
-}
 
 export default Registry;

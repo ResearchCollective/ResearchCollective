@@ -10,7 +10,8 @@ class Votes extends Component {
       super(props);
       //the smart contract for the voting for the main research dao is specified below
        this.state = {
-            voteId: "0xc6c1725868210736c3bcb784b4c13c6412823096"
+            voteId: "0xc6c1725868210736c3bcb784b4c13c6412823096",
+            columns: ['Description','Link']
        };
    }
 
@@ -23,7 +24,7 @@ render() {
             <p className="sectionSubTitle"> passed by the Non-Profit/DAO <a  rel="noopener noreferrer" target="_blank" href="https://mainnet.aragon.org/#/research">'Research Collective' <IconExternal style={{position: "relative", top: "-2px"}} size="small"/> </a>   </p>
 
             <Split
-             primary={               <Registry box={this.props.box} voteId={this.state.voteId} address={this.props.address}/>            }
+             primary={               <Registry box={this.props.box} columns={this.state.columns} voteId={this.state.voteId} address={this.props.address}/>            }
              secondary={
                <>
                  <Box>
