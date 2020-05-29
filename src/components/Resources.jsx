@@ -6,6 +6,7 @@ import ProfileHover from 'profile-hover';
 import Loading from "./Loading";
 
 import ThreeBoxComments from '3box-comments-react';
+import PostItemModal from "./credentials/RequestCredential";
 
 
 
@@ -23,18 +24,14 @@ class Resources extends Component {
     };
 
 
-    static getDerivedStateFromProps(props,state){
-        console.log(props);
-    }
-
     componentDidMount() {
         this.commentData["0x648e7a1a51db72fc2df3091614e79468feabff40-4"] = ["aitheric - Used their test kit with consistent results.",
             "Alfonso II - Arrived on time with good documentation.",
-            <Button className="pushDown" mode="neutral"  icon={<IconPlus/>} label="Add Comment" style={{marginBottom:40}}/>
+            <Button className="pushDown" mode="normal"  icon={<IconPlus/>} label="Add Comment" style={{marginBottom:40}}/>
         ];
         this.commentData["0x648e7a1a51db72fc2df3091614e79468feabff40-5"] = ["JasonLTV - Now I can vape happily ever after.",
             "DangerXXX - Not sure this makes sense to start smoking again just with one study so far.",
-            <Button className="pushDown" mode="neutral"  icon={<IconPlus/>} label="Add Comment" style={{marginBottom:40}}/>
+            <Button className="pushDown" mode="normal"  icon={<IconPlus/>} label="Add Comment" style={{marginBottom:40}}/>
         ];
      this.setState({
          box:this.props.box,
@@ -111,11 +108,11 @@ function ExtricateData(data) {
   if (typeof data[0] !== "undefined") {
     data.forEach(myFunction);
     function myFunction(item, index) {
-        console.log("Extricate Loop @:  " + index + item);
+        // console.log("Extricate Loop @:  " + index + item);
            try {
-                console.log("Trying to make  JSON object for " + item.metadata);
+                // console.log("Trying to make  JSON object for " + item.metadata);
                 var metadata = JSON.parse(item.metadata);
-                console.log("Made initial JSON object for " + index);
+                // console.log("Made initial JSON object for " + index);
                 item.description = metadata.description;
                 item.owner = metadata.owner;
                 item.url = metadata.url;
@@ -134,13 +131,13 @@ function ExtricateData(data) {
               item.url = "N/A";
               item.staked = "N/A";
               item.parsed = false;
-              console.log("Vote item " + index + " failed; resulting object:");
-              console.log(item);
+              // console.log("Vote item " + index + " failed; resulting object:");
+              // console.log(item);
             }
           }
         }
-  console.log("old data at end of Extricate: " +  data);
-  console.log("new data at end of Extricate: " + newData);
+  // console.log("old data at end of Extricate: " +  data);
+  // console.log("new data at end of Extricate: " + newData);
   return newData;
   }
 
@@ -184,25 +181,6 @@ function ExtricateData(data) {
 }
 
 
-function PostItemModal() {
-  const [opened, setOpened] = React.useState(false)
-  const open = () => setOpened(true)
-  const close = () => setOpened(false)
-  return (
-    <>
-      <Button className="pushDown" mode="neutral"  icon={<IconPlus/>} onClick={open} label="Post Resource"/>
-        <Modal visible={opened} onClose={close}>
-             <Box className="notesContainer">
-               <h1 className="sectionTitle"> Post Resource</h1>
-               <p className="sectionSubTitle">on Covid Research</p>
-             <Field label="Name"><TextInput placeholder="Required" wide="true"></TextInput></Field>
-             <Field label="URL"><TextInput placeholder="Optional" wide="true"></TextInput></Field>
-             <Field  label="Description"><TextInput placeholder="Required" wide="true" multiline="true"></TextInput></Field>
-             <Button mode="strong" label="Post"/>
-          </Box>
-      </Modal>
-    </>
-  )
-}
+
 
 export default Resources;
