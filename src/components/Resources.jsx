@@ -13,7 +13,6 @@ class Resources extends Component {
     };
 
 
-
 render() {
       return (
           <div>
