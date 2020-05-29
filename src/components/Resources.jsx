@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Box, Modal, IconPlus, IconExternal} from '@aragon/ui';
+import {Box, IconExternal} from '@aragon/ui';
 import Registry from './Registry';
 import { Form } from "react-bootstrap";
 import PostItemModal from './credentials/RequestCredential';

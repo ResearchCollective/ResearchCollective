@@ -8,15 +8,6 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 
-// TODO: Perhaps it's better to use a schema from here: https://schema.org/
-// e.g.:
-// https://schema.org/ScholarlyArticle
-// https://schema.org/member
-// https://schema.org/provider
-// https://schema.org/EndorsementRating
-// https://schema.org/DataFeedItem
-
-
 // TODO: NEW ENDPOINTS NEEDED:
 const SERVER_URL = "http://127.0.0.1:3001/"; // https://researchcollective.io/
 const EXAMPLE_CREDENTIAL = SERVER_URL + "ExampleResearchCollectiveExpertDAOResource";
@@ -49,7 +40,7 @@ function RequestCredential (subject, itemType, description, resourceName, resour
         };
         vc.addContext(schemaContexts);
 
-        vc.addType("ResearchCollectiveExpertDAOResource")
+        vc.addType("ResearchCollectiveExpertDAOResource");
         vc.addSubject({
             id:subject, // this should be their DID or other identifier
             type:"ResearchCollectiveExpertDAOResource",
@@ -69,7 +60,7 @@ function RequestCredential (subject, itemType, description, resourceName, resour
             }
         });
         vc.issuer = COVID_ISSUER;
-        console.log("vc:", vc);
+        // console.log("vc:", vc);
         return vc;
 }
 
@@ -88,30 +79,38 @@ const handleSubmitPostResource = (event) => {
         itemType = "Resource"
     }
 
-
     let newRequestedCredential = RequestCredential(
         form.formHorizontalResourceName.value,
         itemType,
         form.formResourceDescription.value,
         form.formHorizontalResourceName.value,
         form.formHorizontalResourceURL.value
-        )
+        );
+
+    const payload = {
+        contactEmail:form.formHorizontalEmail.value,
+        contactName:form.formHorizontalContactName.value,
+        credential:newRequestedCredential
+    };
+
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify( newRequestedCredential)
+        body: JSON.stringify(payload)
     };
 
-    // send the vc over to the backend
-    fetch(SERVER_URL + 'signCredential', requestOptions)
+    // send the vc over to the backend to submit to the Telegram channel
+    fetch(SERVER_URL + 'submitNewProposal', requestOptions)
         .then(async response =>
         {
-            const jsonResponse = await response.json();
-            console.log("signed credential", jsonResponse);
-            newRequestedCredential.proof = jsonResponse.proof;
-            newRequestedCredential.issuer = jsonResponse.issuer;
+            // const jsonResponse = await response.json();
+            console.log("credential submitted:", response);
+
+            // when we sign the credential, set the proof
+            // newRequestedCredential.proof = jsonResponse.proof;
+            // newRequestedCredential.issuer = jsonResponse.issuer;
         }).catch(err=>{
-            console.log("error on backend request:", err)
+            console.log("error on credential request:", err)
     });
 }
 
@@ -129,7 +128,7 @@ export default function PostItemModal() {
             <Form onSubmit={handleSubmitPostResource} >
                 <Form.Group as={Row} controlId="formHorizontalContactName">
                     <Form.Label column sm={2}>
-                        Contact Name (Required)
+                        Contact Name<sup>*</sup>
                     </Form.Label>
                     <Col sm={10}>
                         <Form.Control  type="name" placeholder="Contact Name" />
@@ -138,7 +137,7 @@ export default function PostItemModal() {
 
                 <Form.Group as={Row} controlId="formHorizontalEmail">
                     <Form.Label column sm={2}>
-                        Contact Email (Required)
+                        Contact Email<sup>*</sup>
                     </Form.Label>
                     <Col sm={10}>
                         <Form.Control type="email" placeholder="Contact Email" />
@@ -147,16 +146,16 @@ export default function PostItemModal() {
 
                 <Form.Group as={Row} controlId="formHorizontalResourceName">
                     <Form.Label column sm={2}>
-                        Resource Name (Required)
+                        Resource Identifier<sup>*</sup>
                     </Form.Label>
                     <Col sm={10}>
-                        <Form.Control type="name" placeholder="Resource Name" />
+                        <Form.Control type="name" placeholder="Resource Identifier" />
                     </Col>
                 </Form.Group>
 
                 <Form.Group as={Row} controlId="formHorizontalResourceURL">
                     <Form.Label column sm={2}>
-                        Resource URL (Required)
+                        Resource URL<sup>*</sup>
                     </Form.Label>
                     <Col sm={10}>
                         <Form.Control type="url" placeholder="Resource URL" />
@@ -164,7 +163,7 @@ export default function PostItemModal() {
                 </Form.Group>
 
                 <Form.Group as={Row} controlId="formResourceDescription">
-                    <Form.Label column sm={2}>Resource Description (Required) </Form.Label>
+                    <Form.Label column sm={2}>Resource Description<sup>*</sup> </Form.Label>
                     <Col sm={10}>
                     <Form.Control as="textarea" rows="3" />
                     </Col>
@@ -174,7 +173,7 @@ export default function PostItemModal() {
                 <fieldset>
                     <Form.Group as={Row}>
                         <Form.Label as="legend" column sm={2}>
-                            Resource Type
+                            Resource Type<sup>*</sup>
                         </Form.Label>
                         <Col sm={10}>
                             <Form.Check
@@ -199,22 +198,16 @@ export default function PostItemModal() {
                     </Form.Group>
                 </fieldset>
 
+                <Form.Label column sm={10}><sup>*</sup> Required </Form.Label>
+
                 <Form.Group as={Row}>
                     <Col sm={{ span: 10, offset: 2 }}>
-                        <Button onClick={close} type="submit">Submit for Review</Button>
+                        {/*<Button onClick={close} type="submit">Submit for Review</Button>*/}
+                        <Button type="submit">Submit for Review</Button>
                     </Col>
                 </Form.Group>
             </Form>
         </Modal>
-{/*    <Box className="notesContainer">*/}
-{/*        <h1 className="sectionTitle"> Post Resource</h1>*/}
-{/*        <p className="sectionSubTitle">on Covid Research</p>*/}
-{/*        <Field label="Name"><TextInput placeholder="Required" wide="true"></TextInput></Field>*/}
-{/*        <Field label="URL"><TextInput placeholder="Optional" wide="true"></TextInput></Field>*/}
-{/*        <Field  label="Description"><TextInput placeholder="Required" wide="true" multiline="true"></TextInput></Field>*/}
-{/*        <Button mode="strong" label="Post"/>*/}
-{/*    </Box>*/}
-
 </>
     )
 }

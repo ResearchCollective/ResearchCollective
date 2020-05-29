@@ -19,9 +19,6 @@ class Registry extends Component {
     };
 
 
-  static getDerivedStateFromProps(props,state){
-        console.log(props);
-    }
 
     componentDidMount() {
       //These are fake comments used by Ian earlier... we probably should delete this after the DAIA hackathon
