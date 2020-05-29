@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Box, Modal, DropDown, IconPlus, IconExternal, DataView, Field, TextInput} from '@aragon/ui';
+import {Button, IconExternal, DataView} from '@aragon/ui';
 import ApolloClient from 'apollo-boost';
 import { gql } from 'apollo-boost';
 import ProfileHover from 'profile-hover';
@@ -21,6 +21,7 @@ class Registry extends Component {
 
 
     componentDidMount() {
+      //These are fake comments used by Ian earlier... we probably should delete this after the DAIA hackathon
     //    this.commentData["0x648e7a1a51db72fc2df3091614e79468feabff40-4"] = ["aitheric - Used their test kit with consistent results.",
       //      "Alfonso II - Arrived on time with good documentation.",
     //        <Button className="pushDown" mode="neutral"  icon={<IconPlus/>} label="Add Comment" style={{marginBottom:40}}/>
@@ -39,9 +40,18 @@ class Registry extends Component {
  };
 
  toggleLabel(label) {
-    //  var newLabels = [];
-    //  this.state.labels = newLabels;
-    };
+     //  if (this.state.labels.includes(label)) {
+    //    console.log("Here it includes; so remove it");
+    //    var newLabels = [];
+    //    newLabels = this.state.labels.filter(e => e !== label);
+    // change the button to reflect if it has been toggled or not
+    //  } else {
+    //here it does not have the label, so let's add it
+    //    this.state.labels.push(label);
+  //      TODO: Change the graphData and make sure it redraws with new results.
+      // change the button to reflect if it has been toggled or not
+//      } };
+  };
 
 
 
@@ -67,8 +77,8 @@ render() {
 
       return (
           <div>
-          <Button onClick={this.toggleLabel("entity", this.state.labels)} label="Entities"/>
-          <Button onClick={this.toggleLabel("event", this.state.labels)} label="Events"/>
+          <Button onClick={this.toggleLabel("entity")} label="Entities"/>
+          <Button onClick={this.toggleLabel("event")} label="Events"/>
              {this.state.graphData &&  <Loading data={this.state.graphData}/>}
              {this.state.graphData.length > 0 &&
                <DataView  theme={'light'}
@@ -105,11 +115,11 @@ function processGraph(labels, data) {
   if (typeof data[0] !== "undefined") {
     data.forEach(parseData);
     function parseData(item, index) {
-        console.log("process Graph Loop @:  " + index + item);
+        //console.log("process Graph Loop @:  " + index + item);
            try {
-                console.log("Trying to make  JSON object for " + item.metadata);
+              //  console.log("Trying to make  JSON object for " + item.metadata);
                 var metadata = JSON.parse(item.metadata);
-                console.log("Made initial JSON object for " + index);
+            //    console.log("Made initial JSON object for " + index);
                 item.description = metadata.description;
                 item.owner = metadata.owner;
                 item.url = metadata.url;
@@ -139,8 +149,8 @@ function processGraph(labels, data) {
               }
               item.parsed = false;
               item.flags = {parsed: false, visible: true};
-              console.log("Vote item " + index + " failed; resulting object:");
-              console.log(item);
+            //  console.log("Vote item " + index + " failed; resulting object:");
+            //  console.log(item);
               if ((item.description.length > 2) && !item.description.includes("test vote")&& !item.description.includes("description")) {
                newData[newData.length] = item;
              }

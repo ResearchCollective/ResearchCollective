@@ -7,13 +7,14 @@ body {
 .navbar {
   background-color: #425176 !important;
   height: 10vh;
-  border-bottom: 2px solid #8dd79a;
+  border-bottom: 3px solid #8dd79a;
 }
 
 .navbar-brand {
   font-weight: bold;
   font-size: 21pt;
   text-decoration: none!important;
+  font-family: 'Play', sans-serif;
 }
 
 .navbar-brand:active{
