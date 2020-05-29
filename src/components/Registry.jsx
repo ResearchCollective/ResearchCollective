@@ -19,9 +19,6 @@ class Registry extends Component {
     };
 
 
-  static getDerivedStateFromProps(props,state){
-        console.log(props);
-    }
 
     componentDidMount() {
     //    this.commentData["0x648e7a1a51db72fc2df3091614e79468feabff40-4"] = ["aitheric - Used their test kit with consistent results.",
