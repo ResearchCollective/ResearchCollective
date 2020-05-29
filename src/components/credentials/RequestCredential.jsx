@@ -7,11 +7,15 @@ import {Form} from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
+// remote API
+const SERVER_URL = "http://api.researchcollective.io/";
+// local API
+// const SERVER_URL = "http://127.0.0.1:3001/";
 
-// TODO: NEW ENDPOINTS NEEDED:
-const SERVER_URL = "http://127.0.0.1:3001/"; // https://researchcollective.io/
-const EXAMPLE_CREDENTIAL = SERVER_URL + "ExampleResearchCollectiveExpertDAOResource";
+// Endpoints
 const RESOURCE_CREDENTIAL = SERVER_URL +  "credentials/v1"; // return context-json-ld.json
+// TODO: NEW ENDPOINTS NEEDED:
+const EXAMPLE_CREDENTIAL = SERVER_URL + "ExampleResearchCollectiveExpertDAOResource";
 const COVID_ISSUER = SERVER_URL + "issuers/covidresearch"; // must return our info containing our pubkey
 
 // TODO: this should be added via proposal form for each dao
@@ -202,8 +206,8 @@ export default function PostItemModal() {
 
                 <Form.Group as={Row}>
                     <Col sm={{ span: 10, offset: 2 }}>
-                        {/*<Button onClick={close} type="submit">Submit for Review</Button>*/}
-                        <Button type="submit">Submit for Review</Button>
+                        <Button onClick={close} type="submit">Submit for Review</Button>
+                        {/*<Button type="submit">Submit for Review</Button>*/}
                     </Col>
                 </Form.Group>
             </Form>
