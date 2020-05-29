@@ -1,16 +1,17 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Nav } from 'react-bootstrap';
-import { Main, Header, Button, Modal, Split, Bar, IconExternal, IconIdentity, Box as AragonBox } from '@aragon/ui'
+  import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Main, Button, Split, IconExternal, Box as AragonBox } from '@aragon/ui'
 import Box from '3box';
 import Votes from "./components/Votes";
 import Notebook from "./components/Notebook";
 import Resources from "./components/Resources";
 import ProfileHover from 'profile-hover';
 import EditProfile from '3box-profile-edit-react';
+import ChatBox from '3box-chatbox-react';
 import './styles/style.css';
 import Navbar from './components/Shared/Header';
 import Home from './pages/Home';
+
 
 class App extends Component {
 
@@ -34,7 +35,7 @@ class App extends Component {
     }
     async auth3box() {
         const address = this.state.accounts[0];
-        const spaces = ['3Book'];
+        const spaces = ['researchCollective'];
         const box = await Box.create(window.ethereum);
         await box.auth(spaces, { address });
         await box.syncDone;
@@ -47,7 +48,7 @@ class App extends Component {
         if (this.state.accounts) {
             // Now MetaMask's provider has been enabled, we can start working with 3Box
             await this.auth3box();
-            const space = await this.state.box.openSpace('3Book');
+            const space = await this.state.box.openSpace('researchCollective');
             await space.syncDone;
             this.setState({space});
         }
@@ -62,7 +63,7 @@ class App extends Component {
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route path="/chat">
-                        <Chat/>
+                        <Chat  box={this.state.box} address={this.state.address}/>
                     </Route>
                     <Route path="/profile">
                         {this.state.box &&
@@ -73,10 +74,10 @@ class App extends Component {
                         <Notes web3enabled={this.state.web3enabled} space={this.state.space}/>
                     </Route>
                     <Route path="/votes">
-                        <Votes />
+                        <Votes   box={this.state.box} address={this.state.address} />
                     </Route>
                     <Route path="/resources">
-                        <Resources/>
+                        <Resources   box={this.state.box} address={this.state.address} />
                     </Route>
                 </Switch>
                 </Main>
@@ -86,26 +87,7 @@ class App extends Component {
 }
 
 
-  class ItemComment extends Component {
-    render() {
-      return (<>
-          {this.props.box && this.props.space &&
-            <h1
-                // required
-                spaceName="researchCollective"
-                threadName="testThread"
-                adminEthAddr={this.props.address}
 
-
-                // Required props for context A) & B)
-                box={this.props.box}
-                currentUserAddr={this.props.address}
-            />
-      }
-      </>
-    )
-  }
-}
 
 
 
@@ -113,12 +95,23 @@ class Chat extends Component {
     render() {
         return (<>
             <h1 className="sectionTitle">Chat </h1>
-            <h1 className="sectionSubTitle"><i>🚨Under Construction🚨</i></h1>
-            <AragonBox className="notesContainer" >
-                <p className="pushUp">Communicate with other researchers here anonymously.</p><br/>
-                <p><i> Or join us on</i></p>
-                <Button  mode="strong"  label="Telegram"/>
-            </AragonBox>
+            <Split
+             primary={            <AragonBox>
+                             <p>anonymous research communication</p><br/>
+                                 {this.props.address && this.props.box &&
+                                   <ChatBox spaceName="researchCollective" colorTheme="#00a7e1" box={this.props.box} currentUserAddr={this.props.address} threadName="researchConversation"  />
+                                 }
+
+                         </AragonBox>}
+             secondary={
+               <>
+                 <AragonBox className="fullWidth">
+                 <p className="centerText"><i>pseudonymous communication on</i></p>
+                 <Button  mode="strong"  label="Telegram"/>
+                 </AragonBox>
+               </>
+             }> </Split>
+
         </>);
     }
 }
@@ -139,29 +132,22 @@ class Notes extends Component {
     }
 }
 
-// class Home extends Component {
-//     render() {
-//       return ( <>
-//         <h1 className="bigTitle"> Welcome Home, Researcher </h1>
-//         </>
-//       )
-//     }
-// }
-
 class Profile extends Component {
-    constructor(props) {
-        super(props);
-    }
+
     render() {
         return (
             <div>
                 <h1 className="sectionTitle"> Profile </h1>
-                <p className="sectionSubTitle"> Your Ethereal Appearance</p>
+                <p className="sectionSubTitle"> Edit your 3Box and Research Collective Persona</p>
                 <AragonBox className="profileContainer">
-                    {this.props.address && <div className="pushUp">
-                        <ProfileHover className="fatBottomed" address={this.props.address} showName={true} /><br/>
-                        <a  rel="noopener noreferrer" target="_blank" href={"https://3box.io/" + this.props.address}><Button className="pushDown" label="Edit on 3Box" icon={<IconExternal/>}/></a>
-                    </div>}
+                {this.props.space && this.props.box &&
+                        <EditProfile
+                        // required
+                        box={this.props.box}
+                        space={this.props.space}
+                        currentUserAddr={this.props.address}
+                    />
+                    }
                 </AragonBox>
             </div>
         );

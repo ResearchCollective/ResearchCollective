@@ -104,13 +104,15 @@ const handleSubmitPostResource = (event) => {
 
     // send the vc over to the backend
     fetch(SERVER_URL + 'signCredential', requestOptions)
-        .then(response =>
+        .then(async response =>
         {
-            const jsonResponse = response.json();
+            const jsonResponse = await response.json();
             console.log("signed credential", jsonResponse);
             newRequestedCredential.proof = jsonResponse.proof;
             newRequestedCredential.issuer = jsonResponse.issuer;
-        });
+        }).catch(err=>{
+            console.log("error on backend request:", err)
+    });
 }
 
 
@@ -199,7 +201,7 @@ export default function PostItemModal() {
 
                 <Form.Group as={Row}>
                     <Col sm={{ span: 10, offset: 2 }}>
-                        <Button type="submit">Submit for Review</Button>
+                        <Button onClick={close} type="submit">Submit for Review</Button>
                     </Col>
                 </Form.Group>
             </Form>
