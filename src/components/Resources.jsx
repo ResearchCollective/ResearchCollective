@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Button, Box, Modal, IconPlus, IconExternal} from '@aragon/ui';
 import Registry from './Registry';
 import { Form } from "react-bootstrap";
+import PostItemModal from './credentials/RequestCredential';
 
 class Resources extends Component {
     //ID for covidresearch DAO's voting smart contract is specified below
@@ -168,7 +169,7 @@ class PostForm extends Component {
 
 
 
-function PostItemModal() {
+function OldItemModal() {
   const [opened, setOpened] = React.useState(false)
   const open = () => setOpened(true)
   const close = () => setOpened(false)
