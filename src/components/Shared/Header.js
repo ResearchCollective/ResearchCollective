@@ -1,6 +1,7 @@
-import React from "react";
-import {Button, NavbarBrand, Nav, Navbar} from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Nav, Navbar } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 const Header = () => {
     return(
       <Navbar bg="light" expand="lg" style={{ minHeight: '40px' }}>

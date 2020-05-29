@@ -1,4 +1,4 @@
-import { Box as AragonBox, Button, DataView, IconMaximize, SidePanel } from '@aragon/ui';
+import { Box as AragonBox, Button, DataView, IconMaximize, Modal } from '@aragon/ui';
 import React, { Component } from 'react';
 
 import NotebookForm from './NotebookForm';
@@ -10,9 +10,9 @@ class Notebook extends Component {
        this.state = {
             client: false,
             view: false,
+            space: null,
             singleChecked: false,
             opened: false,
-            setOpened: false,
             privateNotes: [],
             publicNotes: [],
        };
@@ -71,16 +71,10 @@ class Notebook extends Component {
       console.log("private load: " + privateNotes);
     }
 
-    alertPrivateNote  = async (e) => {
-      const note = await this.props.space.private.get('foo2');
-      alert(note);
+    closeModal = () =>{
+      this.setState({opened:false})
     }
 
-
-    alertPublicNote  = async (e) => {
-      const note = await this.props.space.private.get('foo');
-      alert(note);
-    }
 
 render() {
     return (
@@ -88,10 +82,10 @@ render() {
           <h1 className="sectionTitle pushUp"><i>Notebook</i></h1>
           <h1 className="sectionSubTitle pushUp"><i>🚨Under Construction🚨</i></h1>
           <p className="pushUp sectionSubTitle"><i>Researchers will be able to stash public or encrypted notes on IPFS here.</i><br/><i>Eventually they will be able to log experimental data,<br/> or wrap their potentially patentable idea in a Series LLC for a few DAI.</i></p><br/>
-          <SidePanel className="fullWidth">
+          <Modal className="fullWidth" visible={this.state.opened} onClose={this.closeModal}>
             {/* //TODO: */}
-             <NotebookForm />
-          </SidePanel>
+            <NotebookForm space={this.props.space}/>
+          </Modal>
           <div className="fullWidth">
             <Button label="New Note" size="medium" mode="strong" onClick={() => this.setState({opened: true }) } />
           </div>

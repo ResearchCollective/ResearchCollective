@@ -1,8 +1,9 @@
 import { Button, TextInput } from '@aragon/ui';
 import React, { useState } from 'react';
 
-const NotebookForm = () => {
+const NotebookForm = (props) => {
 
+    // this is for state on inputs//
     let [note, setNote] = useState({
         title: '',
         labels: '',
@@ -21,9 +22,18 @@ const NotebookForm = () => {
             [name]: value
         }))
     }
-    
-    console.log('State: ',note)
-        
+
+    let saveNote = async (e) => {
+        let newNote = {
+            id: 'dsfsdfs',
+            title: note.title,
+            label: note.labels,
+            description: note.description
+        }
+
+        await props.notesThread.post(newNote)
+        console.log(props.notesThread)
+    }
     return(
         <div>
             <TextInput className="fullWidth" name='title' value={note.title} onChange={e => handleOnChange(e)} placeholder="Note Title" wide="true" /> 
@@ -32,8 +42,7 @@ const NotebookForm = () => {
             <TextInput className="fullWidth" name='attachment' value={note.attachment} onChange={e => handleOnChange(e)} style={{minHeight: "120px"}} placeholder="Attachments" wide="true" multiline="true"/>
             <div className="buttonContainer">
                 <Button style={{maxWidth: "45px"}} label="Save Private Note" size="medium" mode="strong" onClick={() => this.privateSave() } />
-                <Button style={{maxWidth: "45px"}} label="Save Public Note" size="medium" mode="strong" onClick={() => this.publicSave() } />
-                <Button label="Discard" style={{marginLeft: "70px"}} size="medium" mode="negative" onClick={() => this.setState({opened: false }) } />
+                <Button style={{maxWidth: "45px"}} label="Save Public Note" size="medium" mode="strong" onClick={(e) => saveNote(e) } />
             </div>
         </div>
     )

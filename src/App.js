@@ -19,33 +19,54 @@ class App extends Component {
         web3enabled: false,
         box: false,
         space: false,
+        notes: [],
         address: false,
-        accounts: false
+        account: null,
     }
+    // //get research-coolective space//
+    // get3BoxSpaceForNotes  = async () => {
+    //     // create a 3Box instance//
+    //     const provider = await Box.get3idConnectProvider()
+    //     const box = await Box.create(provider)
+    //     let rsSpace = await box.openSpace('Research-Collective')
+    //     this.setState({notesSpace:rsSpace})
+    // }
+
+    // // to create a thread for storing notes//
+    // joinNotesThread = async () => {
+    //     // create a 3Box instance//
+    //     const provider = await Box.get3idConnectProvider()
+    //     const box = await Box.create(provider)
+    //     let rsSpace = await box.openSpace('Research-Collective')
+    //     const notesThread = await rsSpace.joinThread('Notes')
+    //     this.setState({notes:notesThread})
+    // }
 
     async getAddressFromMetaMask() {
         if (typeof window.ethereum == "undefined") {
             this.setState({ needToAWeb3Browser: true });
         } else {
             window.ethereum.autoRefreshOnNetworkChange = false; //silences warning about no autofresh on network change
-            const accounts = await window.ethereum.enable();
+            const account = await window.ethereum.enable();
             this.setState({ web3enabled: true });
-            this.setState({accounts: accounts });
+            this.setState({account: account });
+            console.log(this.state.account)
         }
     }
     async auth3box() {
-        const address = this.state.accounts[0];
+        const address = this.state.account[0];
         const spaces = ['3Book'];
         const box = await Box.create(window.ethereum);
         await box.auth(spaces, { address });
         await box.syncDone;
         this.setState({address: address})
         this.setState({box: box });
+        //join notes thread//
+        this.joinNotesThread()
     }
-
     async componentDidMount() {
         await this.getAddressFromMetaMask();
-        if (this.state.accounts) {
+        if (this.state.account) {
             // Now MetaMask's provider has been enabled, we can start working with 3Box
             await this.auth3box();
             const space = await this.state.box.openSpace('3Book');
@@ -58,7 +79,7 @@ class App extends Component {
             <Router>
             <Main  theme={'dark'}>
             <Navbar bg="light" expand="lg" style={{ minHeight: '40px' }}>
-              {this.state.accounts && (
+              {this.state.account && (
                 <Nav fill style={{ width: "100%" }} >
                   <Nav.Item><Link to="/">Home</Link></Nav.Item>
                   <Nav.Item><Link to="/votes">Votes</Link></Nav.Item>
