@@ -149,7 +149,7 @@ export default function PostItemModal() {
                         Resource Identifier<sup>*</sup>
                     </Form.Label>
                     <Col sm={10}>
-                        <Form.Control type="name" placeholder="Resource Name" />
+                        <Form.Control type="name" placeholder="Resource Identifier" />
                     </Col>
                 </Form.Group>
 
