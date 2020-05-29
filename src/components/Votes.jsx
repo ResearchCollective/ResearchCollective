@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Box, IconExternal, Split, DataView } from '@aragon/ui';
-import Loading from "./Loading";
-import ApolloClient from 'apollo-boost';
-import { gql } from 'apollo-boost';
+import {  Box, IconExternal, Split } from '@aragon/ui';
 import Registry from './Registry';
 
 class Votes extends Component {

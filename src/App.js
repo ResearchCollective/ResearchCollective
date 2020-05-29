@@ -1,11 +1,9 @@
   import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Main, Button, Split, IconExternal, Box as AragonBox } from '@aragon/ui'
+import { Main, Button, Split, Box as AragonBox } from '@aragon/ui'
 import Box from '3box';
 import Votes from "./components/Votes";
-import Notebook from "./components/Notebook";
 import Resources from "./components/Resources";
-import ProfileHover from 'profile-hover';
 import EditProfile from '3box-profile-edit-react';
 import ChatBox from '3box-chatbox-react';
 import './styles/style.css';
@@ -73,6 +71,13 @@ class App extends Component {
                     <Route path="/notes">
                         <Notes web3enabled={this.state.web3enabled} space={this.state.space}/>
                     </Route>
+                    <Route path="/experiments">
+                        <Notes web3enabled={this.state.web3enabled} space={this.state.space}/>
+                    </Route>
+                    <Route path='/docs' component={() => {
+                         window.location.href = 'https://www.notion.so/ResearchCo-Covidathon-2ae1203029ed4c2cb4f5b6056ae7b89c';
+                         return null;
+                    }}/>
                     <Route path="/votes">
                         <Votes   box={this.state.box} address={this.state.address} />
                     </Route>
@@ -96,9 +101,9 @@ class Chat extends Component {
         return (<>
             <h1 className="sectionTitle">Chat </h1>
             <Split
-             primary={            <AragonBox>
-                             <p>anonymous research communication</p><br/>
-                                 {this.props.address && this.props.box &&
+             primary={ <AragonBox>
+                          <p>ethereal research communication</p> <p>messages are lost after last user leaves the chat</p><br/>
+                            {this.props.address && this.props.box &&
                                    <ChatBox spaceName="researchCollective" colorTheme="#00a7e1" box={this.props.box} currentUserAddr={this.props.address} threadName="researchConversation"  />
                                  }
 

@@ -20,7 +20,8 @@ render() {
             <Nav.Item><Link to="/votes">Votes</Link> 🗳</Nav.Item>
             <Nav.Item><Link to="/notes">Notebook</Link> 📘</Nav.Item>
             <Nav.Item><Link to="/chat">Chat</Link> 🗯</Nav.Item>
-            <Nav.Item><Link to="/docs">Docs</Link> 📃</Nav.Item>
+            <Nav.Item><a href="https://www.notion.so/ResearchCo-Covidathon-2ae1203029ed4c2cb4f5b6056ae7b89c" rel="noopener noreferrer" target="_blank">
+ Docs</a> 📃</Nav.Item>
               {this.props.ethAddress &&
                 <Nav.Item><Link to="/login">Sign In</Link> 🦊</Nav.Item>
               }     {!this.props.ethAddress &&
