@@ -30,9 +30,12 @@ const NotebookForm = (props) => {
             label: note.labels,
             description: note.description
         }
+        let notesSpace = this.props.space
 
-        await props.notesThread.post(newNote)
-        console.log(props.notesThread)
+        let notes = this.props.notes
+        notes.push(newNote)
+        
+        console.log('notes', notes)
     }
     return(
         <div>

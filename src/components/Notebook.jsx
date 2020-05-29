@@ -1,3 +1,4 @@
+import Box from '3box';
 import { Box as AragonBox, Button, DataView, IconMaximize, Modal } from '@aragon/ui';
 import React, { Component } from 'react';
 
@@ -10,19 +11,30 @@ class Notebook extends Component {
        this.state = {
             client: false,
             view: false,
-            space: null,
+            notesSpace: null,
+            notes: [],
             singleChecked: false,
             opened: false,
             privateNotes: [],
             publicNotes: [],
        };
 
-      // TODO: need to get 'space' in App.js//
-        
+      // TODO: need to get 'space'//
+      this.get3BoxNotesSpace()
       // this to fetch data for table
       // Reasons(ComponentWillMount is depricated, and this works better than using this.componentDidMount)
       this.fetchNotes()
+
    }
+
+    get3BoxNotesSpace = async() => {
+      console.log('this is get public space')
+      const provider = await Box.get3idConnectProvider()
+      const box = await Box.create(provider)
+      const rsSapce = await box.openSpace('research-collective-notes-attempt1')
+      await rsSapce.syncDone
+      this.setState({notesSpace:rsSapce})
+    }
 
     fetchNotes = async => {
       console.log('This is from fetchNotes method')
@@ -32,44 +44,44 @@ class Notebook extends Component {
       }
     }
 
-    publicSave = async () => {
-      //saves to a public 3Box space
-      //TODO: Set this to save the note title + content
-      await this.props.space.public.set("foo", "bar");
-      this.setState({publicNoteToSave : null});
-      console.log("public save: " + this.publicNoteToSave);
-      this.getPublicNotes();
-      this.setState({opened: false })
-    }
+    // publicSave = async () => {
+    //   //saves to a public 3Box space
+    //   //TODO: Set this to save the note title + content
+    //   await this.props.space.public.set("foo", "bar");
+    //   this.setState({publicNoteToSave : null});
+    //   console.log("public save: " + this.publicNoteToSave);
+    //   this.getPublicNotes();
+    //   this.setState({opened: false })
+    // }
 
-    privateSave = async () => {
-     //saves to a private 3Box space
-     //await this.props.space.private.set("Date.now()", this.state.privateNoteToSave);
-     // set(noteTitle, noteContent)
-     //TODO: Set this to save the note title + content
-      await this.props.space.private.set("foo2", "bar2");
-      this.setState({privateNoteToSave : null});
-      console.log("private save: " + this.privateNoteToSave);
-      this.getPrivateNotes();
-      this.setState({opened: false })
-    }
+    // privateSave = async () => {
+    //  //saves to a private 3Box space
+    //  //await this.props.space.private.set("Date.now()", this.state.privateNoteToSave);
+    //  // set(noteTitle, noteContent)
+    //  //TODO: Set this to save the note title + content
+    //   await this.props.space.private.set("foo2", "bar2");
+    //   this.setState({privateNoteToSave : null});
+    //   console.log("private save: " + this.privateNoteToSave);
+    //   this.getPrivateNotes();
+    //   this.setState({opened: false })
+    // }
 
 
-    getPublicNotes = async (e) => {
-      //TODO add in Catch or try or conditional so that it doesn't try to load from an empty space
-      console.log('this from getPublicNotes')
-      const publicNotes = await this.props.space.public.all();
-      this.setState({ publicNotes });
-      console.log("public load: " + publicNotes);
-    }
+    // getPublicNotes = async (e) => {
+    //   //TODO add in Catch or try or conditional so that it doesn't try to load from an empty space
+    //   console.log('this from getPublicNotes')
+    //   const publicNotes = await this.props.space.public.all();
+    //   this.setState({ publicNotes });
+    //   console.log("public load: " + publicNotes);
+    // }
 
-    getPrivateNotes = async (e) => {
-      console.log('this from getPublicNotes')
-      //TODO add in Catch or try or conditional so that it doesn't try to load from an empty space
-      const privateNotes = await this.props.space.private.all();
-      this.setState({ privateNotes });
-      console.log("private load: " + privateNotes);
-    }
+    // getPrivateNotes = async (e) => {
+    //   console.log('this from getPublicNotes')
+    //   //TODO add in Catch or try or conditional so that it doesn't try to load from an empty space
+    //   const privateNotes = await this.props.space.private.all();
+    //   this.setState({ privateNotes });
+    //   console.log("private load: " + privateNotes);
+    // }
 
     closeModal = () =>{
       this.setState({opened:false})
@@ -84,7 +96,7 @@ render() {
           <p className="pushUp sectionSubTitle"><i>Researchers will be able to stash public or encrypted notes on IPFS here.</i><br/><i>Eventually they will be able to log experimental data,<br/> or wrap their potentially patentable idea in a Series LLC for a few DAI.</i></p><br/>
           <Modal className="fullWidth" visible={this.state.opened} onClose={this.closeModal}>
             {/* //TODO: */}
-            <NotebookForm space={this.props.space}/>
+            <NotebookForm notesSpace={this.state.notesSpace} notes={this.state.notes}/>
           </Modal>
           <div className="fullWidth">
             <Button label="New Note" size="medium" mode="strong" onClick={() => this.setState({opened: true }) } />
