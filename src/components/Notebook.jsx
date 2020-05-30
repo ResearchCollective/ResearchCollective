@@ -29,8 +29,8 @@ class Notebook extends Component {
    }
 
    get3BoxNotesSpace = async() => {
-    if(this.props.accountAddress !== ''){
-      console.log('this is to get public space')
+    if(this.props.accountAddress !== false){
+      console.log('this is to get notes space')
       const provider = await Box.get3idConnectProvider()
       const box = await Box.create(provider)
       const notesSpace = ('Research-Collective-Notes')
@@ -105,7 +105,7 @@ render() {
           <p className="pushUp sectionSubTitle"><i>Researchers will be able to stash public or encrypted notes on IPFS here.</i><br/><i>Eventually they will be able to log experimental data,<br/> or wrap their potentially patentable idea in a Series LLC for a few DAI.</i></p><br/>
           <Modal className="fullWidth" visible={this.state.opened} onClose={this.closeModal}>
             {/* //TODO: */}
-            <NotebookForm notesSpace={this.props.notesSpace}/>
+            <NotebookForm accountAddress={this.props.accountAddress}/>
           </Modal>
           <div className="fullWidth">
             <Button label="New Note" size="medium" mode="strong" onClick={() => this.setState({opened: true }) } />

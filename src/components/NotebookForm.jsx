@@ -1,3 +1,4 @@
+import Box from '3box';
 import { Button, TextInput } from '@aragon/ui';
 import React, { useState } from 'react';
 
@@ -25,19 +26,22 @@ const NotebookForm = (props) => {
 
     let saveNote = async (e) => {
         let newNote = {
-            id: 'dsfsdfs',
+            id: 'test',
             title: note.title,
             label: note.labels,
             description: note.description
         }
-        // this is notes space -passed through props//
-        let notesSpace = props.notesSpace
-        console.log(newNote)
-        console.log(notesSpace)
+        // get notes space//console.log('this is to get notes space')
+        console.log('Getting Notes space....')
+        const provider = await Box.get3idConnectProvider()
+        const box = await Box.create(provider)
+        const notesSpace = ('Research-Collective-Notes')
+        await box.auth(notesSpace, props.accountAddress )
         // save the note//
         await notesSpace.private.set(`${newNote.id}`, newNote)
-        console.log(notesSpace)
+        console.log(`Saved new note`)
     }
+    if(props.accountAddress != false) {console.log(props.accountAddress)}
     return(
         <div>
             <TextInput className="fullWidth" name='title' value={note.title} onChange={e => handleOnChange(e)} placeholder="Note Title" wide="true" /> 
