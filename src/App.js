@@ -19,28 +19,21 @@ class App extends Component {
         web3enabled: false,
         box: false,
         space: false,
+        notesSpace: null,
         notes: [],
         address: false,
         account: null,
     }
-    // //get research-coolective space//
-    // get3BoxSpaceForNotes  = async () => {
-    //     // create a 3Box instance//
-    //     const provider = await Box.get3idConnectProvider()
-    //     const box = await Box.create(provider)
-    //     let rsSpace = await box.openSpace('Research-Collective')
-    //     this.setState({notesSpace:rsSpace})
-    // }
 
-    // // to create a thread for storing notes//
-    // joinNotesThread = async () => {
-    //     // create a 3Box instance//
-    //     const provider = await Box.get3idConnectProvider()
-    //     const box = await Box.create(provider)
-    //     let rsSpace = await box.openSpace('Research-Collective')
-    //     const notesThread = await rsSpace.joinThread('Notes')
-    //     this.setState({notes:notesThread})
-    // }
+    get3BoxNotesSpace = async() => {
+        console.log('this is to get public space')
+        const provider = await Box.get3idConnectProvider()
+        const box = await Box.create(provider)
+        const notesSpace = await box.openSpace('research-collective-notes-attempt1')
+        await notesSpace.syncDone
+        this.setState({notesSpace})
+    }
+
 
     async getAddressFromMetaMask() {
         if (typeof window.ethereum == "undefined") {
@@ -55,14 +48,17 @@ class App extends Component {
     }
     async auth3box() {
         const address = this.state.account[0];
-        const spaces = ['3Book'];
+        // this space can be used for user data and other things like that//
+        const space = ('research-collective');
         const box = await Box.create(window.ethereum);
-        await box.auth(spaces, { address });
+        await box.auth(space, { address });
         await box.syncDone;
+        // creating space for notes//
+        this.get3BoxNotesSpace()
+        // setting state//
         this.setState({address: address})
         this.setState({box: box });
-        //join notes thread//
-        this.joinNotesThread()
+
     }
     async componentDidMount() {
         await this.getAddressFromMetaMask();
@@ -110,7 +106,7 @@ class App extends Component {
                         <Resources/>
                     </Route>
                     <Route path='/notebook'>
-                        <Notebook web3enabled={this.state.web3enabled} space={this.state.space}/>
+                        <Notebook web3enabled={this.state.web3enabled} notesSpace={this.state.notesSpace}/>
                     </Route>
                 </Switch>
                 </Main>

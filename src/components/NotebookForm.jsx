@@ -30,12 +30,13 @@ const NotebookForm = (props) => {
             label: note.labels,
             description: note.description
         }
-        let notesSpace = this.props.space
-
-        let notes = this.props.notes
-        notes.push(newNote)
-        
-        console.log('notes', notes)
+        // this is notes space -passed through props//
+        let notesSpace = props.notesSpace
+        console.log(newNote)
+        console.log(notesSpace)
+        // save the note//
+        await notesSpace.private.set(`${newNote.id}`, newNote)
+        console.log(notesSpace)
     }
     return(
         <div>

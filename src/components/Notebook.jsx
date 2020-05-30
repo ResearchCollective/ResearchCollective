@@ -1,4 +1,3 @@
-import Box from '3box';
 import { Box as AragonBox, Button, DataView, IconMaximize, Modal } from '@aragon/ui';
 import React, { Component } from 'react';
 
@@ -11,30 +10,18 @@ class Notebook extends Component {
        this.state = {
             client: false,
             view: false,
-            notesSpace: null,
             notes: [],
             singleChecked: false,
             opened: false,
             privateNotes: [],
             publicNotes: [],
        };
-
-      // TODO: need to get 'space'//
-      this.get3BoxNotesSpace()
       // this to fetch data for table
       // Reasons(ComponentWillMount is depricated, and this works better than using this.componentDidMount)
       this.fetchNotes()
 
    }
 
-    get3BoxNotesSpace = async() => {
-      console.log('this is get public space')
-      const provider = await Box.get3idConnectProvider()
-      const box = await Box.create(provider)
-      const rsSapce = await box.openSpace('research-collective-notes-attempt1')
-      await rsSapce.syncDone
-      this.setState({notesSpace:rsSapce})
-    }
 
     fetchNotes = async => {
       console.log('This is from fetchNotes method')
@@ -96,7 +83,7 @@ render() {
           <p className="pushUp sectionSubTitle"><i>Researchers will be able to stash public or encrypted notes on IPFS here.</i><br/><i>Eventually they will be able to log experimental data,<br/> or wrap their potentially patentable idea in a Series LLC for a few DAI.</i></p><br/>
           <Modal className="fullWidth" visible={this.state.opened} onClose={this.closeModal}>
             {/* //TODO: */}
-            <NotebookForm notesSpace={this.state.notesSpace} notes={this.state.notes}/>
+            <NotebookForm notesSpace={this.props.notesSpace}/>
           </Modal>
           <div className="fullWidth">
             <Button label="New Note" size="medium" mode="strong" onClick={() => this.setState({opened: true }) } />
