@@ -29,14 +29,19 @@ class Notebook extends Component {
    }
 
    get3BoxNotesSpace = async() => {
-    console.log('this is to get public space')
-    const provider = await Box.get3idConnectProvider()
-    const box = await Box.create(provider)
-    const notesSpace = await box.openSpace('research-collective-notes-attempt1')
-    await notesSpace.syncDone()
-    console.log(notesSpace)
+    if(this.props.accountAddress !== ''){
+      console.log('this is to get public space')
+      const provider = await Box.get3idConnectProvider()
+      const box = await Box.create(provider)
+      const notesSpace = ('Research-Collective-Notes')
+      await box.auth(notesSpace, this.props.accountAddress )
+      await notesSpace.syncDone()
+      console.log('Opened notes space')
     // this.setState({notesSpace})
     // console.log(this.state.notesSpace)
+    }else{
+      console.warn('No account founds!!!')
+    }
 }
 
 

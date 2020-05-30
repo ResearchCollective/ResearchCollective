@@ -101,7 +101,7 @@ class App extends Component {
                         <Resources/>
                     </Route>
                     <Route path='/notes'>
-                        <Notebook web3enabled={this.state.web3enabled} />
+                        <Notebook web3enabled={this.state.web3enabled} accountAddress={this.state.address} />
                     </Route>
                 </Switch>
                 </Main>
