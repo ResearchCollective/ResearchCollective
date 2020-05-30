@@ -54,17 +54,7 @@
 .homepage-why{
   margin: 5%;
 }
-.section-header{
-  margin-top: 10%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 5%;
-  color: #8CAFFD;
-  font-size: 25pt;
-  font-weight: bolder;
-  text-align: center;
-  text-decoration: underline;
-}
+
 
 .card{
   width: 18rem;
@@ -100,7 +90,7 @@
 //Resources Section//
 .homepage-resources-text{
   color: white;
-  font-size: 16pt;
+  font-size: 3rem;
   text-align: center;
 }
 
@@ -135,9 +125,10 @@
 }
 
 .hiw-title{
-  color: #8CAFFD;
+  color: white;
   font-weight: bold;
   margin: 10%;
+  text-decoration: none;
 }
 
 .hiw-body{
