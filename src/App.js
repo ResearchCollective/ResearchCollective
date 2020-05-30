@@ -15,26 +15,19 @@ import Home from './pages/Home';
 
 class App extends Component {
 
-    state = {
-        web3enabled: false,
-        box: false,
-        space: false,
-        notesSpace: null,
-        notes: [],
-        address: false,
-        account: null,
+    constructor(props){
+        super(props)
+
+        this.state = {
+            web3enabled: false,
+            box: false,
+            space: false,
+            notes: [],
+            address: false,
+            account: null,
+        }
     }
-
-    get3BoxNotesSpace = async() => {
-        console.log('this is to get public space')
-        const provider = await Box.get3idConnectProvider()
-        const box = await Box.create(provider)
-        const notesSpace = await box.openSpace('research-collective-notes-attempt1')
-        await notesSpace.syncDone
-        this.setState({notesSpace})
-    }
-
-
+    
     async getAddressFromMetaMask() {
         if (typeof window.ethereum == "undefined") {
             this.setState({ needToAWeb3Browser: true });
@@ -46,29 +39,31 @@ class App extends Component {
             console.log(this.state.account)
         }
     }
+
     async auth3box() {
+        await this.getAddressFromMetaMask()
         const address = this.state.account[0];
         // this space can be used for user data and other things like that//
         const space = ('research-collective');
         const box = await Box.create(window.ethereum);
         await box.auth(space, { address });
         await box.syncDone;
-        // creating space for notes//
-        this.get3BoxNotesSpace()
         // setting state//
         this.setState({address: address})
         this.setState({box: box });
+        console.log(this.state)
+    }   
 
-    }
     async componentDidMount() {
         await this.getAddressFromMetaMask();
         if (this.state.account) {
             // Now MetaMask's provider has been enabled, we can start working with 3Box
             await this.auth3box();
-            const space = await this.state.box.openSpace('3Book');
-            await space.syncDone;
-            this.setState({space});
+            // const space = await this.state.box.openSpace('3Book');
+            // await space.syncDone;
+            // this.setState({space});
         }
+        console.log(this.state)
     }
     render() {
         return(
@@ -96,17 +91,17 @@ class App extends Component {
                             <Profile  box={this.state.box} space={this.state.space} address={this.state.address}/>
                         }
                     </Route>
-                    <Route path="/notes">
+                    {/* <Route path="/notes">
                         <Notes web3enabled={this.state.web3enabled} space={this.state.space}/>
-                    </Route>
+                    </Route> */}
                     <Route path="/votes">
                         <Votes />
                     </Route>
                     <Route path="/resources">
                         <Resources/>
                     </Route>
-                    <Route path='/notebook'>
-                        <Notebook web3enabled={this.state.web3enabled} notesSpace={this.state.notesSpace}/>
+                    <Route path='/notes'>
+                        <Notebook web3enabled={this.state.web3enabled} />
                     </Route>
                 </Switch>
                 </Main>

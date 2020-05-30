@@ -1,3 +1,4 @@
+import Box from '3box';
 import { Box as AragonBox, Button, DataView, IconMaximize, Modal } from '@aragon/ui';
 import React, { Component } from 'react';
 
@@ -6,6 +7,9 @@ import NotebookForm from './NotebookForm';
 class Notebook extends Component {
   constructor(props) {
       super(props);
+
+      const accountAddress = this.props.accountAddress
+      console.log(accountAddress)
 
        this.state = {
             client: false,
@@ -16,11 +20,24 @@ class Notebook extends Component {
             privateNotes: [],
             publicNotes: [],
        };
+      // opening notes space//
+      this.get3BoxNotesSpace() 
       // this to fetch data for table
       // Reasons(ComponentWillMount is depricated, and this works better than using this.componentDidMount)
       this.fetchNotes()
 
    }
+
+   get3BoxNotesSpace = async() => {
+    console.log('this is to get public space')
+    const provider = await Box.get3idConnectProvider()
+    const box = await Box.create(provider)
+    const notesSpace = await box.openSpace('research-collective-notes-attempt1')
+    await notesSpace.syncDone()
+    console.log(notesSpace)
+    // this.setState({notesSpace})
+    // console.log(this.state.notesSpace)
+}
 
 
     fetchNotes = async => {
