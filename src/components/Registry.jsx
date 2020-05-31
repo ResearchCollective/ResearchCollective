@@ -47,6 +47,8 @@ class Registry extends Component {
     this.state.labels = array;
     if (this.state.graphData === undefined  || this.state.graphData.length < 1) {
       this.loadData();
+      console.log("Graph data:");
+      console.log(this.state.graphData);
     }
   };
 
@@ -59,7 +61,7 @@ class Registry extends Component {
    client.query({
      query: gql`
       {
-           votes(where: { creator: "${this.props.voteId}"}){
+           votes(first:20, where: { creator: "${this.props.voteId}"}){
            id
            creator
            metadata
@@ -119,27 +121,43 @@ function processGraph(labels, data) {
   if (typeof data[0] !== "undefined") {
     data.forEach(parseData);
     function parseData(item, index) {
-        //console.log("process Graph Loop @:  " + index + item);
+        console.log("process Graph Loop @:  " + index + item);
            try {
-              //  console.log("Trying to make  JSON object for " + item.metadata);
+                console.log("Trying to make  JSON object for " + item.metadata);
                 var metadata = JSON.parse(item.metadata);
-                console.log("Made initial JSON object for " + index);
-                item.description = metadata.description;
-                item.owner = metadata.owner;
-                item.url = metadata.url;
-                item.did = "testDID";
-                //item.did =  metadata.url.split("//");
-                item.staked = metadata.staked;
-                item.flags = {parsed: false, visible: false};
+                item.flags = {parsed: false, visible: true};
                 item.labels = ["entity", "event"];
-                for (index = 0; index < item.labels.length; index++) {
-                    if (labels.includes(item.labels[index])) {
-                      item.flags.visible = true;
+                if (metadata.ipfs === null) {
+                  //pull what we can from IPFS  // RC.02
+                  console.log("Found IPFS / RC.02 JSON format for index " + index);
+                  item.owner = "0x262b4F07e42BBc33F597fcf0d854e9DAFaf3D469";
+                  item.description = "Foo Bar Description";
+                  item.url = "https://test.com";
+                  item.did = "testdid";
+                } else {
+                  //RC.01 JSON format
+                  console.log("Found RC.01 JSON format for index " + index);
+                 if (metadata.title == null) {
+                    item.description = metadata.description;
+                } else {
+                  item.description = metadata.title;
+                  item.tooltip = metadata.description;
+                }
+                  item.owner = metadata.owner;
+                  item.url = metadata.url;
+                  item.did = "testDID";
+                  //item.did =  metadata.url.split("//");
+                  //item.staked = metadata.staked;
+                  for (index = 0; index < item.labels.length; index++) {
+                      if (labels.includes(item.labels[index])) {
+                        item.flags.visible = true;
+                      }
+                  }
+                  if (!item.url.includes("http")) {
+                      item.url = "https://" + item.url
                     }
                 }
-                if (!item.url.includes("http")) {
-                    item.url = "https://" + item.url
-                  }
+
                 if (item.flags.visible && !item.description.includes("test vote")) {
                 item.flags.parsed = true;
                   newData[newData.length] = item;
@@ -154,8 +172,8 @@ function processGraph(labels, data) {
               }
               item.parsed = false;
               item.flags = {parsed: false, visible: true};
-            //  console.log("Vote item " + index + " failed; resulting object:");
-            //  console.log(item);
+              console.log("Vote item " + index + " failed; resulting object:");
+             console.log(item);
               if ((item.description.length > 2) && !item.description.includes("test vote")&& !item.description.includes("description")) {
                newData[newData.length] = item;
              }

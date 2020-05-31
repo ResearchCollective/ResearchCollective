@@ -9,11 +9,11 @@ class Resources extends Component {
     state = {
         box:false,
         address:false,
-        //rc
-      //  voteId: "0x0f5c3fef568487b9937c57d93ca8f7c7e556375e-1",
-      //covidresearch
-      voteId: "0x8f409307ecdd0cb567ae433a54ec9767ff585618",
-      columns: ['Description', 'Poster', 'Link']
+        // rc   voting id  0xb0cff1400bc4d39f030d01af00d118bb5cf4ab24
+      //  voteId: "0xb0cff1400bc4d39f030d01af00d118bb5cf4ab24",
+        //covidresearch voting id 0x8f409307ecdd0cb567ae433a54ec9767ff585618
+        voteId: "0x8f409307ecdd0cb567ae433a54ec9767ff585618",
+        columns: ['Description', 'Poster', 'Link']
     };
 
 

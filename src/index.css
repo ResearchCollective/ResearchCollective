@@ -451,6 +451,13 @@ a:hover{
   box-shadow: 0 0 16px 3px rgba(0,0,0,.2);
 }
 
+.logo{
+  width: 100%!important;
+}
+
+.logo-card{
+  background-color: #425176!important;
+}
 
 /*# sourceMappingURL=style.css.map */
 

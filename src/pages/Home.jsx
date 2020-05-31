@@ -5,25 +5,24 @@ import { Link } from "react-router-dom";
 import  {Card} from "react-bootstrap";
 
 const Home = () => {
-
     return(
         //this div represents the 'whole' homepage//
         <div className='homepage'>
             <Container>
             {/*this div represents the first element (hero) of the landing page*/}
                     <Row  className='homepage-hero'>
-                        <Col lg={4}>
-                        <Card>
+                        <Col  pull-right lg={4}>
+                        <Card className='logo-card'>
                             <Card.Body>
                                 <Card.Text>
-                                <h1 className="centerText hero-title">Logo will go here</h1>
+                                    <Card.Img className='logo' variant='top' src='logo.png' />
                                 </Card.Text>
                             </Card.Body>
                         </Card>
                       </Col>
                         <Col lg={8} className="margins" >
-                             <h1 className="centerText hero-sub-title pushUp">an anchor for the scientific Web-of-Trust</h1>
                              <h1 className="centerText hero-title">Research Collective</h1>
+                             <h1 className="centerText hero-sub-title pushUp">an anchor for the scientific Web-of-Trust:</h1>
                              <h1 className="centerText hero-sub-title pushUp">a moderately friendly network of Expert DAOs</h1>
                              <div className="buttonContainer pushDown flexContainer">
                                <a  className="paddingRight" target="_blank" rel="noopener noreferrer"  href="https://luisivan.net/posts/expert-daos"><Button label="What is an Expert DAO?" mode="neutral"/></a>
@@ -172,8 +171,8 @@ const Home = () => {
             {/*// email should go to social@researchcollective.io*/}
             <Container>
               <Row>
-                <Col lg={3}/>
-                <Col lg={6}>
+                <Col lg={2}/>
+                <Col lg={8}>
                 <div className='contact-us'>
                     <p className='section-header sectionBreak'>Contact Us</p>
                         <InputGroup className='contact-form-input mb-3'>
@@ -196,7 +195,7 @@ const Home = () => {
                         <Button mode="strong" className='rc-button contact-send-btn'>Send</Button>
                 </div>
                 </Col>
-                  <Col lg={3}/>
+                  <Col lg={2}/>
                 </Row>
             </Container>
         </div>
