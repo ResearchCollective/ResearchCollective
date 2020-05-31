@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {Button, IconExternal, DataView} from '@aragon/ui';
+import {Button, IconExternal, Box, DataView} from '@aragon/ui';
 import ApolloClient from 'apollo-boost';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 import { gql } from 'apollo-boost';
 import ProfileHover from 'profile-hover';
 import Loading from "./Loading";
@@ -14,7 +15,8 @@ class Registry extends Component {
         visibleGraphData: [],
         box:false,
         address:false,
-        voteId: "0x8f409307ecdd0cb567ae433a54ec9767ff585618",
+          voteId: "0x0f5c3fef568487b9937c57d93ca8f7c7e556375e",
+      //  voteId: "0x8f409307ecdd0cb567ae433a54ec9767ff585618",
         labels: ["entity", "event"]
     };
 
@@ -34,33 +36,29 @@ class Registry extends Component {
          box:this.props.box,
          address: this.props.adress
      });
-     if (this.state.graphData.length === undefined  || this.state.graphData.length < 1) {
+     if (this.state.graphData === undefined  || this.state.graphData.length < 1) {
        this.loadData();
      }
  };
 
- toggleLabel(label) {
-     //  if (this.state.labels.includes(label)) {
-    //    console.log("Here it includes; so remove it");
-    //    var newLabels = [];
-    //    newLabels = this.state.labels.filter(e => e !== label);
-    // change the button to reflect if it has been toggled or not
-    //  } else {
-    //here it does not have the label, so let's add it
-    //    this.state.labels.push(label);
-  //      TODO: Change the graphData and make sure it redraws with new results.
-      // change the button to reflect if it has been toggled or not
-//      } };
+ toggleLabel(e) {
+
+   var array  = [];
+    this.state.labels = array;
+    if (this.state.graphData === undefined  || this.state.graphData.length < 1) {
+      this.loadData();
+    }
   };
 
 
 
  loadData() {
    var client = new ApolloClient({
-   uri: 'https://api.thegraph.com/subgraphs/name/protofire/aragon'});
+         cache: new InMemoryCache(),
+         uri: 'https://api.thegraph.com/subgraphs/name/protofire/aragon'});
    client.query({
      query: gql`
-     {
+      {
            votes(where: { creator: "${this.props.voteId}"}){
            id
            creator
@@ -69,27 +67,33 @@ class Registry extends Component {
            createdAtBlock
            createdAtTransaction
          }
-       }
+        }
        `
    }).then(result =>  this.setState({graphData: result.data.votes, client: client}))};
+
 
 render() {
 
       return (
           <div>
-          <Button onClick={this.toggleLabel("entity")} label="Entities"/>
-          <Button onClick={this.toggleLabel("event")} label="Events"/>
              {this.state.graphData &&  <Loading data={this.state.graphData}/>}
              {this.state.graphData.length > 0 &&
+                //
+                 //first try to get this function firing only when clicking...
+                 // if you set an alert or console.log it will be clear how often it is firing
+                 //after that, allow these buttons to toggle the filters
+                 // Button onClick=this.toggleLabel("covid")
                <DataView  theme={'light'}
                   fields={this.props.columns}
                   // entries is a list of items
                   entries={processGraph(this.state.labels, this.state.graphData)}
-                  renderEntryExpansion={({did}) => {
-                        if (!did == null){
-	                      return <ItemComment box={this.props.box} address={this.props.address} did={did} />;
-                      }
-                      }
+                  renderEntryExpansion={({url}) => {
+                    //TODO: Add in proper DID support here instead of URL
+                    //    if (!did == null){
+                    //      alert("did: " + did);
+	                      return<Box  className="fullSize flexContainer"><ItemComment   box={this.props.box} address={this.props.address} did={url} /></Box>;
+                  //    }
+                    }
                   }
                   renderEntry={({ description, owner, url, labels, flags}) => {
                     if (flags.parsed && flags.visible ) {
@@ -101,9 +105,9 @@ render() {
                     }
                    }
                  }
-                />
-              }
-          </div>
+              />
+            }
+       </div>
     );
   }
 }
@@ -119,11 +123,12 @@ function processGraph(labels, data) {
            try {
               //  console.log("Trying to make  JSON object for " + item.metadata);
                 var metadata = JSON.parse(item.metadata);
-            //    console.log("Made initial JSON object for " + index);
+                console.log("Made initial JSON object for " + index);
                 item.description = metadata.description;
                 item.owner = metadata.owner;
                 item.url = metadata.url;
-                item.did =  metadata.url.split("//");
+                item.did = "testDID";
+                //item.did =  metadata.url.split("//");
                 item.staked = metadata.staked;
                 item.flags = {parsed: false, visible: false};
                 item.labels = ["entity", "event"];

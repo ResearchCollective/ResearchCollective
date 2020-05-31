@@ -22,14 +22,12 @@ const Home = () => {
                         </Card>
                       </Col>
                         <Col lg={8} className="margins" >
-                             <h1 className="centerText hero-sub-title pushUp">a foundation for the scientific Web-of-Trust</h1>
+                             <h1 className="centerText hero-sub-title pushUp">an anchor for the scientific Web-of-Trust</h1>
                              <h1 className="centerText hero-title">Research Collective</h1>
                              <h1 className="centerText hero-sub-title pushUp">a moderately friendly network of Expert DAOs</h1>
-                             <div className="buttonContainer flexContainer">
+                             <div className="buttonContainer pushDown flexContainer">
                                <a  className="paddingRight" target="_blank" rel="noopener noreferrer"  href="https://luisivan.net/posts/expert-daos"><Button label="What is an Expert DAO?" mode="neutral"/></a>
-
                                 <a className="paddingLeft" target="_blank" rel="noopener noreferrer"  href="https://tristanerr.typeform.com/to/VOEZ4F"><Button className="rc-button" label="Join an Expert DAO" /></a>
-
                              </div>
                         </Col>
                     </Row>

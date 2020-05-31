@@ -177,7 +177,7 @@ export default function PostItemModal() {
                 <fieldset>
                     <Form.Group as={Row}>
                         <Form.Label as="legend" column sm={2}>
-                            Resource Type<sup>*</sup>
+                            Resource Label<sup>*</sup>
                         </Form.Label>
                         <Col sm={10}>
                             <Form.Check
@@ -198,9 +198,24 @@ export default function PostItemModal() {
                                 name="formHorizontalRadios"
                                 id="formOtherResource"
                             />
+                            <Form.Check
+                                type="radio"
+                                label="Registry"
+                                name="formHorizontalRadios"
+                                id="formRegistry"
+                            />
+                            <Form.Check
+                                type="radio"
+                                label="Covid"
+                                name="formHorizontalRadios"
+                                id="formCovid"
+                            />
                         </Col>
                     </Form.Group>
                 </fieldset>
+
+
+
 
                 <Form.Label column sm={10}><sup>*</sup> Required </Form.Label>
 
