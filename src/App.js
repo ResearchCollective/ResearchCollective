@@ -9,7 +9,6 @@ import ChatBox from '3box-chatbox-react';
 import Notebook from './components/Notebook';
 import './styles/style.css';
 import Navbar from './components/Shared/Header';
-import Votes from './components/Votes';
 import Home from './pages/Home';
 
 
@@ -54,20 +53,15 @@ class App extends Component {
         }
     }
     async auth3box() {
-<<<<<<< HEAD
-        const address = this.state.accounts[0];
-        const spaces = ['researchCollective'];
-=======
         const address = this.state.account[0];
-        const spaces = ['3Book'];
->>>>>>> notebook
+        const spaces = ['researchCollective'];
         const box = await Box.create(window.ethereum);
         await box.auth(spaces, { address });
         await box.syncDone;
         this.setState({address: address})
         this.setState({box: box });
         //join notes thread//
-        this.joinNotesThread()
+
     }
     async componentDidMount() {
         await this.getAddressFromMetaMask();
@@ -76,28 +70,15 @@ class App extends Component {
             await this.auth3box();
             const space = await this.state.box.openSpace('researchCollective');
             await space.syncDone;
-            this.setState({space});
+            this.setState({space: space});
         }
     }
     render() {
         return(
             <Router>
-<<<<<<< HEAD
+
             <Navbar bg="light" expand="lg"   ethAddress={this.props.address} style={{ minHeight: '40px' }}>
-=======
-            <Main  theme={'dark'}>
-            <Navbar bg="light" expand="lg" style={{ minHeight: '40px' }}>
-              {this.state.account && (
-                <Nav fill style={{ width: "100%" }} >
-                  <Nav.Item><Link to="/">Home</Link></Nav.Item>
-                  <Nav.Item><Link to="/votes">Votes</Link></Nav.Item>
-                  <Nav.Item><Link to="/notes">Notes</Link></Nav.Item>
-                  <Nav.Item><Link to="/chat">Chat</Link></Nav.Item>
-                  <Nav.Item><Link to="/docs">Docus</Link></Nav.Item>
-                  <Nav.Item><Link to="/login">🦊</Link></Nav.Item>
-                </Nav>
-              )}
->>>>>>> notebook
+
             </Navbar>
             <Main  theme={'dark'}>
 
@@ -112,7 +93,7 @@ class App extends Component {
                         }
                     </Route>
                     <Route path="/notes">
-                        <Notes web3enabled={this.state.web3enabled} space={this.state.space}/>
+                        <Notebook web3enabled={this.state.web3enabled} address={this.state.address} box={this.state.box} space={this.state.space}/>
                     </Route>
                     <Route path="/experiments">
                         <Notes web3enabled={this.state.web3enabled} space={this.state.space}/>
@@ -126,9 +107,6 @@ class App extends Component {
                     </Route>
                     <Route path="/resources">
                         <Resources   box={this.state.box} address={this.state.address} />
-                    </Route>
-                    <Route path='/notebook'>
-                        <Notebook web3enabled={this.state.web3enabled} space={this.state.space}/>
                     </Route>
                 </Switch>
                 </Main>

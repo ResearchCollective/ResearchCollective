@@ -17,15 +17,31 @@ class Notebook extends Component {
             opened: false,
             privateNotes: [],
             publicNotes: [],
+            space: false
        };
-
-      // TODO: need to get 'space'//
-      this.get3BoxNotesSpace()
-      // this to fetch data for table
-      // Reasons(ComponentWillMount is depricated, and this works better than using this.componentDidMount)
-      this.fetchNotes()
-
    }
+
+   componentDidMount() {
+    this.setState({
+        box:this.props.box,
+        address: this.props.adress
+    });
+    if (!this.state.space) {
+      this.loadSpace();
+    }
+};
+
+loadSpace = async() => {
+    if (!this.props.box === null) {
+        console.log("loading space")
+        const noteSpace = await this.props.box.openSpace('researchCollective')
+       this.setState({space:noteSpace})
+           alert(noteSpace);
+    }
+
+}
+
+
 
     get3BoxNotesSpace = async() => {
       console.log('this is get public space')
@@ -91,12 +107,13 @@ class Notebook extends Component {
 render() {
     return (
       <div>
-          <h1 className="sectionTitle pushUp"><i>Notebook</i></h1>
-          <h1 className="sectionSubTitle pushUp"><i>🚨Under Construction🚨</i></h1>
-          <p className="pushUp sectionSubTitle"><i>Researchers will be able to stash public or encrypted notes on IPFS here.</i><br/><i>Eventually they will be able to log experimental data,<br/> or wrap their potentially patentable idea in a Series LLC for a few DAI.</i></p><br/>
+          <h1 className="sectionTitle"><i>Notebook</i></h1>
+          <h1 className="sectionSubTitle"><i>🚨Under Construction🚨</i></h1>
+          <p className="sectionSubTitle"><i>Researchers will be able to stash public or encrypted notes on IPFS here.</i><br/><i>Eventually they will be able to log experimental data,<br/> or wrap their potentially patentable idea in a Series LLC for a few DAI.</i></p><br/>
+
           <Modal className="fullWidth" visible={this.state.opened} onClose={this.closeModal}>
             {/* //TODO: */}
-            <NotebookForm notesSpace={this.state.notesSpace} notes={this.state.notes}/>
+            <NotebookForm space={this.state.notesSpace} notes={this.state.notes}/>
           </Modal>
           <div className="fullWidth">
             <Button label="New Note" size="medium" mode="strong" onClick={() => this.setState({opened: true }) } />
@@ -113,7 +130,7 @@ render() {
               { account: 'dhfjdsfhsd', amount: '-7.900,33 ANT', date: '24 May 2020', noteId: '1' },
             ]}
             // entries={this.state.privateNotes}
-            
+
             renderEntry={({ account, amount, date, noteId }) => {
               return [<p>{account}</p>, <p>{amount}</p>,<p>{date}</p>,<div  className="buttonContainer txnButton"> <Button label={noteId} icon={<IconMaximize/>}/>  </div>]
             }}
