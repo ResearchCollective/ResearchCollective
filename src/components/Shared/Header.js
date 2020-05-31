@@ -10,7 +10,7 @@ class Header extends Component {
    }
 render() {
   return(
-      <Navbar bg="light" expand="lg" style={{ minHeight: '40px' }}>
+      <Navbar bg="light" expand="lg">
       <Navbar.Brand><Link to="/">Research Collective</Link></Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">

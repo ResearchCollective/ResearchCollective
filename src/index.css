@@ -148,7 +148,8 @@ code {
 
 .navLink{
   margin-top: 7px;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
+  font-weight: bold;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -187,6 +188,10 @@ body {
 
 .navbar-brand:active{
     text-shadow: 1px 1px 1px rgba(141,215,154,0.37);
+}
+
+.nav-item a {
+  margin-right: 3px;
 }
 
 .nav-item:hover {
