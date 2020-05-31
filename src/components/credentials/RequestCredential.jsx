@@ -214,9 +214,6 @@ export default function PostItemModal() {
                     </Form.Group>
                 </fieldset>
 
-
-
-
                 <Form.Label column sm={10}><sup>*</sup> Required </Form.Label>
 
                 <Form.Group as={Row}>

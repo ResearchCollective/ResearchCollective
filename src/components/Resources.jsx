@@ -20,12 +20,16 @@ class Resources extends Component {
 render() {
       return (
           <div>
-            <h1 className="sectionTitle"> Resources </h1>
-            <p className="sectionSubTitle"> passed by the expert DAO <a  rel="noopener noreferrer" target="_blank" href="https://mainnet.aragon.org/#/covidresearch">'Covid Research' <IconExternal style={{position: "relative", top: "-2px"}} size="small"/> </a>   </p>
+            <h1 className="sectionTitle sectionBreak"> Resources </h1>
+            <p className="narrativeTitle"> passed by the DAO <a  rel="noopener noreferrer" target="_blank" href="https://mainnet.aragon.org/#/covidresearch">'covidresearch' <IconExternal style={{position: "relative", top: "-2px"}} size="large"/> </a>   </p>
+             <PostItemModal/>
              <Box style={{display: "inline"}}>
                <Registry box={this.props.box} voteId={this.state.voteId} columns={this.state.columns} address={this.props.address}/>
+
+
+             <p className="narrativeTitle"> passed by the Telegram DAO <a  rel="noopener noreferrer" target="_blank" href="https://t.me/ResearchCollectiveBot">'rc' <IconExternal style={{position: "relative", top: "-2px"}} size="large"/> </a>   </p>
+               <Registry box={this.props.box} voteId={"0xb0cff1400bc4d39f030d01af00d118bb5cf4ab24"} columns={this.state.columns} address={this.props.address}/>
             </Box>
-            <PostItemModal/>
           </div>
     );
   }

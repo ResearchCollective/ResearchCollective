@@ -443,6 +443,12 @@ a:hover{
   display: none;
 }
 
+.narrativeTitle {
+  width: 100%;
+  font-size: 2rem;
+  text-align: center;
+}
+
 .telegramBox {
   border:0px;
   height:500px;
