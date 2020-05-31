@@ -125,6 +125,7 @@ a:hover{
   background-color: #617AB2;
   text-align: center;
   color: #29334B;
+  min-width: 18rem;
 }
 
 .why-rs-title {
@@ -144,7 +145,7 @@ a:hover{
 }
 
 .centerText{
-    text-align: center !important;
+  text-align: center !important;
 }
 
 .glyph {
@@ -261,7 +262,6 @@ a:hover{
   color: #8CAFFF;
   font-size: 30pt;
   font-weight: bolder;
-  font-max-size: 45pt;
 }
 
 .contact-us-btn{
@@ -304,7 +304,7 @@ a:hover{
   background-color: #617AB2;
 }
 
-//Why Research Creative //
+/* Why Research Creative  */
 
 .homepage-why{
   margin: 5%;
@@ -369,7 +369,7 @@ a:hover{
   margin-bottom: 10%;
 }
 
-//Resources Section//
+/* Resources Section */
 .homepage-resources-text{
   color: white;
   font-size: 2rem;
@@ -392,7 +392,7 @@ a:hover{
   background-color: #38C6FE;
 }
 
-//How it works section//
+/* How it works section */
 
 .hiw-card{
   margin-top: 5%;
@@ -417,10 +417,11 @@ a:hover{
   color: white;
 }
 
-//Contact Form//
+/* Contact Form */
 
 .contact-us{
   text-align: center;
+  height: 100%;
 }
 
 .contact-form-input{
