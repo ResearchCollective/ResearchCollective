@@ -1,9 +1,9 @@
 # Research Collective
-#### A Submission to the Stop Covid-19 Hackathon
+#### A Submission to the COVIDathon/DAIA Hackathon
 
 **[Live Site](https://researchcollective)**
 
-**[Pitch Deck](https://drive.google.com/open?id=11UhpG4ZZo3Ar2gRrUZNXHn3TiNRLEdm0I9YhrRuyjFQ)**
+**[Pitch Deck](https://docs.google.com/presentation/d/16ukIjYRFOGal9BN4aYr942aYr1-9kDYrHVlPd_D6Yoc)**
 
 **[Video Demonstration](https://youtu.be/B84uNKVqWOY)**
 
