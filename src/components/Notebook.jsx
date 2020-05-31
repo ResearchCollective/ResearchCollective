@@ -1,17 +1,14 @@
-import Box from '3box';
 import { Box as AragonBox, Button, DataView, IconMaximize, Modal } from '@aragon/ui';
-import React, { Component } from 'react';
-
+import React, {  Component } from 'react';
 import NotebookForm from './NotebookForm';
 
 class Notebook extends Component {
   constructor(props) {
       super(props);
-
        this.state = {
             client: false,
             view: false,
-            notesSpace: null,
+            spaceData: [],
             notes: [],
             singleChecked: false,
             opened: false,
@@ -21,43 +18,20 @@ class Notebook extends Component {
        };
    }
 
-   componentDidMount() {
-    this.setState({
-        box:this.props.box,
-        address: this.props.adress
-    });
-    if (!this.state.space) {
-      this.loadSpace();
-    }
-};
-
-loadSpace = async() => {
-    if (!this.props.box === null) {
-        console.log("loading space")
-        const noteSpace = await this.props.box.openSpace('researchCollective')
-       this.setState({space:noteSpace})
-           alert(noteSpace);
-    }
-
-}
-
-
-
-    get3BoxNotesSpace = async() => {
-      console.log('this is get public space')
-      const provider = await Box.get3idConnectProvider()
-      const box = await Box.create(provider)
-      const rsSapce = await box.openSpace('research-collective-notes-attempt1')
-      await rsSapce.syncDone
-      this.setState({notesSpace:rsSapce})
-    }
-
-    fetchNotes = async => {
-      console.log('This is from fetchNotes method')
-      if (this.props.space) {
-        this.getPublicNotes()
-        this.getPrivateNotes()
-      }
+   loadNotes = async (e) => {
+     console.log("Load notes");
+        try {
+              console.log("Tryna load the notes");
+              const publicSpace = await this.props.space.public.all();
+              console.log("Note loading success:" + publicSpace );
+              var notes = pullNotesFrom(publicSpace);
+              console.log("Note pulling success:" + notes);
+              this.setState({notes: pullNotesFrom(publicSpace)});
+              console.log(notes.entries);
+        }
+        catch(err) {
+              console("note load fail ");
+        }
     }
 
     // publicSave = async () => {
@@ -107,38 +81,67 @@ loadSpace = async() => {
 render() {
     return (
       <div>
-          <h1 className="sectionTitle"><i>Notebook</i></h1>
-          <h1 className="sectionSubTitle"><i>🚨Under Construction🚨</i></h1>
-          <p className="sectionSubTitle"><i>Researchers will be able to stash public or encrypted notes on IPFS here.</i><br/><i>Eventually they will be able to log experimental data,<br/> or wrap their potentially patentable idea in a Series LLC for a few DAI.</i></p><br/>
 
-          <Modal className="fullWidth" visible={this.state.opened} onClose={this.closeModal}>
-            {/* //TODO: */}
-            <NotebookForm space={this.state.notesSpace} notes={this.state.notes}/>
-          </Modal>
-          <div className="fullWidth">
-            <Button label="New Note" size="medium" mode="strong" onClick={() => this.setState({opened: true }) } />
+          <h1 className="sectionTitle"><i>Notebook</i></h1>
+          <p className="sectionSubTitle"><i>Stash your research notes here on the interplanetary file system. They can either be public or encrypted with your MetaMask key.</i></p><br/>
+            <div className="buttonContainer fullWidth flexContainer">
+              <Button style={{maxWidth: "45px"}} label="Load Notes" size="medium" mode="neutral" onClick={(e) => this.loadNotes(e) } />
+              <Button label="New Note" size="medium" mode="strong" onClick={() => this.setState({opened: true }) } />
+               <Modal visible={this.state.opened} onClose={this.closeModal}>
+                <NotebookForm    space={this.props.space} notes={this.state.notes}/>
+              </Modal>
           </div>
         <AragonBox>
-          <DataView style={{position: "absolute", top: "500px"}}
-            fields={['Title', 'Labels', 'Date', 'Private']}
-            //TODO: combine privateNotes & publicNotes. Include a boolean for isPrivate.
-
-            // This id dummy data to verify that data view is working(for entries), Original logis is commented below//
-            entries={[
-              { account: 'dhfjdsfhsd', amount: '-7.900,33 ANT', date: '24 May 2020', noteId: '1' },
-              { account: 'dhfjdsfhsd', amount: '-7.900,33 ANT', date: '24 May 2020', noteId: '1' },
-              { account: 'dhfjdsfhsd', amount: '-7.900,33 ANT', date: '24 May 2020', noteId: '1' },
-            ]}
-            // entries={this.state.privateNotes}
-
-            renderEntry={({ account, amount, date, noteId }) => {
-              return [<p>{account}</p>, <p>{amount}</p>,<p>{date}</p>,<div  className="buttonContainer txnButton"> <Button label={noteId} icon={<IconMaximize/>}/>  </div>]
-            }}
-          />
-      </AragonBox>
+            <DataView style={{position: "absolute", top: "500px"}}
+              fields={['id', 'title', 'description', 'labels']}
+               entries={this.state.notes}
+              renderEntry={({ id, title, description, labels }) => {
+                return [<p>{id}</p>, <p>{title}</p>,<p>{description}</p>,<div  className="buttonContainer txnButton"> <Button label={labels} icon={<IconMaximize/>}/>  </div>]
+              }}
+            />
+        </AragonBox>
       </div>
     )
   }
+}
+
+function pullNotesFrom(space) {
+    var newData = [];
+    if (space !== null) {
+      try {
+        console.log("Space is not null...");
+        for (const item in space) {
+            if (typeof item === 'string' || item instanceof String) {
+               if (item.includes("note-")) {
+                console.log("Note Item" + space[item]);
+                try {
+                  var newNote = {};
+                  var note = space[item];
+                  console.log("Note: ")
+                  console.log(note);
+                  var obj = JSON.parse(note);
+                  newNote.id = item;
+                  newNote.title = obj.title;
+                  newNote.description = obj.description;
+                  if (obj.label !== null) {
+                  newNote.label = obj.label;
+                } else {
+                  newNote.label = "";
+                }
+                  newData[newData.length] = newNote;
+              } catch(err) {
+                 console.log("Error parsing JSON from Note " + space[item]);
+              }
+            }
+          }
+        }
+      }
+      catch(err) {
+        console.log("pullNotes fail");
+      }
+    }
+    (console.log("Final notes: " + newData));
+  return newData;
 }
 
 

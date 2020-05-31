@@ -1,53 +1,65 @@
 import { Button, TextInput } from '@aragon/ui';
-import React, { useState } from 'react';
+import React, {Component } from 'react';
 
-const NotebookForm = (props) => {
+class NotebookForm extends Component {
+  constructor(props) {
+      super(props);
+       this.state = {
+            space: false,
+            note: false,
+            description: false,
+       };
+   }
 
-    // this is for state on inputs//
-    let [note, setNote] = useState({
-        title: '',
-        labels: '',
-        description: '',
-        attachment: ''
-    })
-    // let [title, setTitle] = useState('')
-    // let [labels, setLabel] = useState('')
-    // let [note, setNote] = useState('')
-    // let [attachment, setAttachment] = useState('')
+   handleFormChange= (e) => {
+         /*
+           Because we named the inputs to match their
+           corresponding values in state, it's
+           super easy to update the state
+         */
 
-    let handleOnChange = (e) => {
-        let {name, value} = e.target
-        setNote(prevState => ({
-            ...prevState,
-            [name]: value
-        }))
-    }
+         this.setState({ [e.target.name]: e.target.value });
 
-    let saveNote = async (e) => {
-        let newNote = {
-            id: 'dsfsdfs',
-            title: note.title,
-            label: note.labels,
-            description: note.description
-        }
-        let notesSpace = this.props.space
-        let notes = this.props.notes
-        notes.push(newNote)
+   }
 
-        console.log('notes', notes)
-    }
-    return(
-        <div>
-            <TextInput className="fullWidth" name='title' value={note.title} onChange={e => handleOnChange(e)} placeholder="Note Title" wide="true" />
-            <TextInput className="fullWidth" name='labels' value={note.label} onChange={e => handleOnChange(e)} placeholder="Comma, Separated, Labels" wide="true" />
-            <TextInput className="fullWidth" name='description' value={note.description} onChange={e => handleOnChange(e)} style={{minHeight: "300px"}} placeholder="Note" wide="true" multiline="true"/>
-            <TextInput className="fullWidth" name='attachment' value={note.attachment} onChange={e => handleOnChange(e)} style={{minHeight: "120px"}} placeholder="Attachments" wide="true" multiline="true"/>
-            <div className="buttonContainer">
-                <Button style={{maxWidth: "45px"}} label="Save Private Note" size="medium" mode="strong" onClick={() => this.privateSave() } />
-                <Button style={{maxWidth: "45px"}} label="Save Public Note" size="medium" mode="strong" onClick={(e) => saveNote(e) } />
-            </div>
-        </div>
-    )
+   savePrivateNote = async (e) => {
+     alert("This function is in development");
 }
 
-export default NotebookForm
+   saveNote = async (e) => {
+        var note;
+        var date = new Date();
+        var timestamp = date.getTime();
+        var noteId = "note-"+timestamp;
+        var newNote = {
+            title: this.state.title,
+            label: this.state.labels,
+            description: this.state.description
+        }
+        var noteContent = JSON.stringify(newNote);;
+        try {
+              await this.props.space.public.set(noteId, noteContent);
+              note = await this.props.space.public.get(noteId);
+              console("Create note success: " + note);
+        }
+        catch(err) {
+              alert("Create note failed ");
+        }
+    }
+
+    render() {
+        return (
+        <div>
+
+                <TextInput className="fullWidth" name='title'  onChange={this.handleFormChange}   placeholder="Note Title" wide="true" />
+                 <TextInput className="fullWidth" name='labels'onChange={this.handleFormChange}   placeholder="Comma, Separated, Labels" wide="true" />
+                 <TextInput className="fullWidth" name='description' onChange={this.handleFormChange}   style={{minHeight: "300px"}} placeholder="Note" wide="true" multiline="true"/>
+                 <TextInput className="fullWidth" name='attachment' placeholder="Does not work yet"  onChange={this.handleFormChange}   style={{minHeight: "120px"}} placeholder="Attachments" wide="true" multiline="true"/>
+                <Button style={{maxWidth: "45px"}} label="Save Publicly" size="medium" classname="rc-button" onClick={(e) => this.saveNote(e) } />
+                <Button style={{maxWidth: "45px"}} label="Save Privately" size="medium" mode="negative" onClick={(e) => this.savePrivateNote(e) } />
+        </div>
+    )
+  }
+}
+
+export default NotebookForm;

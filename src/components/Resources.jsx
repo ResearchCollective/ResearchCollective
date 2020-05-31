@@ -111,85 +111,64 @@ class PostForm extends Component {
     }
       return (
             <Box>
-            <Form onSubmit={mySubmitHandler}>
+              <Form onSubmit={mySubmitHandler}>
 
-              <Form.Group onChange={this.handleFormChange} controlId="title">
-              <Form.Label>Title</Form.Label>
-              <Form.Control    name="title" onChange={this.handleFormChange} />
-              <Form.Text  className="text-muted">
-               What text should be displayed as this listing's title?
-              </Form.Text>
-              </Form.Group>
+                <Form.Group onChange={this.handleFormChange} controlId="title">
+                <Form.Label>Title</Form.Label>
+                <Form.Control    name="title" onChange={this.handleFormChange} />
+                <Form.Text  className="text-muted">
+                 What text should be displayed as this listing's title?
+                </Form.Text>
+                </Form.Group>
 
-              <Form.Group  controlId="description">
-              <Form.Label>Description</Form.Label>
-              <Form.Control name="description"  onChange={this.handleFormChange}  as="textarea" rows="3" />
-              <Form.Text className="text-muted">
-               Describe the subject of the listing
-              </Form.Text>
-              </Form.Group>
+                <Form.Group  controlId="description">
+                <Form.Label>Description</Form.Label>
+                <Form.Control name="description"  onChange={this.handleFormChange}  as="textarea" rows="3" />
+                <Form.Text className="text-muted">
+                 Describe the subject of the listing
+                </Form.Text>
+                </Form.Group>
 
-              <Form.Group  controlId="address">
-              <Form.Label>Address</Form.Label>
-              <Form.Control  onChange={this.handleFormChange}  name="address"/>
-              <Form.Text className="text-muted">
-               URL, DOI, Physical Address or Contact Method
-              </Form.Text>
-              </Form.Group>
+                <Form.Group  controlId="address">
+                <Form.Label>Address</Form.Label>
+                <Form.Control  onChange={this.handleFormChange}  name="address"/>
+                <Form.Text className="text-muted">
+                 URL, DOI, Physical Address or Contact Method
+                </Form.Text>
+                </Form.Group>
 
-              <Form.Group controlId="ethAddress">
-              <Form.Label>Ethereum Address</Form.Label>
-              <Form.Control  onChange={this.handleFormChange}  name="posterEthAddress" />
-              <Form.Text className="text-muted">
-               Optional; will eventually be able to update listing
-              </Form.Text>
-              </Form.Group>
+                <Form.Group controlId="ethAddress">
+                <Form.Label>Ethereum Address</Form.Label>
+                <Form.Control  onChange={this.handleFormChange}  name="posterEthAddress" />
+                <Form.Text className="text-muted">
+                 Optional; will eventually be able to update listing
+                </Form.Text>
+                </Form.Group>
 
-              <Form.Group controlId="tags">
-              <Form.Label>Optional Tags</Form.Label>
-              <Form.Check  onChange={this.handleFormChange}  label="Covid" name="vendor" />
-              <Form.Check onChange={this.handleFormChange}   label="Anti-Viral" name="antiviral" />
-              <Form.Check  onChange={this.handleFormChange}  label="Test Kit" name="testkit" />
-              <Form.Check onChange={this.handleFormChange}    label="Registry" name="registry" />
-              <Form.Check  onChange={this.handleFormChange}  label="Article" name="article" />
-              </Form.Group>
+                <Form.Group controlId="tags">
+                <Form.Label>Optional Tags</Form.Label>
+                <Form.Check  onChange={this.handleFormChange}  label="Covid" name="vendor" />
+                <Form.Check onChange={this.handleFormChange}   label="Anti-Viral" name="antiviral" />
+                <Form.Check  onChange={this.handleFormChange}  label="Test Kit" name="testkit" />
+                <Form.Check onChange={this.handleFormChange}    label="Registry" name="registry" />
+                <Form.Check  onChange={this.handleFormChange}  label="Article" name="article" />
+                </Form.Group>
 
-              <Form.Group name="consent" controlId="consent">
-              <Form.Check   onChange={this.handleFormChange} type="checkbox" label="I acknowledge that this data will be stored on a public ledger." />
-              </Form.Group>
+                <Form.Group name="consent" controlId="consent">
+                <Form.Check   onChange={this.handleFormChange} type="checkbox" label="I acknowledge that this data will be stored on a public ledger." />
+                </Form.Group>
 
 
 
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
+                <Button variant="primary" type="submit">
+                  Submit
+                </Button>
            </Form>
          </Box>
        );
      }
   }
 
-
-
-
-function OldItemModal() {
-  const [opened, setOpened] = React.useState(false)
-  const open = () => setOpened(true)
-  const close = () => setOpened(false)
-
-
-  return (
-    <>
-      <Button className="pushDown" mode="outline"  icon={<IconPlus/>} onClick={open} label="Post Resource"/>
-        <Modal visible={opened} onClose={close}>
-             <Box className="notesContainer">
-               <h1 className="sectionTitle"> List Resource</h1>
-                  <PostForm/>
-               </Box>
-      </Modal>
-    </>
-  )
-}
 
 
 
