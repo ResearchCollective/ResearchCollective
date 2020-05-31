@@ -1,4 +1,3 @@
-import Box from '3box';
 import { Button, TextInput } from '@aragon/ui';
 import React, { useState } from 'react';
 
@@ -32,16 +31,16 @@ const NotebookForm = (props) => {
             description: note.description
         }
         // get notes space//console.log('this is to get notes space')
-        console.log('Getting Notes space....')
-        const provider = await Box.get3idConnectProvider()
-        const box = await Box.create(provider)
-        const notesSpace = ('Research-Collective-Notes')
-        await box.auth(notesSpace, props.accountAddress )
+        // console.log('Getting Notes space....')
+        // const provider = await Box.get3idConnectProvider()
+        // const box = await Box.create(provider)
+        // const notesSpace = ('Research-Collective-Notes')
+        // await box.auth(notesSpace, `${props.accountAddress}` )
         // save the note//
-        await notesSpace.private.set(`${newNote.id}`, newNote)
-        console.log(`Saved new note`)
+        // await notesSpace.private.set(`${newNote.id}`, newNote)
+        // console.log(`Saved new note`)
     }
-    if(props.accountAddress != false) {console.log(props.accountAddress)}
+    
     return(
         <div>
             <TextInput className="fullWidth" name='title' value={note.title} onChange={e => handleOnChange(e)} placeholder="Note Title" wide="true" /> 
@@ -57,3 +56,46 @@ const NotebookForm = (props) => {
 }
 
 export default NotebookForm
+
+
+// class NotebookForm extends Component{
+
+    //     constructor(props){
+    //         super(props)
+    
+    //         this.state = {
+    //             title: '',
+    //             label:'',
+    //             description: '',
+    //             attachment: ''
+    //         }
+    //     }
+    
+    //     handleOnChange = (e) => {
+    //         let {name, value} = e.target
+    //         this.setState({
+    //             name: value
+    //         })
+    //     }
+    
+    //     saveNote = async => {
+            
+    //     }
+    //     render(){
+    //         console.log(this.state)
+    //         return(
+    //             <div>
+    //              <TextInput className="fullWidth" name='title' value={this.state.title} onChange={e => this.handleOnChange(e)} placeholder="Note Title" wide="true" /> 
+    //              <TextInput className="fullWidth" name='labels' value={this.state.label} onChange={e => this.handleOnChange(e)} placeholder="Comma, Separated, Labels" wide="true" />
+    //              <TextInput className="fullWidth" name='description' value={this.state.description} onChange={e => this.handleOnChange(e)} style={{minHeight: "300px"}} placeholder="Note" wide="true" multiline={true}/>
+    //              <TextInput className="fullWidth" name='attachment' value={this.state.attachment} onChange={e => this.handleOnChange(e)} style={{minHeight: "120px"}} placeholder="Attachments" wide="true" multiline={true}/>
+    //              <div className="buttonContainer">
+    //                  <Button style={{maxWidth: "45px"}} label="Save Private Note" size="medium" mode="strong" onClick={() => this.privateSave() } />
+    //                  <Button style={{maxWidth: "45px"}} label="Save Public Note" size="medium" mode="strong" onClick={(e) => this.saveNote(e) } />
+    //              </div>
+    //          </div>
+    //         )
+    //     }
+    // }
+    
+    // export default NotebookForm

@@ -1,4 +1,3 @@
-import Box from '3box';
 import { Box as AragonBox, Button, DataView, IconMaximize, Modal } from '@aragon/ui';
 import React, { Component } from 'react';
 
@@ -21,28 +20,30 @@ class Notebook extends Component {
             publicNotes: [],
        };
       // opening notes space//
-      this.get3BoxNotesSpace() 
+      // this.get3BoxNotesSpace() 
       // this to fetch data for table
       // Reasons(ComponentWillMount is depricated, and this works better than using this.componentDidMount)
       this.fetchNotes()
+      console.log(this.props)
 
    }
 
-   get3BoxNotesSpace = async() => {
-    if(this.props.accountAddress !== false){
-      console.log('this is to get notes space')
-      const provider = await Box.get3idConnectProvider()
-      const box = await Box.create(provider)
-      const notesSpace = ('Research-Collective-Notes')
-      await box.auth(notesSpace, this.props.accountAddress )
-      await notesSpace.syncDone()
-      console.log('Opened notes space')
-    // this.setState({notesSpace})
-    // console.log(this.state.notesSpace)
-    }else{
-      console.warn('No account founds!!!')
-    }
-}
+  //  get3BoxNotesSpace = async() => {
+  //   if(this.props.accountAddress !== false){
+  //     console.log('this is to get notes space', this.props.accountAddress)
+  //     const provider = await Box.get3idConnectProvider()
+  //     const box = await Box.create(provider)
+  //     const notesSpace = ('Research-Collective-Notes')
+  //     await box.auth(notesSpace, `${this.props.accountAddress}` )
+  //     await notesSpace.syncDone()
+  //     console.log('Opened notes space')
+  //     console.log(this.props.accountAddress)
+  //   // this.setState({notesSpace})
+  //   // console.log(this.state.notesSpace)
+  //   }else{
+  //     console.warn('No account found!!!')
+  //   }
+  // }
 
 
     fetchNotes = async => {

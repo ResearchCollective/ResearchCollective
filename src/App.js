@@ -36,22 +36,23 @@ class App extends Component {
             const account = await window.ethereum.enable();
             this.setState({ web3enabled: true });
             this.setState({account: account });
-            console.log(this.state.account)
         }
     }
 
     async auth3box() {
         await this.getAddressFromMetaMask()
         const address = this.state.account[0];
+        // address = address.toString()
+        console.log('Address: ', address)
+        this.setState({address:address})
         // this space can be used for user data and other things like that//
-        const space = ('research-collective');
+        const space = ('research-collective-notes');
         const box = await Box.create(window.ethereum);
-        await box.auth(space, { address });
+        console.log('Creating space...')
+        await box.auth(space, { address })
         await box.syncDone;
-        // setting state//
-        this.setState({address: address})
-        this.setState({box: box });
-        console.log(this.state)
+        this.setState({box: box, space: space });
+        console.log('Space created!!!!')
     }   
 
     async componentDidMount() {
@@ -63,7 +64,6 @@ class App extends Component {
             // await space.syncDone;
             // this.setState({space});
         }
-        console.log(this.state)
     }
     render() {
         return(
@@ -101,7 +101,7 @@ class App extends Component {
                         <Resources/>
                     </Route>
                     <Route path='/notes'>
-                        <Notebook web3enabled={this.state.web3enabled} accountAddress={this.state.address} />
+                        <Notebook web3enabled={this.state.web3enabled} accountAddress={this.state.address} space={this.state.space} />
                     </Route>
                 </Switch>
                 </Main>
