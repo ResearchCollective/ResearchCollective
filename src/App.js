@@ -6,8 +6,10 @@ import Votes from "./components/Votes";
 import Resources from "./components/Resources";
 import EditProfile from '3box-profile-edit-react';
 import ChatBox from '3box-chatbox-react';
+import Notebook from './components/Notebook';
 import './styles/style.css';
 import Navbar from './components/Shared/Header';
+import Votes from './components/Votes';
 import Home from './pages/Home';
 
 
@@ -17,33 +19,59 @@ class App extends Component {
         web3enabled: false,
         box: false,
         space: false,
+        notes: [],
         address: false,
-        accounts: false
+        account: null,
     }
+    // //get research-coolective space//
+    // get3BoxSpaceForNotes  = async () => {
+    //     // create a 3Box instance//
+    //     const provider = await Box.get3idConnectProvider()
+    //     const box = await Box.create(provider)
+    //     let rsSpace = await box.openSpace('Research-Collective')
+    //     this.setState({notesSpace:rsSpace})
+    // }
+
+    // // to create a thread for storing notes//
+    // joinNotesThread = async () => {
+    //     // create a 3Box instance//
+    //     const provider = await Box.get3idConnectProvider()
+    //     const box = await Box.create(provider)
+    //     let rsSpace = await box.openSpace('Research-Collective')
+    //     const notesThread = await rsSpace.joinThread('Notes')
+    //     this.setState({notes:notesThread})
+    // }
 
     async getAddressFromMetaMask() {
         if (typeof window.ethereum == "undefined") {
             this.setState({ needToAWeb3Browser: true });
         } else {
             window.ethereum.autoRefreshOnNetworkChange = false; //silences warning about no autofresh on network change
-            const accounts = await window.ethereum.enable();
+            const account = await window.ethereum.enable();
             this.setState({ web3enabled: true });
-            this.setState({accounts: accounts });
+            this.setState({account: account });
+            console.log(this.state.account)
         }
     }
     async auth3box() {
+<<<<<<< HEAD
         const address = this.state.accounts[0];
         const spaces = ['researchCollective'];
+=======
+        const address = this.state.account[0];
+        const spaces = ['3Book'];
+>>>>>>> notebook
         const box = await Box.create(window.ethereum);
         await box.auth(spaces, { address });
         await box.syncDone;
         this.setState({address: address})
         this.setState({box: box });
+        //join notes thread//
+        this.joinNotesThread()
     }
-
     async componentDidMount() {
         await this.getAddressFromMetaMask();
-        if (this.state.accounts) {
+        if (this.state.account) {
             // Now MetaMask's provider has been enabled, we can start working with 3Box
             await this.auth3box();
             const space = await this.state.box.openSpace('researchCollective');
@@ -54,7 +82,22 @@ class App extends Component {
     render() {
         return(
             <Router>
+<<<<<<< HEAD
             <Navbar bg="light" expand="lg"   ethAddress={this.props.address} style={{ minHeight: '40px' }}>
+=======
+            <Main  theme={'dark'}>
+            <Navbar bg="light" expand="lg" style={{ minHeight: '40px' }}>
+              {this.state.account && (
+                <Nav fill style={{ width: "100%" }} >
+                  <Nav.Item><Link to="/">Home</Link></Nav.Item>
+                  <Nav.Item><Link to="/votes">Votes</Link></Nav.Item>
+                  <Nav.Item><Link to="/notes">Notes</Link></Nav.Item>
+                  <Nav.Item><Link to="/chat">Chat</Link></Nav.Item>
+                  <Nav.Item><Link to="/docs">Docus</Link></Nav.Item>
+                  <Nav.Item><Link to="/login">🦊</Link></Nav.Item>
+                </Nav>
+              )}
+>>>>>>> notebook
             </Navbar>
             <Main  theme={'dark'}>
 
@@ -83,6 +126,9 @@ class App extends Component {
                     </Route>
                     <Route path="/resources">
                         <Resources   box={this.state.box} address={this.state.address} />
+                    </Route>
+                    <Route path='/notebook'>
+                        <Notebook web3enabled={this.state.web3enabled} space={this.state.space}/>
                     </Route>
                 </Switch>
                 </Main>
