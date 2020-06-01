@@ -199,8 +199,16 @@ body {
   opacity: 100%;
 }
 
-.experiments-list {
+.experiments {
   margin-top: 10vh;
+}
+
+.experiments-form {
+  text-align: center;
+}
+
+.experiments-form button {
+  margin-top: 5%;
 }
 
 /*# sourceMappingURL=style.css.map */
