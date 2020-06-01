@@ -1,16 +1,18 @@
-  import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Main, Button, Split, Box as AragonBox } from '@aragon/ui'
-import Box from '3box';
-import Votes from "./components/Votes";
-import Resources from "./components/Resources";
-import EditProfile from '3box-profile-edit-react';
-import ChatBox from '3box-chatbox-react';
-import Notebook from './components/Notebook';
 import './styles/style.css';
-import Navbar from './components/Shared/Header';
-import Home from './pages/Home';
 
+import Box from '3box';
+import ChatBox from '3box-chatbox-react';
+import EditProfile from '3box-profile-edit-react';
+import { Box as AragonBox, Button, Main, Split } from '@aragon/ui';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import Experiments from './components/experiments/Experiments';
+import Notebook from './components/Notebook';
+import Resources from './components/Resources';
+import Navbar from './components/Shared/Header';
+import Votes from './components/Votes';
+import Home from './pages/Home';
 
 class App extends Component {
 
@@ -77,9 +79,7 @@ class App extends Component {
         return(
             <Router>
 
-            <Navbar bg="light" expand="lg"   ethAddress={this.props.address} style={{ minHeight: '40px' }}>
-
-            </Navbar>
+            <Navbar bg="light" expand="lg" ethAddress={this.props.address} style={{ minHeight: '40px' }} />
             <Main  theme={'dark'}>
 
                 <Switch>
@@ -95,9 +95,6 @@ class App extends Component {
                     <Route path="/notes">
                         <Notebook web3enabled={this.state.web3enabled} address={this.state.address} box={this.state.box} space={this.state.space}/>
                     </Route>
-                    <Route path="/experiments">
-                        <Notes web3enabled={this.state.web3enabled} space={this.state.space}/>
-                    </Route>
                     <Route path='/docs' component={() => {
                          window.location.href = 'https://www.notion.so/ResearchCo-Covidathon-2ae1203029ed4c2cb4f5b6056ae7b89c';
                          return null;
@@ -107,6 +104,9 @@ class App extends Component {
                     </Route>
                     <Route path="/resources">
                         <Resources   box={this.state.box} address={this.state.address} />
+                    </Route>
+                    <Route path='/experiments'>
+                        <Experiments />
                     </Route>
                 </Switch>
                 </Main>

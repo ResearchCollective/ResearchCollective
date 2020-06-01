@@ -1,5 +1,6 @@
 import { Box as AragonBox, Button, DataView, IconMaximize, Modal } from '@aragon/ui';
-import React, {  Component } from 'react';
+import React, { Component } from 'react';
+
 import NotebookForm from './NotebookForm';
 
 class Notebook extends Component {
@@ -81,7 +82,6 @@ class Notebook extends Component {
 render() {
     return (
       <div>
-
           <h1 className="sectionTitle"><i>Notebook</i></h1>
           <p className="sectionSubTitle"><i>Stash your research notes here on the interplanetary file system. They can either be public or encrypted with your MetaMask key.</i></p><br/>
             <div className="buttonContainer fullWidth flexContainer">
