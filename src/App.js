@@ -23,6 +23,7 @@ class App extends Component {
         notes: [],
         address: false,
         account: null,
+        experimentsThread: null
     }
     // //get research-coolective space//
     // get3BoxSpaceForNotes  = async () => {
@@ -42,6 +43,14 @@ class App extends Component {
     //     const notesThread = await rsSpace.joinThread('Notes')
     //     this.setState({notes:notesThread})
     // }
+
+    // this method is to join the "thread" of experiments//
+    joinExperimentsThread = async() => {
+        let {space} = this.state
+        const experimentsThread = await space.joinThread('researchCollectiveExperiments')
+        console.log('Joined Experiments Thread',experimentsThread) 
+        this.setState({experimentsThread : experimentsThread})
+    }
 
     async getAddressFromMetaMask() {
         if (typeof window.ethereum == "undefined") {
@@ -73,6 +82,8 @@ class App extends Component {
             const space = await this.state.box.openSpace('researchCollective');
             await space.syncDone;
             this.setState({space: space});
+            // join experiments thread//
+            this.joinExperimentsThread()
         }
     }
     render() {
@@ -94,7 +105,7 @@ class App extends Component {
                     </Route>
                     <Route path="/notes">
                         <Notebook web3enabled={this.state.web3enabled} address={this.state.address} box={this.state.box} space={this.state.space}/>
-                    </Route>
+                    </Route> 
                     <Route path='/docs' component={() => {
                          window.location.href = 'https://www.notion.so/ResearchCo-Covidathon-2ae1203029ed4c2cb4f5b6056ae7b89c';
                          return null;
@@ -106,7 +117,7 @@ class App extends Component {
                         <Resources   box={this.state.box} address={this.state.address} />
                     </Route>
                     <Route path='/experiments'>
-                        <Experiments />
+                        <Experiments experimentsThread={this.state.experimentsThread}/>
                     </Route>
                 </Switch>
                 </Main>
@@ -114,11 +125,6 @@ class App extends Component {
         )
     }
 }
-
-
-
-
-
 
 class Chat extends Component {
     render() {
