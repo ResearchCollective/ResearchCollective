@@ -1,9 +1,12 @@
 import React from 'react';
 
+import ExperimentsList from './ExperimentsList';
+
 const Experiments = () => {
     return(
         <div>
-            <h1>Experiments</h1>
+            <button>Create New</button>
+            <ExperimentsList/>
         </div>
     )
 }
