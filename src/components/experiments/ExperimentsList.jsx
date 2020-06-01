@@ -1,7 +1,16 @@
 import { Box as AragonBox, DataView } from '@aragon/ui';
 import React from 'react';
 
-const ExperimentsList = () => {
+const ExperimentsList = ({thread}) => {
+
+    const getExperiments = async() => {
+        if(thread!= null){
+            let data = await thread.getPosts()
+            console.log('Experiments: ',data)
+        }
+    }
+
+    getExperiments()
     return(
         <div>
             <AragonBox className='experiments-list'>

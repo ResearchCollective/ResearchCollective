@@ -30,9 +30,9 @@ const Experiments = ({experimentsThread}) => {
         <div className='experiments'>
             <Button mode='positive' onClick={open}>Create New</Button>
             <Modal className='experiment-modal' visible={opened} onClose={close}>
-                <ExperimentsModal />
+                <ExperimentsModal thread={ experimentsThread }/>
             </Modal>
-            <ExperimentsList/>
+            <ExperimentsList thread={ experimentsThread }/>
         </div>
     )
 }
