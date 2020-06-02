@@ -205,6 +205,13 @@ a:hover{
 
 .CardB{
   background-color: #425176!important;
+  margin-bottom: 5%;
+  min-width: 250px;
+}
+
+.bufferB{
+  margin-left: 50px!important;
+  margin-right: 50px!important;
 }
 
 .login-btn {
@@ -387,6 +394,9 @@ a:hover{
   margin-top: 5%;
   background-color: #29334B;
   border: none;
+  display: flex;
+align-items: center;
+justify-content: center;
 }
 
 .hiw-glyph {
@@ -450,7 +460,7 @@ a:hover{
 
 .narrativeTitle {
   width: 100%;
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-align: center;
 }
 
@@ -468,6 +478,11 @@ a:hover{
 
 .logo-card{
   background-color: #425176!important;
+  margin-bottom: 50px;
+}
+
+.navbar{
+  min-height: 59px;
 }
 
 /*# sourceMappingURL=style.css.map */
@@ -480,4 +495,11 @@ a:hover{
 
 .threeboxProfileHover__style_hoverProfile  {
   width: 300px!important;
+}
+
+
+.hiw-box{
+  display: flex;
+align-items: center;
+justify-content: center;
 }

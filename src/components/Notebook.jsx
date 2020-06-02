@@ -18,60 +18,29 @@ class Notebook extends Component {
        };
    }
 
+   componentDidMount() {
+
+  //  if (this.props.space !== null ) {
+      this.loadNotes();
+  //  }
+};
+
    loadNotes = async (e) => {
      console.log("Load notes");
         try {
-              console.log("Tryna load the notes");
+          //    console.log("Tryna load the notes");
               const publicSpace = await this.props.space.public.all();
-              console.log("Note loading success:" + publicSpace );
-              var notes = pullNotesFrom(publicSpace);
-              console.log("Note pulling success:" + notes);
-              this.setState({notes: pullNotesFrom(publicSpace)});
-              console.log(notes.entries);
+              const privateSpace = await this.props.space.private.all();
+              console.log("Note loading success:" + publicSpace + privateSpace );
+              var notes = pullNotesFrom(privateSpace)
+              notes.concat(pullNotesFrom(publicSpace));
+          //    console.log("Note pulling success:" + notes);
+              this.setState({notes: notes});
         }
         catch(err) {
-              console("note load fail ");
+             console.log("note load fail");
         }
     }
-
-    // publicSave = async () => {
-    //   //saves to a public 3Box space
-    //   //TODO: Set this to save the note title + content
-    //   await this.props.space.public.set("foo", "bar");
-    //   this.setState({publicNoteToSave : null});
-    //   console.log("public save: " + this.publicNoteToSave);
-    //   this.getPublicNotes();
-    //   this.setState({opened: false })
-    // }
-
-    // privateSave = async () => {
-    //  //saves to a private 3Box space
-    //  //await this.props.space.private.set("Date.now()", this.state.privateNoteToSave);
-    //  // set(noteTitle, noteContent)
-    //  //TODO: Set this to save the note title + content
-    //   await this.props.space.private.set("foo2", "bar2");
-    //   this.setState({privateNoteToSave : null});
-    //   console.log("private save: " + this.privateNoteToSave);
-    //   this.getPrivateNotes();
-    //   this.setState({opened: false })
-    // }
-
-
-    // getPublicNotes = async (e) => {
-    //   //TODO add in Catch or try or conditional so that it doesn't try to load from an empty space
-    //   console.log('this from getPublicNotes')
-    //   const publicNotes = await this.props.space.public.all();
-    //   this.setState({ publicNotes });
-    //   console.log("public load: " + publicNotes);
-    // }
-
-    // getPrivateNotes = async (e) => {
-    //   console.log('this from getPublicNotes')
-    //   //TODO add in Catch or try or conditional so that it doesn't try to load from an empty space
-    //   const privateNotes = await this.props.space.private.all();
-    //   this.setState({ privateNotes });
-    //   console.log("private load: " + privateNotes);
-    // }
 
     closeModal = () =>{
       this.setState({opened:false})
@@ -81,16 +50,15 @@ class Notebook extends Component {
 render() {
     return (
       <div>
-
           <h1 className="sectionTitle"><i>Notebook</i></h1>
           <p className="sectionSubTitle"><i>Stash your research notes here on the interplanetary file system. They can either be public or encrypted with your MetaMask key.</i></p><br/>
             <div className="buttonContainer fullWidth flexContainer">
-              <Button style={{maxWidth: "45px"}} label="Load Notes" size="medium" mode="neutral" onClick={(e) => this.loadNotes(e) } />
-              <Button label="New Note" size="medium" mode="strong" onClick={() => this.setState({opened: true }) } />
+               <Button style={{maxWidth: "45px"}} label="Load Notes" size="medium" mode="normal" onClick={(e) => this.loadNotes(e) } />
+               <Button label="New Note" size="medium" mode="strong" onClick={() => this.setState({opened: true }) } />
                <Modal visible={this.state.opened} onClose={this.closeModal}>
-                <NotebookForm    space={this.props.space} notes={this.state.notes}/>
+               <NotebookForm space={this.props.space} notes={this.state.notes}/>
               </Modal>
-          </div>
+           </div>
         <AragonBox>
             <DataView style={{position: "absolute", top: "500px"}}
               fields={['id', 'title', 'description', 'labels']}

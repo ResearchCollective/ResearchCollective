@@ -115,6 +115,14 @@
   margin-top: 5%;
   background-color: #29334B;
   border: none;
+
+}
+
+.hiw-box{
+  display: flex;
+align-items: center;
+justify-content: center;
+min-width: 250px;
 }
 
 .hiw-glyph{
@@ -165,4 +173,9 @@
   border: 0px solid #169363;
   background-color: #169363;
   opacity: 100%;
+}
+
+.navbar-brand{
+  padding-top: 0px;
+  padding-bottom: 0px;
 }

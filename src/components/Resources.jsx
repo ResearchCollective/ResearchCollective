@@ -20,10 +20,10 @@ class Resources extends Component {
 render() {
       return (
           <div>
-            <h1 className="sectionTitle sectionBreak"> Resources </h1>
+            <h1 className="sectionTitle "> Resources </h1>
+                 <PostItemModal className=" sectionBreak" />
             <p className="narrativeTitle"> passed by the DAO <a  rel="noopener noreferrer" target="_blank" href="https://mainnet.aragon.org/#/covidresearch">'covidresearch' <IconExternal style={{position: "relative", top: "-2px"}} size="large"/> </a>   </p>
-             <PostItemModal/>
-             <Box style={{display: "inline"}}>
+             <Box  className=""  style={{display: "inline"}}>
                <Registry box={this.props.box} voteId={this.state.voteId} columns={this.state.columns} address={this.props.address}/>
 
 

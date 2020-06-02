@@ -126,7 +126,7 @@ export default function PostItemModal() {
     const close = () => setOpened(false)
     return (
         <>
-            <Button className="pushDown" mode="normal"  icon={<IconPlus/>} onClick={open} label="Post Resource"/>
+            <Button className=" rc-button" mode="normal"   icon={<IconPlus/>} onClick={open} label="Post Resource"/>
             <Modal visible={opened} onClose={close}>
 
             <Form onSubmit={handleSubmitPostResource} >

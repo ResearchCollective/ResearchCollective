@@ -22,11 +22,9 @@ class NotebookForm extends Component {
 
    }
 
-   savePrivateNote = async (e) => {
-     alert("This function is in development");
-}
 
-   saveNote = async (e) => {
+   saveNote = async (e, isPrivate) => {
+       console.log("Saving note");
         var note;
         var date = new Date();
         var timestamp = date.getTime();
@@ -36,11 +34,17 @@ class NotebookForm extends Component {
             label: this.state.labels,
             description: this.state.description
         }
-        var noteContent = JSON.stringify(newNote);;
+        var noteContent = JSON.stringify(newNote);
+        console.log("Trying to create: " + noteId + noteContent);
         try {
+              if (isPrivate) {
+              await this.props.space.private.set(noteId, noteContent);
+              console.log("Create private note success: " + noteId);
+              } else {
               await this.props.space.public.set(noteId, noteContent);
-              note = await this.props.space.public.get(noteId);
-              console("Create note success: " + note);
+              console.log("Create public note success: " + noteId);
+              }
+
         }
         catch(err) {
               alert("Create note failed ");
@@ -50,13 +54,12 @@ class NotebookForm extends Component {
     render() {
         return (
         <div>
-
+            {this.props.space && <h1>SPACE ONLINE </h1>}
                 <TextInput className="fullWidth" name='title'  onChange={this.handleFormChange}   placeholder="Note Title" wide="true" />
                  <TextInput className="fullWidth" name='labels'onChange={this.handleFormChange}   placeholder="Comma, Separated, Labels" wide="true" />
-                 <TextInput className="fullWidth" name='description' onChange={this.handleFormChange}   style={{minHeight: "300px"}} placeholder="Note" wide="true" multiline="true"/>
-                 <TextInput className="fullWidth" name='attachment' placeholder="Does not work yet"  onChange={this.handleFormChange}   style={{minHeight: "120px"}} placeholder="Attachments" wide="true" multiline="true"/>
-                <Button style={{maxWidth: "45px"}} label="Save Publicly" size="medium" classname="rc-button" onClick={(e) => this.saveNote(e) } />
-                <Button style={{maxWidth: "45px"}} label="Save Privately" size="medium" mode="negative" onClick={(e) => this.savePrivateNote(e) } />
+                 <TextInput className="fullWidth" name='description' onChange={this.handleFormChange}   style={{minHeight: "300px"}} placeholder="Note"  multiline={true} wide="true" />
+                <Button style={{maxWidth: "45px"}} label="Save Publicly" size="medium" mode="strong" onClick={(e) => this.saveNote(e, false) } />
+                <Button style={{maxWidth: "45px"}} label="Save Privately" size="medium" mode="negative" onClick={(e) => this.saveNote(e, true) } />
         </div>
     )
   }

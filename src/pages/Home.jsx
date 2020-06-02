@@ -11,7 +11,7 @@ const Home = () => {
             <Container>
             {/*this div represents the first element (hero) of the landing page*/}
                     <Row  className='homepage-hero'>
-                        <Col  pull-right lg={4}>
+                        <Col  className="flexContainer" pull-right lg={4} md={6}>
                         <Card className='logo-card'>
                             <Card.Body>
                                 <Card.Text>
@@ -22,7 +22,7 @@ const Home = () => {
                       </Col>
                         <Col lg={8} className="margins" >
                              <h1 className="centerText hero-title">Research Collective</h1>
-                             <h1 className="centerText hero-sub-title pushUp">an anchor for the scientific Web-of-Trust &</h1>
+                             <h1 className="centerText hero-sub-title pushUp">an anchor for the scientific Web-of-Trust</h1>
                              <h1 className="centerText hero-sub-title pushUp">a moderately friendly network of Expert DAOs</h1>
                              <div className="buttonContainer pushDown flexContainer">
                                <a  className="paddingRight" target="_blank" rel="noopener noreferrer"  href="https://luisivan.net/posts/expert-daos"><Button label="What is an Expert DAO?" mode="neutral"/></a>
@@ -51,7 +51,7 @@ const Home = () => {
                 <div>
                     <p className="section-header sectionBreak">Method</p>
                     <Row>
-                        <Col>
+                        <Col lg={3} className='hiw-box' md={6}>
                             <Card className='hiw-card'>
                                 <Card.Img className='hiw-glyph' variant='top' src='homepage-glyph/propose.png' />
                                 <Card.Body>
@@ -63,7 +63,7 @@ const Home = () => {
                                 </Card.Body>
                             </Card>
                         </Col>
-                        <Col>
+                        <Col lg={3} md={6}  className='hiw-box' >
                             <Card className='hiw-card'>
                                 <Card.Img className='hiw-glyph' variant='top' src='homepage-glyph/test.png' />
                                 <Card.Body>
@@ -75,7 +75,7 @@ const Home = () => {
                                 </Card.Body>
                             </Card>
                         </Col>
-                        <Col>
+                        <Col  lg={3} className='hiw-box' md={6}>
                             <Card className='hiw-card'>
                                 <Card.Img className='hiw-glyph' variant='top' src='homepage-glyph/review.png' />
                                 <Card.Body>
@@ -87,7 +87,7 @@ const Home = () => {
                                 </Card.Body>
                             </Card>
                         </Col>
-                        <Col>
+                        <Col  md={6}   lg={3} className='hiw-box'l>
                             <Card className='hiw-card'>
                                 <Card.Img className='hiw-glyph' variant='top' src='homepage-glyph/gift.png' />
                                 <Card.Body>
@@ -107,9 +107,9 @@ const Home = () => {
             <Container>
                 <div className='homepage-why'>
                    <p className='sectionBreak section-header'>Principles</p>
-                    <Row>
+                    <Row lg={12} >
                         {/*Resilient*/}
-                        <Col>
+                        <Col className="hiw-box" lg={3} md={6}>
                             <Card className="CardB">
                                 <Card.Img className='glyph' variant='top' src='homepage-glyph/resilient.png' />
                                 <Card.Body>
@@ -124,8 +124,9 @@ const Home = () => {
                             </Card>
                         </Col>
                         {/*Immutable*/}
-                        <Col>
-                            <Card className="CardB">
+                        <Col className="hiw-box " lg={1} md={0}/>
+                        <Col className="hiw-box " lg={3} md={6}>
+                            <Card className="CardB ">
                                 <Card.Img className='glyph' variant='top' src='/homepage-glyph/immutable.png' />
                                 <Card.Body>
                                     <Card.Title className='why-rs-title'>Immutable</Card.Title>
@@ -135,8 +136,9 @@ const Home = () => {
                                 </Card.Body>
                             </Card>
                         </Col>
+                                      <Col className="hiw-box " lg={1} md={0}/>
                         {/*Open*/}
-                        <Col>
+                        <Col className="hiw-box" lg={3} md={6}>
                             <Card className="CardB">
                                 <Card.Img className='glyph' variant='top' src='/homepage-glyph/open.png'/>
                                 <Card.Body>
