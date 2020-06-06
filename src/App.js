@@ -1,11 +1,11 @@
   import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Main, Button, Split, Box as AragonBox } from '@aragon/ui'
+import { Main, Box as AragonBox } from '@aragon/ui'
 import Box from '3box';
 import Votes from "./components/Votes";
 import Resources from "./components/Resources";
 import EditProfile from '3box-profile-edit-react';
-import ChatBox from '3box-chatbox-react';
+import Chat from "./components/Chat";
 import Notebook from './components/Notebook';
 import './styles/style.css';
 import Navbar from './components/Shared/Header';
@@ -76,12 +76,9 @@ class App extends Component {
     render() {
         return(
             <Router>
-
             <Navbar bg="light" expand="lg"   ethAddress={this.props.address} style={{ minHeight: '40px' }}>
-
             </Navbar>
             <Main  theme={'dark'}>
-
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route path="/chat">
@@ -96,7 +93,7 @@ class App extends Component {
                         <Notebook web3enabled={this.state.web3enabled} address={this.state.address} box={this.state.box} space={this.state.space}/>
                     </Route>
                     <Route path="/experiments">
-                        <Notebook web3enabled={this.state.web3enabled} space={this.state.space}/>
+                        <Experiments web3enabled={this.state.web3enabled} space={this.state.space}/>
                     </Route>
                     <Route path='/docs' component={() => {
                          window.location.href = 'https://www.notion.so/ResearchCo-Covidathon-2ae1203029ed4c2cb4f5b6056ae7b89c';
@@ -106,7 +103,7 @@ class App extends Component {
                         <Votes   box={this.state.box} address={this.state.address} />
                     </Route>
                     <Route path="/resources">
-                        <Resources   box={this.state.box} address={this.state.address} />
+                        <Resources   box={this.state.box}  space={this.state.space} address={this.state.address} />
                     </Route>
                 </Switch>
                 </Main>
@@ -119,31 +116,6 @@ class App extends Component {
 
 
 
-
-class Chat extends Component {
-    render() {
-        return (<>
-            <h1 className="sectionTitle">Chat </h1>
-            <Split
-             primary={ <AragonBox>
-                          <p>ethereal research communication</p> <p>messages are lost after last user leaves the chat</p><br/>
-                            {this.props.address && this.props.box &&
-                                   <ChatBox spaceName="researchCollective" colorTheme="#00a7e1" box={this.props.box} currentUserAddr={this.props.address} threadName="researchConversation"  />
-                                 }
-
-                         </AragonBox>}
-             secondary={
-               <>
-                 <AragonBox className="fullWidth">
-                 <p className="centerText"><i>pseudonymous communication on</i></p>
-                 <a href="https://t.me/joinchat/EObaChML8AxqbUZtiyqeKQ" rel="noopener noreferrer"  target="_blank"><Button  mode="strong"  label="Telegram"/></a>
-                 </AragonBox>
-               </>
-             }> </Split>
-
-        </>);
-    }
-}
 
 
 class Profile extends Component {
