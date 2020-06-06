@@ -4,10 +4,9 @@ body {
   margin-bottom: 0px !important;
 }
 
-#responsive-navbar-nav {
+.show {
   z-index: 10 !important;
   background: #29334B;
-  margin-top: 10%;
 }
 
 .homepage-hero {
