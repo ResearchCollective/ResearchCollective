@@ -4,8 +4,7 @@ body {
   margin-bottom: 0px !important;
 }
 
-.collapse {
-  background-color: !important;
+#responsive-navbar-nav {
   z-index: 10 !important;
   background: #425176;
 }

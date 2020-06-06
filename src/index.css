@@ -237,7 +237,7 @@ a:hover{
 }
 
 .homepage-hero {
-  margin-top: 10hero-titlevh;
+  margin-top: 10vh;
 }
 
 .hero-title {
@@ -317,6 +317,14 @@ a:hover{
 
 .rc-button:hover{
     background: #c4f1be!important;
+}
+
+.exp-dao-button{
+  background-color: #425176;
+}
+
+.exp-dao-button:hover{
+  opacity: 80%;
 }
 
 .blue-button{
@@ -506,6 +514,6 @@ justify-content: center;
 
 .hiw-box{
   display: flex;
-  align-items: center;
-  justify-content: center;
+align-items: center;
+justify-content: center;
 }
