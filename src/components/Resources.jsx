@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Box, Button, IconPlus, Modal, IconExternal} from '@aragon/ui';
+import {Box, Button, IconExternal} from '@aragon/ui';
 import Registry from './Registry';
 import { Form } from "react-bootstrap";
 import PostItemModal from './credentials/RequestCredential';
@@ -35,8 +35,8 @@ render() {
   }
 }
 
-
-class PostForm extends Component {
+//this should probably get deleted after the DAIA hackathon
+class OldPostForm extends Component {
 
   constructor() {
        super();

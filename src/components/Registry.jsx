@@ -42,9 +42,6 @@ class Registry extends Component {
  };
 
  toggleLabel(e) {
-
-   var array  = [];
-    this.state.labels = array;
     if (this.state.graphData === undefined  || this.state.graphData.length < 1) {
       this.loadData();
       console.log("Graph data:");

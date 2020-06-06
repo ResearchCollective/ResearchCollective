@@ -96,7 +96,7 @@ class App extends Component {
                         <Notebook web3enabled={this.state.web3enabled} address={this.state.address} box={this.state.box} space={this.state.space}/>
                     </Route>
                     <Route path="/experiments">
-                        <Notes web3enabled={this.state.web3enabled} space={this.state.space}/>
+                        <Notebook web3enabled={this.state.web3enabled} space={this.state.space}/>
                     </Route>
                     <Route path='/docs' component={() => {
                          window.location.href = 'https://www.notion.so/ResearchCo-Covidathon-2ae1203029ed4c2cb4f5b6056ae7b89c';
@@ -136,7 +136,7 @@ class Chat extends Component {
                <>
                  <AragonBox className="fullWidth">
                  <p className="centerText"><i>pseudonymous communication on</i></p>
-                 <Button  mode="strong"  label="Telegram"/>
+                 <a href="https://t.me/joinchat/EObaChML8AxqbUZtiyqeKQ" rel="noopener noreferrer"  target="_blank"><Button  mode="strong"  label="Telegram"/></a>
                  </AragonBox>
                </>
              }> </Split>
@@ -145,21 +145,6 @@ class Chat extends Component {
     }
 }
 
-class Notes extends Component {
-    render() {
-        return (
-            <div>
-                <h1 className="sectionTitle">Notebook </h1>
-                <h1 className="sectionSubTitle"><i>🚨Under Construction🚨</i></h1>
-                <AragonBox className="notesContainer" >
-                    <p><i>Researchers will be able to stash encypted or public notes here.</i></p><br/>
-                    <p><i>These notes will be 'hashed and stashed' and will be accessible by one's 3box/MetaMask account.
-                    </i></p>
-                </AragonBox>
-            </div>
-        )
-    }
-}
 
 class Profile extends Component {
 

@@ -6,7 +6,6 @@ class NotebookForm extends Component {
       super(props);
        this.state = {
             space: false,
-            note: false,
             description: false,
        };
    }
@@ -25,7 +24,6 @@ class NotebookForm extends Component {
 
    saveNote = async (e, isPrivate) => {
        console.log("Saving note");
-        var note;
         var date = new Date();
         var timestamp = date.getTime();
         var noteId = "note-"+timestamp;
@@ -44,17 +42,17 @@ class NotebookForm extends Component {
               await this.props.space.public.set(noteId, noteContent);
               console.log("Create public note success: " + noteId);
               }
-
+              this.props.closeModal();
         }
         catch(err) {
               alert("Create note failed ");
         }
+
     }
 
     render() {
         return (
         <div>
-            {this.props.space && <h1>SPACE ONLINE </h1>}
                 <TextInput className="fullWidth" name='title'  onChange={this.handleFormChange}   placeholder="Note Title" wide="true" />
                  <TextInput className="fullWidth" name='labels'onChange={this.handleFormChange}   placeholder="Comma, Separated, Labels" wide="true" />
                  <TextInput className="fullWidth" name='description' onChange={this.handleFormChange}   style={{minHeight: "300px"}} placeholder="Note"  multiline={true} wide="true" />

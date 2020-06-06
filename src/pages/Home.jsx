@@ -69,8 +69,8 @@ const Home = () => {
                                 <Card.Body>
                                     <Card.Title className='hiw-title'>Test</Card.Title>
                                     <Card.Text className='hiw-body'>
-                                        <p>A network of credentialed researchers performs an experiment to test the hypothesis.</p><br/>
-                                        <p>Samples are analyzed, and the results are signed by a trusted third party.</p>
+                                        <p>A network of credentialed researchers performs an experiment to test the hypothesis.<br/>
+                                         Samples are analyzed, and the results are signed by a trusted third party.</p>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -81,8 +81,8 @@ const Home = () => {
                                 <Card.Body>
                                     <Card.Title className='hiw-title'>Review</Card.Title>
                                     <Card.Text className='hiw-body'>
-                                        <p>If the data is conclusive, the Collective takes a position on the knowledge market...</p> <br/>
-                                        <p>...just moments before making the experiment's data available to the public.</p>
+                                        <p>If the data is conclusive, the Collective takes a position on the knowledge market... <br/>
+                                        ...just moments before making the experiment's data available to the public.</p>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -93,8 +93,8 @@ const Home = () => {
                                 <Card.Body>
                                     <Card.Title className='hiw-title'>Develop</Card.Title>
                                     <Card.Text className='hiw-body'>
-                                    <p>The winnings from the knowledge market are used to fund clinical development via <a href="https://www.molecule.to">Molecule.</a> </p><br/>
-                                    <p>A token allows researchers and institutions to align incentives to bring the idea to market.</p>
+                                    <p>The winnings from the knowledge market are used to fund clinical development via <a href="https://www.molecule.to">Molecule.</a><br/>
+                                     A token allows researchers and institutions to align incentives to bring the idea to market.</p>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>

@@ -10,10 +10,7 @@ class Notebook extends Component {
             view: false,
             spaceData: [],
             notes: [],
-            singleChecked: false,
             opened: false,
-            privateNotes: [],
-            publicNotes: [],
             space: false
        };
    }
@@ -28,14 +25,14 @@ class Notebook extends Component {
    loadNotes = async (e) => {
      console.log("Load notes");
         try {
-          //    console.log("Tryna load the notes");
               const publicSpace = await this.props.space.public.all();
               const privateSpace = await this.props.space.private.all();
               console.log("Note loading success:" + publicSpace + privateSpace );
-              var notes = pullNotesFrom(privateSpace)
-              notes.concat(pullNotesFrom(publicSpace));
-          //    console.log("Note pulling success:" + notes);
-              this.setState({notes: notes});
+              var privNotes = pullNotesFrom(privateSpace)
+              var publicNotes = pullNotesFrom(publicSpace);
+              var allNotes = privNotes.concat(publicNotes);
+              console.log("Note pulling success:" + privNotes + publicNotes);
+              this.setState({notes: allNotes});
         }
         catch(err) {
              console.log("note load fail");
@@ -52,11 +49,11 @@ render() {
       <div>
           <h1 className="sectionTitle"><i>Notebook</i></h1>
           <p className="sectionSubTitle"><i>Stash your research notes here on the interplanetary file system. They can either be public or encrypted with your MetaMask key.</i></p><br/>
-            <div className="buttonContainer fullWidth flexContainer">
+            <div className="buttonContainer fullWidth">
                <Button style={{maxWidth: "45px"}} label="Load Notes" size="medium" mode="normal" onClick={(e) => this.loadNotes(e) } />
                <Button label="New Note" size="medium" mode="strong" onClick={() => this.setState({opened: true }) } />
                <Modal visible={this.state.opened} onClose={this.closeModal}>
-               <NotebookForm space={this.props.space} notes={this.state.notes}/>
+               <NotebookForm  closeModal={this.closeModal} space={this.props.space} notes={this.state.notes}/>
               </Modal>
            </div>
         <AragonBox>
