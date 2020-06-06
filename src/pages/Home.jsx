@@ -1,8 +1,7 @@
-import React from 'react'
-import {Container, Row, Col, Image, InputGroup, FormControl, Form} from 'react-bootstrap';
-import { Button }  from '@aragon/ui'
-import { Link } from "react-router-dom";
-import  {Card} from "react-bootstrap";
+import { Button } from '@aragon/ui';
+import React from 'react';
+import { Card, Col, Container, Form, FormControl, Image, InputGroup, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     return(
@@ -22,11 +21,11 @@ const Home = () => {
                       </Col>
                         <Col lg={8} className="margins" >
                              <h1 className="centerText hero-title">Research Collective</h1>
-                             <h1 className="centerText hero-sub-title pushUp">an anchor for the scientific Web-of-Trust</h1>
+                             <h1 className="centerText hero-sub-title pushUp">An anchor for the scientific Web-of-Trust</h1>
                              <h1 className="centerText hero-sub-title pushUp">a moderately friendly network of Expert DAOs</h1>
                              <div className="buttonContainer pushDown flexContainer">
-                               <a  className="paddingRight" target="_blank" rel="noopener noreferrer"  href="https://luisivan.net/posts/expert-daos"><Button label="What is an Expert DAO?" mode="neutral"/></a>
-                                <a className="paddingLeft" target="_blank" rel="noopener noreferrer"  href="https://tristanerr.typeform.com/to/VOEZ4F"><Button className="rc-button" label="Join an Expert DAO" /></a>
+                               <a  className="" target="_blank" rel="noopener noreferrer"  href="https://luisivan.net/posts/expert-daos"><Button className="exp-dao-button" label="What is an Expert DAO?" mode="neutral"/></a>
+                                <a className="" target="_blank" rel="noopener noreferrer"  href="https://tristanerr.typeform.com/to/VOEZ4F"><Button className="rc-button" label="Join an Expert DAO" /></a>
                              </div>
                         </Col>
                     </Row>

@@ -7,8 +7,10 @@ import Resources from "./components/Resources";
 import EditProfile from '3box-profile-edit-react';
 import Chat from "./components/Chat";
 import Notebook from './components/Notebook';
+import Experiments from './components/experiments/Experiments'
 import './styles/style.css';
 import Navbar from './components/Shared/Header';
+import Votes from './components/Votes';
 import Home from './pages/Home';
 
 
