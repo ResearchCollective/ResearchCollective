@@ -1,7 +1,9 @@
-import { Button } from '@aragon/ui';
-import React from 'react';
-import { Card, Col, Container, Form, FormControl, Image, InputGroup, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+
+import React from 'react'
+import {Container, Row, Col, Image, InputGroup, FormControl, Form} from 'react-bootstrap';
+import { Button }  from '@aragon/ui'
+import { Link } from "react-router-dom";
+import  {Card} from "react-bootstrap";
 
 const Home = () => {
     return(
@@ -10,22 +12,22 @@ const Home = () => {
             <Container>
             {/*this div represents the first element (hero) of the landing page*/}
                     <Row  className='homepage-hero'>
-                        <Col  className="flexContainer" pull-right lg={4} md={6}>
-                        <Card className='logo-card'>
-                            <Card.Body>
-                                <Card.Text>
-                                    <Card.Img className='logo' variant='top' src='logo.png' />
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                      </Col>
-                        <Col lg={8} className="margins" >
+                        <Col  className="flexContainer" lg={4} md={6}>
+                          <Card className='logo-card'>
+                              <Card.Body>
+                                  <Card.Text>
+                                      <Card.Img className='logo' variant='top' src='logo.png' />
+                                  </Card.Text>
+                              </Card.Body>
+                          </Card>
+                        </Col>
+                        <Col lg={8}  md={6} className="margins" >
                              <h1 className="centerText hero-title">Research Collective</h1>
-                             <h1 className="centerText hero-sub-title pushUp">An anchor for the scientific Web-of-Trust</h1>
+                             <h1 className="centerText hero-sub-title pushUp">an anchor for the scientific Web-of-Trust:</h1>
                              <h1 className="centerText hero-sub-title pushUp">a moderately friendly network of Expert DAOs</h1>
                              <div className="buttonContainer pushDown flexContainer">
-                               <a  className="" target="_blank" rel="noopener noreferrer"  href="https://luisivan.net/posts/expert-daos"><Button className="exp-dao-button" label="What is an Expert DAO?" mode="neutral"/></a>
-                                <a className="" target="_blank" rel="noopener noreferrer"  href="https://tristanerr.typeform.com/to/VOEZ4F"><Button className="rc-button" label="Join an Expert DAO" /></a>
+                               <a  className="paddingRight" target="_blank" rel="noopener noreferrer"  href="https://luisivan.net/posts/expert-daos"><Button label="What is an Expert DAO?" mode="neutral"/></a>
+                                <a className="paddingLeft" target="_blank" rel="noopener noreferrer"  href="https://tristanerr.typeform.com/to/VOEZ4F"><Button className="rc-button" label="Join an Expert DAO" /></a>
                              </div>
                         </Col>
                     </Row>
@@ -63,25 +65,25 @@ const Home = () => {
                             </Card>
                         </Col>
                         <Col lg={3} md={6}  className='hiw-box' >
-                            <Card className='hiw-card'>
+                            <Card className='hiw-card '>
                                 <Card.Img className='hiw-glyph' variant='top' src='homepage-glyph/test.png' />
                                 <Card.Body>
                                     <Card.Title className='hiw-title'>Test</Card.Title>
                                     <Card.Text className='hiw-body'>
-                                        <p>A network of credentialed researchers performs an experiment to test the hypothesis.<br/>
-                                         Samples are analyzed, and the results are signed by a trusted third party.</p>
+                                        <p>A network of credentialed researchers performs an experiment to test the hypothesis. </p><br/>
+                                        <p> Samples are analyzed, and the results are signed by a trusted third party.</p>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>
                         <Col  lg={3} className='hiw-box' md={6}>
-                            <Card className='hiw-card'>
+                            <Card className='hiw-card '>
                                 <Card.Img className='hiw-glyph' variant='top' src='homepage-glyph/review.png' />
                                 <Card.Body>
                                     <Card.Title className='hiw-title'>Review</Card.Title>
                                     <Card.Text className='hiw-body'>
-                                        <p>If the data is conclusive, the Collective takes a position on the knowledge market... <br/>
-                                        ...just moments before making the experiment's data available to the public.</p>
+                                        <p>If the data is conclusive, the Collective takes a position on the knowledge market...</p> <br/>
+                                        <p>...just moments before making the experiment's data available to the public.</p>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -92,12 +94,13 @@ const Home = () => {
                                 <Card.Body>
                                     <Card.Title className='hiw-title'>Develop</Card.Title>
                                     <Card.Text className='hiw-body'>
-                                    <p>The winnings from the knowledge market are used to fund clinical development via <a href="https://www.molecule.to">Molecule.</a><br/>
-                                     A token allows researchers and institutions to align incentives to bring the idea to market.</p>
+                                    <p>The winnings from the knowledge market are used to fund clinical development via <a href="https://www.molecule.to">Molecule.</a></p><br/>
+                                    <p> A token allows researchers and institutions to align incentives to bring the idea to market.</p>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>
+
                     </Row>
                 </div>
             </Container>
@@ -108,7 +111,7 @@ const Home = () => {
                    <p className='sectionBreak section-header'>Principles</p>
                     <Row lg={12} >
                         {/*Resilient*/}
-                        <Col className="hiw-box" lg={3} md={6}>
+                        <Col className="hiw-box" lg={4} md={6}>
                             <Card className="CardB">
                                 <Card.Img className='glyph' variant='top' src='homepage-glyph/resilient.png' />
                                 <Card.Body>
@@ -123,8 +126,7 @@ const Home = () => {
                             </Card>
                         </Col>
                         {/*Immutable*/}
-                        <Col className="hiw-box " lg={1} md={0}/>
-                        <Col className="hiw-box " lg={3} md={6}>
+                        <Col className="hiw-box " lg={4} md={6}>
                             <Card className="CardB ">
                                 <Card.Img className='glyph' variant='top' src='/homepage-glyph/immutable.png' />
                                 <Card.Body>
@@ -135,9 +137,9 @@ const Home = () => {
                                 </Card.Body>
                             </Card>
                         </Col>
-                                      <Col className="hiw-box " lg={1} md={0}/>
+
                         {/*Open*/}
-                        <Col className="hiw-box" lg={3} md={6}>
+                        <Col className="hiw-box" lg={4} md={6}>
                             <Card className="CardB">
                                 <Card.Img className='glyph' variant='top' src='/homepage-glyph/open.png'/>
                                 <Card.Body>
@@ -163,7 +165,6 @@ const Home = () => {
                 <span className='call-to-action'>
                     <a href="https://tristanerr.typeform.com/to/VOEZ4F"><Button mode="strong" className='call-to-action-btn'>Apply to be a Curator</Button></a>
                 </span>
-
               </div>
             </Container> */}
 
@@ -193,7 +194,7 @@ const Home = () => {
                         <Form.Group className='contact-form-input'>
                             <Form.Control as='textarea' rows='5' placeholder='What is on your mind?'/>
                         </Form.Group>
-                        <Button mode="strong" className='rc-button contact-send-btn'>Send</Button>
+                          <a href="https://t.me/joinchat/EObaChML8AxqbUZtiyqeKQ" target="_blank" rel="noopener noreferrer">  <Button mode="strong" className='rc-button contact-send-btn'>Send</Button></a>
                 </div>
                 </Col>
                   <Col lg={2}/>

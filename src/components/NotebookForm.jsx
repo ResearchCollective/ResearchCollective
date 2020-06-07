@@ -1,4 +1,4 @@
-import { Button, TextInput } from '@aragon/ui';
+import { Button, TextInput, LoadingRing } from '@aragon/ui';
 import React, {Component } from 'react';
 
 class NotebookForm extends Component {
@@ -56,8 +56,13 @@ class NotebookForm extends Component {
                 <TextInput className="fullWidth" name='title'  onChange={this.handleFormChange}   placeholder="Note Title" wide="true" />
                  <TextInput className="fullWidth" name='labels'onChange={this.handleFormChange}   placeholder="Comma, Separated, Labels" wide="true" />
                  <TextInput className="fullWidth" name='description' onChange={this.handleFormChange}   style={{minHeight: "300px"}} placeholder="Note"  multiline={true} wide="true" />
-                <Button style={{maxWidth: "45px"}} label="Save Publicly" size="medium" mode="strong" onClick={(e) => this.saveNote(e, false) } />
-                <Button style={{maxWidth: "45px"}} label="Save Privately" size="medium" mode="negative" onClick={(e) => this.saveNote(e, true) } />
+
+                 {!this.props.space && <LoadingRing/>}
+                 {this.props.space && <div className="buttonContainer">
+                  <Button style={{maxWidth: "45px"}} label="Save Publicly" size="medium" mode="strong" onClick={(e) => this.saveNote(e, false) } />
+                  <Button style={{maxWidth: "45px"}} label="Save Privately" size="medium" mode="negative" onClick={(e) => this.saveNote(e, true) } />
+                </div>
+              }
         </div>
     )
   }

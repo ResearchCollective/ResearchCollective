@@ -10,7 +10,6 @@ import Notebook from './components/Notebook';
 import Experiments from './components/experiments/Experiments'
 import './styles/style.css';
 import Navbar from './components/Shared/Header';
-import Votes from './components/Votes';
 import Home from './pages/Home';
 
 

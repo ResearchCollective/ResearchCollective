@@ -86,11 +86,11 @@ render() {
                   fields={this.props.columns}
                   // entries is a list of items
                   entries={processGraph(this.state.labels, this.state.graphData)}
-                  renderEntryExpansion={({url}) => {
+                  renderEntryExpansion={({description}) => {
                     //TODO: Add in proper DID support here instead of URL
                     //    if (!did == null){
                     //      alert("did: " + did);
-	                      return<Box  className="fullSize flexContainer"><ItemComment   box={this.props.box} address={this.props.address} did={url} /></Box>;
+	                      return<Box  className="fullSize flexContainer"><ItemComment   box={this.props.box} address={this.props.address} did={description} /></Box>;
                   //    }
                     }
                   }
@@ -190,7 +190,7 @@ function processGraph(labels, data) {
             <ThreeBoxComments
                 // required
                 spaceName="researchCollective"
-                threadName={this.props.did[1]}
+                threadName={this.props.did}
                 adminEthAddr={this.props.address}
 
                 // Required props for context A) & B)
