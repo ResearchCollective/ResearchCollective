@@ -4,11 +4,11 @@
 
 ### DAIA hackathon deliverables
 
-**[Live Site](https://researchcollective)**
+**[Live Site](https://researchcollective.io)**
 
 **[Pitch Deck](https://docs.google.com/presentation/d/16ukIjYRFOGal9BN4aYr942aYr1-9kDYrHVlPd_D6Yoc)**
 
-**[Video Demonstration](https://youtu.be/B84uNKVqWOY)**
+**[Video Demonstration](https://www.youtube.com/watch?v=jAl696Un0zU)**
 
 ### How It All Started
 
