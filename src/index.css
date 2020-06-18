@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 
@@ -156,7 +155,7 @@ code {
 }
 
 /* 3box Plugin Reskinning */
-.edit_profile_value--description{
+/* .edit_profile_value--description{
   color: black!important;
 }
 
@@ -512,7 +511,7 @@ justify-content: center;
 
 /*# sourceMappingURL=style.css.map */
 
-.fullSize{
+/* .fullSize{
   width: 100%;
   height: 100%;
   overflow: scroll;
@@ -531,4 +530,4 @@ justify-content: center;
 
 p {
     font-family: 'IBM Plex Sans', sans-serif;
-}
+} */

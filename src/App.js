@@ -1,15 +1,17 @@
-  import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Main, Box as AragonBox } from '@aragon/ui'
+import './styles/index.css';
+
 import Box from '3box';
-import Votes from "./components/Votes";
-import Resources from "./components/Resources";
 import EditProfile from '3box-profile-edit-react';
-import Chat from "./components/Chat";
+import { Box as AragonBox, Main } from '@aragon/ui';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import Chat from './components/Chat';
+import Experiments from './components/experiments/Experiments';
 import Notebook from './components/Notebook';
-import Experiments from './components/experiments/Experiments'
-import './styles/style.css';
+import Resources from './components/Resources';
 import Navbar from './components/Shared/Header';
+import Votes from './components/Votes';
 import Home from './pages/Home';
 
 
