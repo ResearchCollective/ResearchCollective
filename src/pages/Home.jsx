@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { Card, Col, Container, Form, FormControl, Image, InputGroup, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import sendEmail from '../functions/sendEmail';
+
 const Home = () => {
 
     const [formData, setFormData] = useState({
@@ -21,6 +23,10 @@ const Home = () => {
         )
     }
     
+    const  submitContactFormData = () => {
+        // TODO: add validation/sanitization
+        sendEmail(formData)
+    }
     return(
         //this div represents the 'whole' homepage//
         <div className='homepage'>
@@ -223,7 +229,7 @@ const Home = () => {
                                 onChange={e => handleContactFormInput(e)}
                             />
                         </Form.Group>
-                        <Button mode="strong" className='rc-button contact-send-btn'>Send</Button>
+                        <Button mode="strong" className='rc-button contact-send-btn' onClick={submitContactFormData}>Send</Button>
                 </div>
                 </Col>
                   <Col lg={2}/>
