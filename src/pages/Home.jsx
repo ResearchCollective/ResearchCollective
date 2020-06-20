@@ -1,9 +1,26 @@
 import { Button } from '@aragon/ui';
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Col, Container, Form, FormControl, Image, InputGroup, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
+
+    const [formData, setFormData] = useState({
+        fullName: '',
+        email: '',
+        message: ''
+    })
+
+    const handleContactFormInput = e => {
+        const {name, value} = e.target
+        console.log(name, value)
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+            })
+        )
+    }
+    
     return(
         //this div represents the 'whole' homepage//
         <div className='homepage'>
@@ -178,9 +195,12 @@ const Home = () => {
                     <p className='section-header sectionBreak'>Contact Us</p>
                         <InputGroup className='contact-form-input mb-3'>
                             <FormControl
-                                placeholder='Name'
-                                aria-label='Enter Your Name'
+                                placeholder='Full Name'
+                                aria-label='Enter Your Full Name'
                                 aria-describedby='basic-addon2'
+                                name='fullName'
+                                value={formData.fullName}
+                                onChange={e => handleContactFormInput(e)}
                             />
                         </InputGroup>
                         <InputGroup className='contact-form-input mb-3'>
@@ -188,10 +208,20 @@ const Home = () => {
                                 placeholder='Email'
                                 aria-label='Enter Your Email'
                                 aria-describedby='basic-addon2'
+                                name='email'
+                                value={formData.email}
+                                onChange={e => handleContactFormInput(e)}
                             />
                         </InputGroup>
                         <Form.Group className='contact-form-input'>
-                            <Form.Control as='textarea' rows='5' placeholder='What is on your mind?'/>
+                            <Form.Control 
+                                as='textarea' 
+                                rows='5' 
+                                placeholder='What is on your mind?'
+                                name='message'
+                                value={formData.message}
+                                onChange={e => handleContactFormInput(e)}
+                            />
                         </Form.Group>
                         <Button mode="strong" className='rc-button contact-send-btn'>Send</Button>
                 </div>
