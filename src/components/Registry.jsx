@@ -134,17 +134,24 @@ function processGraph(labels, data) {
                 } else {
                   //RC.01 JSON format
                   console.log("Found RC.01 JSON format for index " + index);
-                 if (metadata.title == null) {
-                    item.description = metadata.description;
-                } else {
-                  item.description = metadata.title;
-                  item.tooltip = metadata.description;
-                }
-                  item.owner = metadata.owner;
-                  item.url = metadata.url;
-                  item.did = "testDID";
-                  //item.did =  metadata.url.split("//");
-                  //item.staked = metadata.staked;
+                  if (metadata.hasOwnProperty("title")) {
+                      item.description = metadata.title;
+                 } else if (metadata.hasOwnProperty("description")) {
+                     item.description = metadata.description;
+                 } else {
+                    item.description = "Not Available";
+                  }
+                  console.log("made it past for: " + item.description);
+                  if (metadata.hasOwnProperty("owner")) {
+                     item.owner = metadata.owner;
+                  } else {
+                     item.owner = "0x262b4F07e42BBc33F597fcf0d854e9DAFaf3D469";
+                  }
+                 if (metadata.hasOwnProperty("url")) {
+                   item.url = metadata.url;
+                 } else {
+                   item.url = "google.com";
+                 }
                   for (index = 0; index < item.labels.length; index++) {
                       if (labels.includes(item.labels[index])) {
                         item.flags.visible = true;
@@ -154,9 +161,10 @@ function processGraph(labels, data) {
                       item.url = "https://" + item.url
                     }
                 }
-
+                item.did = "testdid";
                 if (item.flags.visible && !item.description.includes("test vote")) {
-                item.flags.parsed = true;
+                  item.flags.parsed = true;
+                  console.log("added item:" + item.description);
                   newData[newData.length] = item;
                 }
             } catch (e) {
@@ -171,7 +179,7 @@ function processGraph(labels, data) {
               item.flags = {parsed: false, visible: true};
               console.log("Vote item " + index + " failed; resulting object:");
              console.log(item);
-              if ((item.description.length > 2) && !item.description.includes("test vote")&& !item.description.includes("description")) {
+              if ((item.description.length > 2) && !item.description.includes("test vote") && !item.description.includes("description")) {
                newData[newData.length] = item;
              }
             }

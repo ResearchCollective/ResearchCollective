@@ -27,8 +27,9 @@ render() {
 
 
              <p className="narrativeTitle"> submitted by the Telegram DAO <a  rel="noopener noreferrer" target="_blank" href="https://t.me/ResearchCollectiveBot">'rc' <IconExternal style={{position: "relative", top: "-2px"}} size="large"/> </a>   </p>
-               <Registry box={this.props.box} voteId={"0xb0cff1400bc4d39f030d01af00d118bb5cf4ab24"} columns={this.state.columns} address={this.props.address}/>
-            </Box>
+          //   <Registry box={this.props.box} voteId={"0xb0cff1400bc4d39f030d01af00d118bb5cf4ab24"} columns={this.state.columns} address={this.props.address}/>
+
+              </Box>
           </div>
     );
   }
