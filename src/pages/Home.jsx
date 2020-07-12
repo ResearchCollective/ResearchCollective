@@ -7,6 +7,7 @@ import sendEmail from '../functions/sendEmail';
 
 const Home = () => {
 
+    const [mailSent, setMailSent] = useState(false)
     const [formData, setFormData] = useState({
         fullName: '',
         email: '',
@@ -23,9 +24,12 @@ const Home = () => {
         )
     }
     
-    const  submitContactFormData = () => {
+    const submitContactFormData = async (e) => {
+        e.preventDefault()
         // TODO: add validation/sanitization
-        sendEmail(formData)
+        let request = await sendEmail(formData)
+        // set status for user msg//
+        setMailSent(true)
     }
     return(
         //this div represents the 'whole' homepage//
@@ -199,6 +203,11 @@ const Home = () => {
                 <Col lg={8}>
                 <div className='contact-us'>
                     <p className='section-header sectionBreak'>Contact Us</p>
+                    if (mailSent) {
+                        <div className="alert alert-primary" role="alert">
+                            Thank you!!! We will get back to you soon.
+                        </div>
+                    }
                         <InputGroup className='contact-form-input mb-3'>
                             <FormControl
                                 placeholder='Full Name'
@@ -229,7 +238,7 @@ const Home = () => {
                                 onChange={e => handleContactFormInput(e)}
                             />
                         </Form.Group>
-                        <Button mode="strong" className='rc-button contact-send-btn' onClick={submitContactFormData}>Send</Button>
+                        <Button mode="strong" className='rc-button contact-send-btn' onClick={(e) => submitContactFormData(e)}>Send</Button>
                 </div>
                 </Col>
                   <Col lg={2}/>

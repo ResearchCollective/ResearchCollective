@@ -16,6 +16,7 @@
     "apollo-cache-inmemory": "^1.6.6",
     "axios": "^0.19.2",
     "did-resolver": "0.0.7",
+    "env-cmd": "^10.1.0",
     "graphql": "^15.0.0",
     "ipfs": "^0.44.0",
     "js-sha256": "^0.9.0",
@@ -53,5 +54,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }
