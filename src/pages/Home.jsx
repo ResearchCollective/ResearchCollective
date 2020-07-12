@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Card, Col, Container, Form, FormControl, Image, InputGroup, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import Alert from '../components/Shared/Alert';
 import sendEmail from '../functions/sendEmail';
 
 const Home = () => {
@@ -27,9 +28,15 @@ const Home = () => {
     const submitContactFormData = async (e) => {
         e.preventDefault()
         // TODO: add validation/sanitization
-        let request = await sendEmail(formData)
+        await sendEmail(formData)
         // set status for user msg//
         setMailSent(true)
+        setFormData(prevState => ({
+            ...prevState,
+            fullName: '',
+            email: '',
+            message: ''
+        }))
     }
     return(
         //this div represents the 'whole' homepage//
@@ -203,11 +210,7 @@ const Home = () => {
                 <Col lg={8}>
                 <div className='contact-us'>
                     <p className='section-header sectionBreak'>Contact Us</p>
-                    if (mailSent) {
-                        <div className="alert alert-primary" role="alert">
-                            Thank you!!! We will get back to you soon.
-                        </div>
-                    }
+                    {(mailSent) ?  <Alert msg='Thank you!!! We will get back to you soon'/> : null}
                         <InputGroup className='contact-form-input mb-3'>
                             <FormControl
                                 placeholder='Full Name'
