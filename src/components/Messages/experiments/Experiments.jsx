@@ -40,4 +40,4 @@ const Experiments = ({experimentsThread}) => {
     )
 }
 
-export default Experiments;
+export default Experiments

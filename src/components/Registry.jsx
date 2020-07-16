@@ -6,6 +6,8 @@ import { gql } from 'apollo-boost';
 import ProfileHover from 'profile-hover';
 import Loading from "./Loading";
 import ThreeBoxComments from '3box-comments-react';
+import Voting from '@aragon/connect';
+import connect from '@aragon/connect';
 
 class Registry extends Component {
     commentData = {};
@@ -20,18 +22,23 @@ class Registry extends Component {
         labels: ["entity", "event"]
     };
 
+    connectAragon = async () => {
+          const org = await connect('covidresearch.aragonid.eth', 'thegraph');
+          console.log("org:");
+          console.log(org);
+          const voting = new Voting(
+              await org.app('voting').address,
+              'https://api.thegraph.com/subgraphs/name/aragon/aragon-voting-mainnet'
+          );
+          console.log("voting:");
+          console.log(voting);
+          const votes = await voting.votes();
+          console.log("votes:");
+          console.log(votes);
+      }
 
 
-    componentDidMount() {
-      //These are fake comments used by Ian earlier... we probably should delete this after the DAIA hackathon
-    //    this.commentData["0x648e7a1a51db72fc2df3091614e79468feabff40-4"] = ["aitheric - Used their test kit with consistent results.",
-      //      "Alfonso II - Arrived on time with good documentation.",
-    //        <Button className="pushDown" mode="neutral"  icon={<IconPlus/>} label="Add Comment" style={{marginBottom:40}}/>
-    //    ];
-  //      this.commentData["0x648e7a1a51db72fc2df3091614e79468feabff40-5"] = ["JasonLTV - Now I can vape happily ever after.",
-  //          "DangerXXX - Not sure this makes sense to start smoking again just with one study so far.",
-    //        <Button className="pushDown" mode="neutral"  icon={<IconPlus/>} label="Add Comment" style={{marginBottom:40}}/>
-  //      ];
+  componentDidMount() {
      this.setState({
          box:this.props.box,
          address: this.props.adress

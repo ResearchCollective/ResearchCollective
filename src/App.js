@@ -1,6 +1,6 @@
-  import React, { Component } from "react";
+    import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Main, Box as AragonBox } from '@aragon/ui'
+import { Main, Box as AragonBox, Header, Button } from '@aragon/ui'
 import Box from '3box';
 import Votes from "./components/Votes";
 import Resources from "./components/Resources";
@@ -9,9 +9,11 @@ import Chat from "./components/Chat";
 import Notebook from './components/Notebook';
 import Experiments from './components/experiments/Experiments'
 import './styles/style.css';
-import Navbar from './components/Shared/Header';
+import Navbar from './components/Header/Header';
 import Home from './pages/Home';
-
+import Login from './components/Login';
+import Fortmatic from 'fortmatic';
+import Web3 from 'web3';
 
 class App extends Component {
 
@@ -53,6 +55,7 @@ class App extends Component {
             console.log(this.state.account)
         }
     }
+
     async auth3box() {
         const address = this.state.account[0];
         const spaces = ['researchCollective'];
@@ -61,11 +64,32 @@ class App extends Component {
         await box.syncDone;
         this.setState({address: address})
         this.setState({box: box });
-        //join notes thread//
-
     }
-    async componentDidMount() {
-        await this.getAddressFromMetaMask();
+
+    loginMagic = ()  => {
+         console.log('Attempting to login via magic');
+         let fm = new Fortmatic('pk_test_FDABC9E0FE176C29');
+         let web3 = new Web3(fm.getProvider());
+         fm.user.login().then(() => {
+             web3.eth.getAccounts((error, accounts) => {
+                 let myAccount = accounts.toString();
+                 console.log('Magic accounts',myAccount);
+                 this.setState({address: myAccount});
+                 console.log('Magic state:', this.state);
+             }).then(console.log); // ['0x...']
+         });
+     }
+
+    loginMetaMask = async () => {
+      if (typeof window.ethereum == "undefined") {
+          this.setState({ needToAWeb3Browser: true });
+      } else {
+          window.ethereum.autoRefreshOnNetworkChange = false; //silences warning about no autofresh on network change
+          const account = await window.ethereum.enable();
+          this.setState({ web3enabled: true });
+          this.setState({account: account });
+          console.log(this.state.account)
+      }
         if (this.state.account) {
             // Now MetaMask's provider has been enabled, we can start working with 3Box
             await this.auth3box();
@@ -74,12 +98,14 @@ class App extends Component {
             this.setState({space: space});
         }
     }
+
+
     render() {
         return(
+
             <Router>
-            <Navbar bg="light" expand="lg"   ethAddress={this.props.address} style={{ minHeight: '40px' }}>
-            </Navbar>
-            <Main  theme={'dark'}>
+             <Navbar bg="light" expand="lg"   ethAddress={this.props.address} style={{ minHeight: '40px' }}/>
+                <Main theme={'dark'}>
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route path="/chat">
@@ -97,18 +123,22 @@ class App extends Component {
                         <Experiments web3enabled={this.state.web3enabled} space={this.state.space}/>
                     </Route>
                     <Route path='/docs' component={() => {
-                         window.location.href = 'https://www.notion.so/ResearchCo-Covidathon-2ae1203029ed4c2cb4f5b6056ae7b89c';
+                         window.location.href = 'https://www.notion.so/Research-Collective-2ae1203029ed4c2cb4f5b6056ae7b89c';
                          return null;
                     }}/>
                     <Route path="/votes">
                         <Votes   box={this.state.box} address={this.state.address} />
                     </Route>
                     <Route path="/resources">
-                        <Resources   box={this.state.box}  space={this.state.space} address={this.state.address} />
+                        <Resources   box={this.state.box}  loginMagic={this.loginMagic} loginMetaMask={this.loginMetaMask} space={this.state.space} address={this.state.address} />
+                    </Route>
+                    <Route path="/login">
+                        <Login address={this.state.address} loginMagic={this.loginMagic} loginMetaMask={this.loginMetaMask} />
                     </Route>
                 </Switch>
-                </Main>
+              </Main>
             </Router>
+
         )
     }
 }
