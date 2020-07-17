@@ -11456,7 +11456,7 @@ var DataView = React__default.memo(function DataView(_ref2) {
     if (status === 'default') {
       return statusEmpty || React__default.createElement(_StyledP, {
         _css9: textStyle('title2')
-      }, "No data available.");
+      }, "No data as of yet available.");
     }
 
     if (status === 'loading') {

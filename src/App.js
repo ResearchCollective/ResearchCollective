@@ -1,6 +1,6 @@
     import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Main, Box as AragonBox, Header, Button } from '@aragon/ui'
+import { Main, Box as AragonBox } from '@aragon/ui'
 import Box from '3box';
 import Votes from "./components/Votes";
 import Resources from "./components/Resources";
@@ -17,14 +17,15 @@ import Web3 from 'web3';
 
 class App extends Component {
 
-    state = {
-        web3enabled: false,
-        box: false,
-        space: false,
-        notes: [],
-        address: false,
-        account: null,
-    }
+state = {
+    web3enabled: false,
+    box: false,
+    space: false,
+    notes: [],
+    address: false,
+    account: null,
+}
+
     // //get research-coolective space//
     // get3BoxSpaceForNotes  = async () => {
     //     // create a 3Box instance//
@@ -44,20 +45,20 @@ class App extends Component {
     //     this.setState({notes:notesThread})
     // }
 
-    async getAddressFromMetaMask() {
-        if (typeof window.ethereum == "undefined") {
-            this.setState({ needToAWeb3Browser: true });
-        } else {
-            window.ethereum.autoRefreshOnNetworkChange = false; //silences warning about no autofresh on network change
-            const account = await window.ethereum.enable();
-            this.setState({ web3enabled: true });
-            this.setState({account: account });
-            console.log(this.state.account)
-        }
-    }
+//    async getAddressFromMetaMask() {
+//        if (typeof window.ethereum == "undefined") {
+//           this.setState({ noWeb3Browser: true });
+  //      } else {
+  //          window.ethereum.autoRefreshOnNetworkChange = false; //silences warning about no autofresh on network change
+  //          const account = await window.ethereum.enable();
+  //          this.setState({ web3enabled: true });
+  //          this.setState({account: account });
+  //          console.log(this.state.account)
+  //      }
+    //}
 
     async auth3box() {
-        const address = this.state.account[0];
+        const address = this.state.address;
         const spaces = ['researchCollective'];
         const box = await Box.create(window.ethereum);
         await box.auth(spaces, { address });
@@ -66,23 +67,33 @@ class App extends Component {
         this.setState({box: box });
     }
 
-    loginMagic = ()  => {
+    loginMagic = async () => {
          console.log('Attempting to login via magic');
          let fm = new Fortmatic('pk_test_FDABC9E0FE176C29');
          let web3 = new Web3(fm.getProvider());
          fm.user.login().then(() => {
              web3.eth.getAccounts((error, accounts) => {
                  let myAccount = accounts.toString();
-                 console.log('Magic accounts',myAccount);
-                 this.setState({address: myAccount});
-                 console.log('Magic state:', this.state);
-             }).then(console.log); // ['0x...']
+                 console.log('Magic account:', myAccount);
+                 this.setState({address: this.address});
+                 console.log('Magic address:', this.address);
+
+             }).then(console.log);
          });
      }
 
-    loginMetaMask = async () => {
+    async open3BoxSpace() {
+      console.log('Opening 3Box Space');
+      await this.auth3box();
+      const space = await this.state.box.openSpace('researchCollective');
+      await space.syncDone;
+      this.setState({space: space});
+      console.log('Space set: ', this.state.space);
+    }
+
+     loginMetaMask = async () => {
       if (typeof window.ethereum == "undefined") {
-          this.setState({ needToAWeb3Browser: true });
+          this.setState({ noWeb3Browser: true });
       } else {
           window.ethereum.autoRefreshOnNetworkChange = false; //silences warning about no autofresh on network change
           const account = await window.ethereum.enable();
@@ -91,18 +102,14 @@ class App extends Component {
           console.log(this.state.account)
       }
         if (this.state.account) {
-            // Now MetaMask's provider has been enabled, we can start working with 3Box
-            await this.auth3box();
-            const space = await this.state.box.openSpace('researchCollective');
-            await space.syncDone;
-            this.setState({space: space});
-        }
+          console.log("Metamask enabled")
+          // Now MetaMask's provider has been enabled, we can start working with 3Box
     }
+  }
 
 
     render() {
         return(
-
             <Router>
              <Navbar bg="light" expand="lg"   ethAddress={this.props.address} style={{ minHeight: '40px' }}/>
                 <Main theme={'dark'}>
@@ -111,14 +118,14 @@ class App extends Component {
                     <Route path="/chat">
                         <Chat  box={this.state.box} address={this.state.address}/>
                     </Route>
-                    <Route path="/profile">
-                        {this.state.box &&
-                            <Profile  box={this.state.box} space={this.state.space} address={this.state.address}/>
+                   <Route path="/profile">
+                      {this.state.box &&
+                          <Profile  box={this.state.box} space={this.state.space} address={this.state.address}/>
                         }
                     </Route>
-                    <Route path="/notes">
-                        <Notebook web3enabled={this.state.web3enabled} address={this.state.address} box={this.state.box} space={this.state.space}/>
-                    </Route>
+                  //  <Route path="/notes">
+                  //     <Notebook web3enabled={this.state.web3enabled} address={this.state.address} box={this.state.box} space={this.state.space}/>
+                  //  </Route>
                     <Route path="/experiments">
                         <Experiments web3enabled={this.state.web3enabled} space={this.state.space}/>
                     </Route>
@@ -138,7 +145,6 @@ class App extends Component {
                 </Switch>
               </Main>
             </Router>
-
         )
     }
 }
@@ -150,7 +156,6 @@ class App extends Component {
 
 
 class Profile extends Component {
-
     render() {
         return (
             <div>
