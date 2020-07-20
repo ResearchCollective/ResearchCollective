@@ -1,6 +1,8 @@
 import { Button, Modal } from '@material-ui/core';
 import React, { useState } from 'react';
 
+import LoginModalContent from './LoginModalContent';
+
 const LoginModal = () => {
     //  const loginWithMagic = ()  => {
     //       console.log('Attempting to login via magic');
@@ -25,16 +27,20 @@ const LoginModal = () => {
     return (
         <React.Fragment>
             {/* button to trigger modal */}
-            <Button variant='contained' onClick={handleOpen}>
-              Login
+            <Button 
+              className='login-button'
+              onClick={handleOpen}
+            >
+            Login
             </Button>
             {/* actual modal for login options */}
             <Modal
               open={open}
               onClose={handleClose}
+              className='login-modal'
               aria-labelledby='login-modal'
             >
-              <h1>sdsads</h1>
+              <LoginModalContent />
             </Modal>
         </React.Fragment>
       )
