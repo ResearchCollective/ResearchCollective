@@ -1,19 +1,20 @@
-    import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Main, Box as AragonBox } from '@aragon/ui'
-import Box from '3box';
-import Votes from "./components/Votes";
-import Resources from "./components/Resources";
-import EditProfile from '3box-profile-edit-react';
-import Chat from "./components/Chat";
-import Notebook from './components/Notebook';
-import Experiments from './components/experiments/Experiments'
 import './styles/style.css';
-import Navbar from './components/Header/Header';
-import Home from './pages/Home';
-import Login from './components/Login';
+
+import Box from '3box';
+import EditProfile from '3box-profile-edit-react';
+import { Box as AragonBox, Main } from '@aragon/ui';
 import Fortmatic from 'fortmatic';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Web3 from 'web3';
+
+import Chat from './components/Chat';
+import Experiments from './components/experiments/Experiments';
+import Navbar from './components/Header/Header';
+import Notebook from './components/Notebook';
+import Resources from './components/Resources';
+import Votes from './components/Votes';
+import Home from './pages/Home';
 
 class App extends Component {
 
@@ -138,9 +139,6 @@ state = {
                     </Route>
                     <Route path="/resources">
                         <Resources   box={this.state.box}  loginMagic={this.loginMagic} loginMetaMask={this.loginMetaMask} space={this.state.space} address={this.state.address} />
-                    </Route>
-                    <Route path="/login">
-                        <Login address={this.state.address} loginMagic={this.loginMagic} loginMetaMask={this.loginMetaMask} />
                     </Route>
                 </Switch>
               </Main>
