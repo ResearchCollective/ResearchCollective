@@ -16,12 +16,10 @@ const VOTING_SUBGRAPH_URL =
 //  "https://api.thegraph.com/subgraphs/name/aragon/aragon-voting-rinkeby";
    "https://api.thegraph.com/subgraphs/name/aragon/aragon-voting-mainnet";
 
-
-
 // Helper function for processing votes
 async function processVote(vote, apps) {
   if (vote.script === EMPTY_SCRIPT) {
-    return { ...vote, metadata: "dummy", link: "link", poster:"poster"};;
+    return { ...vote, link: "link", poster:"poster"};;
   }
   console.log("Vote script: " + vote.script);
   const [{ description }] = await describeScript(vote.script, apps);
@@ -101,36 +99,24 @@ export default function VoteTable(address) {
     </div>
   );
 }
-class ItemComment extends Component {
-  render() {
-    return (<>
 
-        {this.props.box && this.props.address &&
-          <ThreeBoxComments
-              // required
-              spaceName="researchCollective"
-              threadName={this.props.did}
-              adminEthAddr={this.props.address}
+  class ItemComment extends Component {
+    render() {
+      return (<>
 
-              // Required props for context A) & B)
-              box={this.props.box}
-              currentUserAddr={this.props.address}
-          />
-    }
+          {this.props.box && this.props.address &&
+            <ThreeBoxComments
+                // required
+                spaceName="researchCollective"
+                threadName={this.props.did}
+                adminEthAddr={this.props.address}
+
+                // Required props for context A) & B)
+                box={this.props.box}
+                currentUserAddr={this.props.address}
+            />
+      }
     </>
   )
 }
-}
-
-
-
-function Card({ vote, idx }) {
-  return (
-    <div className="card">
-      <div className="card-number">{idx}</div>
-      <ul>
-        <li>Vote: "{vote.metadata}"</li>
-      </ul>
-    </div>
-  );
 }

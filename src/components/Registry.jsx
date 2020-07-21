@@ -84,6 +84,7 @@ render() {
 
       return (
           <div>
+            <ConnectTest/>
              {this.state.graphData &&  <Loading data={this.state.graphData}/>}
              {this.state.graphData.length > 0 &&
                 //

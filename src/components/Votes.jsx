@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {  Box, IconExternal, Split } from '@aragon/ui';
 import Registry from './Registry';
+import MemberTable from './MemberTable';
 
 class Votes extends Component {
   constructor(props) {
@@ -21,7 +22,12 @@ render() {
             <p className="sectionSubTitle"> passed by the Non-Profit/DAO <a  rel="noopener noreferrer" target="_blank" href="https://mainnet.aragon.org/#/research">'Research Collective' <IconExternal style={{position: "relative", top: "-2px"}} size="small"/> </a>   </p>
 
             <Split
-             primary={               <Registry box={this.props.box} columns={this.state.columns} voteId={this.state.voteId} address={this.props.address}/>            }
+             primary={
+               <div>
+                <MemberTable/>
+                <Registry box={this.props.box} columns={this.state.columns} voteId={this.state.voteId} address={this.props.address}/>
+               </div>
+                     }
              secondary={
                <>
                  <Box>
