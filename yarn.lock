@@ -194,6 +194,13 @@
   dependencies:
     "@aragon/connect-core" "*"
 
+"@aragon/connect-react@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@aragon/connect-react/-/connect-react-0.4.2.tgz#8f6a4cc88c8f52d5fe762dd21d92fe37e8e8e685"
+  integrity sha512-oQ67hLTfDhzLJRDvmGRoabDMCi9Nvi+o29MQ/swvDroPHs8EHtW5PAPndZjga69pS3Th12D8sGcFp+CNDePV/Q==
+  dependencies:
+    "@aragon/connect" "*"
+
 "@aragon/connect-thegraph-voting@^0.4.2":
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/@aragon/connect-thegraph-voting/-/connect-thegraph-voting-0.4.2.tgz#81c31c597ce18d0899249ebd2f8f65b28783b627"
@@ -216,7 +223,7 @@
     isomorphic-ws "^4.0.1"
     subscriptions-transport-ws "^0.9.16"
 
-"@aragon/connect@^0.4.2":
+"@aragon/connect@*", "@aragon/connect@^0.4.2":
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/@aragon/connect/-/connect-0.4.2.tgz#535157c6a11f687d225be99f706b0173eb98616a"
   integrity sha512-P9ssNVPQEx9RLrbzYNJjV7eLwARNxFzuUcw7ccTXA08St2rdcSi4EcOhNFvY5yIrO3m/pj673hHcQEVb+48xQQ==

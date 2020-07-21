@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Box, IconExternal} from '@aragon/ui';
 import Registry from './Registry';
+import VoteTable from './VoteTable';
 import PostItemModal from './credentials/RequestCredential';
 
 
@@ -25,7 +26,8 @@ class Resources extends Component {
              <PostItemModal className=" sectionBreak" />
              <p className="narrativeTitle"> passed by the DAO <a  rel="noopener noreferrer" target="_blank" href="https://mainnet.aragon.org/#/covidresearch">'covidresearch' <IconExternal style={{position: "relative", top: "-2px"}} size="large"/> </a>   </p>
              <Box  className=""  style={{display: "inline"}}>
-             <Registry box={this.props.box} voteId={this.state.voteId} columns={this.state.columns} address={this.props.address}/>
+             <VoteTable address="0x9FDA9424B0d25aA3BED1157Ce834fC3A43a81150"/>
+          //   <Registry box={this.props.box} voteId={this.state.voteId} columns={this.state.columns} address={this.props.address}/>
              <p className="narrativeTitle"> submitted by the Telegram DAO <a  rel="noopener noreferrer" target="_blank" href="https://t.me/ResearchCollectiveBot">'rc' <IconExternal style={{position: "relative", top: "-2px"}} size="large"/> </a>   </p>
               //   <Registry box={this.props.box} voteId={"0xb0cff1400bc4d39f030d01af00d118bb5cf4ab24"} columns={this.state.columns} address={this.props.address}/>
              </Box>

@@ -8,6 +8,8 @@ import Loading from "./Loading";
 import ThreeBoxComments from '3box-comments-react';
 import Voting from '@aragon/connect';
 import connect from '@aragon/connect';
+import { Connect, useApps, useOrganization, usePermissions } from '@aragon/connect-react'
+
 
 class Registry extends Component {
     commentData = {};
@@ -195,6 +197,54 @@ function processGraph(labels, data) {
   return newData;
   }
 
+
+
+
+
+
+  function ConnectTest() {
+    const [org, orgStatus] = useOrganization()
+    const [apps, appsStatus] = useApps()
+    const [permissions, permissionsStatus] = usePermissions()
+
+    const loading =
+      orgStatus.loading || appsStatus.loading || permissionsStatus.loading
+    const error = orgStatus.error || appsStatus.error || permissionsStatus.error
+
+    if (loading) {
+      return <p>Loading…</p>
+    }
+
+    if (error) {
+      return <p>Error: {error.message}</p>
+    }
+
+    return (
+      <>
+      {org &&
+        <h1>{org.name}</h1>
+  }
+        <h2>Apps</h2>
+        <ul>
+
+          {apps.map((app, i) => (
+            <li key={i}>{app.name}</li>
+          ))}
+
+        {console.log(apps)};
+
+
+        </ul>
+
+        <h2>Permissions</h2>
+        <ul>
+          {permissions.map((permission, i) => (
+            <li key={i}>{String(permission)}</li>
+          ))}
+        </ul>
+      </>
+    )
+  }
 
 
   class ItemComment extends Component {
