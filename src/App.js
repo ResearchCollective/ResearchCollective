@@ -124,9 +124,9 @@ state = {
                           <Profile  box={this.state.box} space={this.state.space} address={this.state.address}/>
                         }
                     </Route>
-                  //  <Route path="/notes">
-                  //     <Notebook web3enabled={this.state.web3enabled} address={this.state.address} box={this.state.box} space={this.state.space}/>
-                  //  </Route>
+                    <Route path="/notes">
+                       <Notebook web3enabled={this.state.web3enabled} address={this.state.address} box={this.state.box} space={this.state.space}/>
+                    </Route>
                     <Route path="/experiments">
                         <Experiments web3enabled={this.state.web3enabled} space={this.state.space}/>
                     </Route>
