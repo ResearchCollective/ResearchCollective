@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import LoginModalContent from './LoginModalContent';
 
-const LoginModal = () => {
+const LoginModal = (props) => {
     //  const loginWithMagic = ()  => {
     //       console.log('Attempting to login via magic');
     //       let fm = new Fortmatic('pk_test_FDABC9E0FE176C29');
@@ -18,6 +18,7 @@ const LoginModal = () => {
     //       });
     //   }
     // ---------------------------------------------------------//
+    const {loginMagic, loginMetamask} = props
     // state for modal//
     const [open, setOpen] = useState(false)
 
@@ -40,7 +41,7 @@ const LoginModal = () => {
               className='login-modal'
               aria-labelledby='login-modal'
             >
-              <LoginModalContent />
+              <LoginModalContent loginMagic={loginMagic} loginMetamask={loginMetamask}/>
             </Modal>
         </React.Fragment>
       )

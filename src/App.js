@@ -112,7 +112,8 @@ state = {
     render() {
         return(
             <Router>
-             <Header ethAddress={this.props.address} style={{ minHeight: '40px' }}/>
+                {/* the functions will be later refactored and put into seperate folder to keep code clean */}
+             <Header loginMagic={this.loginMagic} loginMetamask={this.loginMetaMask} ethAddress={this.props.address} style={{ minHeight: '40px' }}/>
                 <Main theme={'dark'}>
                 <Switch>
                     <Route exact path='/' component={Home}/>
