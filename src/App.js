@@ -10,7 +10,7 @@ import Web3 from 'web3';
 
 import Chat from './components/Chat';
 import Experiments from './components/experiments/Experiments';
-import Navbar from './components/Header/Header';
+import Header from './components/Header/Header';
 import Notebook from './components/Notebook';
 import Resources from './components/Resources';
 import Votes from './components/Votes';
@@ -112,7 +112,7 @@ state = {
     render() {
         return(
             <Router>
-             <Navbar bg="light" expand="lg"   ethAddress={this.props.address} style={{ minHeight: '40px' }}/>
+             <Header ethAddress={this.props.address} style={{ minHeight: '40px' }}/>
                 <Main theme={'dark'}>
                 <Switch>
                     <Route exact path='/' component={Home}/>
