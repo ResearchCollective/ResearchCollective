@@ -14,21 +14,15 @@ const DAO_ADDRESS = "covidresearch.aragonid.eth";
 // The URL of the corresponding subgraph.
 const VOTING_SUBGRAPH_URL =
 //  "https://api.thegraph.com/subgraphs/name/aragon/aragon-voting-rinkeby";
-   "https://api.thegraph.com/subgraphs/name/aragon/aragon-voting-mainnet";
+   "https://api.thegraph.com/subgraphs/name/aragon/aragon-tokens-mainnet";
 
 // Helper function for processing votes
 async function processVote(vote, apps) {
+  console.log("Processing vote: " + vote);
   if (vote.script === EMPTY_SCRIPT) {
-    try {
-      JSON.parse(vote.metadata);
-      console.log("Process vote success")
-      return { ...vote, link: "link", poster:"poster"};
-    } catch (e) {
-      console.log("Process vote failed")
-      return { ...vote, description: "Processing error"};;
-    }
+    return { ...vote, link: "link", poster:"poster"};
   }
-  console.log("Vote script: " + vote.script);
+
   const [{ description }] = await describeScript(vote.script, apps);
   vote.poster = "poster";
   vote.link = "link";
@@ -56,7 +50,7 @@ export default function VoteTable(address) {
       );
 
       // STEP 2: Fetching and initializing the Voting App
-      const { address: votingAppAddress } = await org.app("voting");
+      const { address: votingAppAddress } = await org.app("finance");
       const apps = await org.apps();
 
       // Initialize the voting app,
@@ -73,7 +67,6 @@ export default function VoteTable(address) {
       );
       processedVotes.reverse();
       setVotes(processedVotes);
-      setLatestVote(processedVotes[0].metadata);
     }
     getVotes();
   }, []);

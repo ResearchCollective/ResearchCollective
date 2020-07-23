@@ -19,25 +19,9 @@ class Registry extends Component {
         visibleGraphData: [],
         box:false,
         address:false,
-          voteId: "0x0f5c3fef568487b9937c57d93ca8f7c7e556375e",
-      //  voteId: "0x8f409307ecdd0cb567ae433a54ec9767ff585618",
         labels: ["entity", "event"]
     };
 
-    connectAragon = async () => {
-          const org = await connect('covidresearch.aragonid.eth', 'thegraph');
-          console.log("org:");
-          console.log(org);
-          const voting = new Voting(
-              await org.app('voting').address,
-              'https://api.thegraph.com/subgraphs/name/aragon/aragon-voting-mainnet'
-          );
-          console.log("voting:");
-          console.log(voting);
-          const votes = await voting.votes();
-          console.log("votes:");
-          console.log(votes);
-      }
 
 
   componentDidMount() {
@@ -63,7 +47,7 @@ class Registry extends Component {
  loadData() {
    var client = new ApolloClient({
          cache: new InMemoryCache(),
-         uri: 'https://api.thegraph.com/subgraphs/name/protofire/aragon'});
+         uri: 'https://api.thegraph.com/subgraphs/name/ajsantander/aragon-voting-rinkeby'});
    client.query({
      query: gql`
       {
@@ -72,46 +56,34 @@ class Registry extends Component {
            creator
            metadata
            executed
-           createdAtBlock
-           createdAtTransaction
+           yea
+           nay
+           minAcceptQuorum
          }
         }
        `
-   }).then(result =>  this.setState({graphData: result.data.votes, client: client}))};
+       }).then(result =>  this.setState({graphData: result.data.votes, client: client}))};
+
+
+  // }).then(result =>  this.setState({graphData: result.data.votes, client: client}))};
 
 
 render() {
-
       return (
           <div>
-            <ConnectTest/>
              {this.state.graphData &&  <Loading data={this.state.graphData}/>}
              {this.state.graphData.length > 0 &&
-                //
-                 //first try to get this function firing only when clicking...
-                 // if you set an alert or console.log it will be clear how often it is firing
-                 //after that, allow these buttons to toggle the filters
-                 // Button onClick=this.toggleLabel("covid")
                <DataView  theme={'light'}
                   fields={this.props.columns}
                   // entries is a list of items
                   entries={processGraph(this.state.labels, this.state.graphData)}
                   renderEntryExpansion={({description}) => {
-                    //TODO: Add in proper DID support here instead of URL
-                    //    if (!did == null){
-                    //      alert("did: " + did);
-	                      return<Box  className="fullSize flexContainer"><ItemComment   box={this.props.box} address={this.props.address} did={description} /></Box>;
-                  //    }
-                    }
-                  }
-                  renderEntry={({ description, owner, url, labels, flags}) => {
-                    if (flags.parsed && flags.visible ) {
-                      return [<h1 style={{width: "100%"}}>{description}</h1>,
+                        return [<h1 style={{width: "100%"}}>{description}</h1>]
+                  }}
+                  renderEntry={({ title, owner, url}) => {
+                      return [<h1 style={{width: "100%"}}>{title}</h1>,
                           <ProfileHover address={owner} showName={true}/>,
                           <div  className="buttonContainer txnButton"> <a rel="noopener noreferrer" target="_blank" href={url}> <Button label="" icon={<IconExternal/>}/> </a> </div>]
-                    } else if (flags.visible) {
-                      return [<h1 style={{width: "100%"}}>{description}</h1>,   <div  className="buttonContainer txnButton"> <a rel="noopener noreferrer" target="_blank" href={url}> <Button label="" icon={<IconExternal/>}/> </a> </div>]
-                    }
                    }
                  }
               />
@@ -124,64 +96,33 @@ render() {
 
 
 function processGraph(labels, data) {
-  var newData = [];
+  var processedData = [];
   if (typeof data[0] !== "undefined") {
     data.forEach(parseData);
     function parseData(item, index) {
-        console.log("process Graph Loop @:  " + index + item);
+        console.log("process Graph Loop @:  " + index);
+        console.log(item);
+        console.log("Yea Power: " + item.yea + " Nay Power: " + item.nay);
+      //  if (item.yea > item.nay) {
+      if (!item.metadata.includes("test vote"))  {
            try {
-                console.log("Trying to make  JSON object for " + item.metadata);
+                console.log("Trying to make JSON object for " + item.metadata);
                 var metadata = JSON.parse(item.metadata);
-                item.flags = {parsed: false, visible: true};
-                item.labels = ["entity", "event"];
-                if (metadata.ipfs === null) {
-                  //pull what we can from IPFS  // RC.02
-                  console.log("Found IPFS / RC.02 JSON format for index " + index);
-                  item.owner = "0x262b4F07e42BBc33F597fcf0d854e9DAFaf3D469";
-                  item.description = "Foo Bar Description";
-                  item.url = "https://test.com";
-                  item.did = "testdid";
-                } else {
-                  //RC.01 JSON format
-                  console.log("Found RC.01 JSON format for index " + index);
-                  if (metadata.hasOwnProperty("title")) {
-                      item.description = metadata.title;
-                 } else if (metadata.hasOwnProperty("description")) {
-                     item.description = metadata.description;
-                 } else {
-                    item.description = "Not Available";
-                  }
-                  console.log("made it past for: " + item.description);
-                  if (metadata.hasOwnProperty("owner")) {
-                     item.owner = metadata.owner;
-                  } else {
-                     item.owner = "0x262b4F07e42BBc33F597fcf0d854e9DAFaf3D469";
-                  }
-                 if (metadata.hasOwnProperty("url")) {
-                   item.url = metadata.url;
-                 } else {
-                   item.url = "google.com";
-                 }
-                  for (index = 0; index < item.labels.length; index++) {
-                      if (labels.includes(item.labels[index])) {
-                        item.flags.visible = true;
-                      }
-                  }
-                  if (!item.url.includes("http")) {
-                      item.url = "https://" + item.url
-                    }
+                let composite = {
+                    ...item,
+                    ...metadata
+                };
+                if (!composite.hasOwnProperty("title")) {
+                  composite.title = composite.description;
+                  composite.description = "Additional details not provided; check link for more information."
                 }
-                item.did = "testdid";
-                if (item.flags.visible && !item.description.includes("test vote")) {
-                  item.flags.parsed = true;
-                  console.log("added item:" + item.description);
-                  newData[newData.length] = item;
-                }
+                processedData[processedData.length] = composite;
             } catch (e) {
               item.description = item.metadata;
               item.owner = "N/A";
               item.url = "N/A";
               item.staked = "N/A";
+              item.title="N/A";
               if (!item.createdAtTransaction == null) {
                 item.url = "https://etherscan.io/tx/" + item.createdAtTransaction;
               }
@@ -190,20 +131,36 @@ function processGraph(labels, data) {
               console.log("Vote item " + index + " failed; resulting object:");
              console.log(item);
               if ((item.description.length > 2) && !item.description.includes("test vote") && !item.description.includes("description")) {
-               newData[newData.length] = item;
+               processedData[processedData.length] = item;
              }
             }
           }
         }
-  return newData;
+      }
+  return processedData;
   }
 
+  class ItemComment extends Component {
+    render() {
+      return (<>
+          {this.props.box && this.props.address &&
+            <ThreeBoxComments
+                // required
+                spaceName="researchCollective"
+                threadName={this.props.did}
+                adminEthAddr={this.props.address}
 
+                // Required props for context A) & B)
+                box={this.props.box}
+                currentUserAddr={this.props.address}
+            />
+         }
+      </>
+    )
+  }
+}
 
-
-
-
-  function ConnectTest() {
+function ConnectTest() {
     const [org, orgStatus] = useOrganization()
     const [apps, appsStatus] = useApps()
     const [permissions, permissionsStatus] = usePermissions()
@@ -229,7 +186,7 @@ function processGraph(labels, data) {
         <ul>
 
           {apps.map((app, i) => (
-            <li key={i}>{app.name}</li>
+            <li key={i}>{app.name + " lol hey " + app.address}</li>
           ))}
 
         {console.log(apps)};
@@ -246,28 +203,6 @@ function processGraph(labels, data) {
       </>
     )
   }
-
-
-  class ItemComment extends Component {
-    render() {
-      return (<>
-
-          {this.props.box && this.props.address &&
-            <ThreeBoxComments
-                // required
-                spaceName="researchCollective"
-                threadName={this.props.did}
-                adminEthAddr={this.props.address}
-
-                // Required props for context A) & B)
-                box={this.props.box}
-                currentUserAddr={this.props.address}
-            />
-      }
-      </>
-    )
-  }
-}
 
 
 
