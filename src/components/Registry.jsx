@@ -8,8 +8,6 @@ import Loading from "./Loading";
 import ThreeBoxComments from '3box-comments-react';
 import Voting from '@aragon/connect';
 import connect from '@aragon/connect';
-import { Connect, useApps, useOrganization, usePermissions } from '@aragon/connect-react'
-
 
 class Registry extends Component {
     commentData = {};
@@ -19,9 +17,25 @@ class Registry extends Component {
         visibleGraphData: [],
         box:false,
         address:false,
+          voteId: "0x0f5c3fef568487b9937c57d93ca8f7c7e556375e",
+      //  voteId: "0x8f409307ecdd0cb567ae433a54ec9767ff585618",
         labels: ["entity", "event"]
     };
 
+    connectAragon = async () => {
+          const org = await connect('covidresearch.aragonid.eth', 'thegraph');
+          console.log("org:");
+          console.log(org);
+          const voting = new Voting(
+              await org.app('voting').address,
+              'https://api.thegraph.com/subgraphs/name/aragon/aragon-voting-mainnet'
+          );
+          console.log("voting:");
+          console.log(voting);
+          const votes = await voting.votes();
+          console.log("votes:");
+          console.log(votes);
+      }
 
 
   componentDidMount() {
@@ -44,49 +58,54 @@ class Registry extends Component {
 
 
 
- loadData() {
-   var client = new ApolloClient({
-         cache: new InMemoryCache(),
-         uri: 'https://api.thegraph.com/subgraphs/name/ajsantander/aragon-voting-rinkeby'});
-   client.query({
-     query: gql`
-      {
-           votes(first:20, where: { creator: "${this.props.voteId}"}){
-           id
-           creator
-           metadata
-           executed
-           yea
-           nay
-           minAcceptQuorum
+  loadData() {
+  //  var subgraph = "https://api.thegraph.com/subgraphs/name/ajsantander/aragon-voting-rinkeby";
+    var client = new ApolloClient({
+          cache: new InMemoryCache(),
+           uri: "https://api.thegraph.com/subgraphs/name/ajsantander/aragon-voting-mainnet"});
+           client.query({
+            query: gql`
+             {
+            votes(first:20, where: { creator: "${this.props.creatorId}"}){
+            id
+            creator
+            metadata
+            executed
+            yea
+            nay
+            minAcceptQuorum
+          }
          }
-        }
-       `
-       }).then(result =>  this.setState({graphData: result.data.votes, client: client}))};
+        `
+        }).then(result =>  this.setState({graphData: result.data.votes, client: client}))};
 
-
-  // }).then(result =>  this.setState({graphData: result.data.votes, client: client}))};
 
 
 render() {
+
       return (
           <div>
              {this.state.graphData &&  <Loading data={this.state.graphData}/>}
              {this.state.graphData.length > 0 &&
-               <DataView  theme={'light'}
-                  fields={this.props.columns}
-                  // entries is a list of items
-                  entries={processGraph(this.state.labels, this.state.graphData)}
-                  renderEntryExpansion={({description}) => {
-                        return [<h1 style={{width: "100%"}}>{description}</h1>]
-                  }}
-                  renderEntry={({ title, owner, url}) => {
-                      return [<h1 style={{width: "100%"}}>{title}</h1>,
-                          <ProfileHover address={owner} showName={true}/>,
-                          <div  className="buttonContainer txnButton"> <a rel="noopener noreferrer" target="_blank" href={url}> <Button label="" icon={<IconExternal/>}/> </a> </div>]
+                //
+                 //first try to get this function firing only when clicking...
+                 // if you set an alert or console.log it will be clear how often it is firing
+                 //after that, allow these buttons to toggle the filters
+                 // Button onClick=this.toggleLabel("covid")
+                 <DataView  theme={'light'}
+                    fields={this.props.columns}
+                    // entries is a list of items
+                    entries={processGraph(this.state.labels, this.state.graphData)}
+                    renderEntryExpansion={({description}) => {
+                          return [<h1 style={{width: "100%"}}>{description}</h1>]
+                    }}
+                    renderEntry={({ title, owner, url}) => {
+                        return [<h1 style={{width: "100%"}}>{title}</h1>,
+                            <ProfileHover address={owner} showName={true}/>,
+                            <div  className="buttonContainer txnButton"> <a rel="noopener noreferrer" target="_blank" href={url}> <Button label="" icon={<IconExternal/>}/> </a> </div>]
+                     }
                    }
-                 }
-              />
+                />
             }
        </div>
     );
@@ -140,9 +159,11 @@ function processGraph(labels, data) {
   return processedData;
   }
 
+
   class ItemComment extends Component {
     render() {
       return (<>
+
           {this.props.box && this.props.address &&
             <ThreeBoxComments
                 // required
@@ -154,56 +175,9 @@ function processGraph(labels, data) {
                 box={this.props.box}
                 currentUserAddr={this.props.address}
             />
-         }
+      }
       </>
     )
   }
 }
-
-function ConnectTest() {
-    const [org, orgStatus] = useOrganization()
-    const [apps, appsStatus] = useApps()
-    const [permissions, permissionsStatus] = usePermissions()
-
-    const loading =
-      orgStatus.loading || appsStatus.loading || permissionsStatus.loading
-    const error = orgStatus.error || appsStatus.error || permissionsStatus.error
-
-    if (loading) {
-      return <p>Loading…</p>
-    }
-
-    if (error) {
-      return <p>Error: {error.message}</p>
-    }
-
-    return (
-      <>
-      {org &&
-        <h1>{org.name}</h1>
-  }
-        <h2>Apps</h2>
-        <ul>
-
-          {apps.map((app, i) => (
-            <li key={i}>{app.name + " lol hey " + app.address}</li>
-          ))}
-
-        {console.log(apps)};
-
-
-        </ul>
-
-        <h2>Permissions</h2>
-        <ul>
-          {permissions.map((permission, i) => (
-            <li key={i}>{String(permission)}</li>
-          ))}
-        </ul>
-      </>
-    )
-  }
-
-
-
 export default Registry;
