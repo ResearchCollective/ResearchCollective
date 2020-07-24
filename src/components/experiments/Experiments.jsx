@@ -3,6 +3,10 @@ import React, { useState } from 'react';
 
 import ExperimentsList from './ExperimentsList';
 import ExperimentsModal from './ExperimentsModal';
+import VoteTable from '../VoteTable';
+
+const REVIEWBOARD_RINKEBY = "0xf7Ed8e47Ae69a0DF6BcDfF286035175BF66BCfF1";
+const CURATION_COLUMNS = ['Title', 'Poster', 'URL'];
 
 const Experiments = ({experimentsThread}) => {
 
@@ -35,7 +39,8 @@ const Experiments = ({experimentsThread}) => {
             <Modal className='experiment-modal' visible={opened} onClose={close}>
                 <ExperimentsModal thread={ experimentsThread }/>
             </Modal>
-            <ExperimentsList thread={ experimentsThread }/>
+            <VoteTable network="rinkeby" type="vote" creatorId={REVIEWBOARD_RINKEBY} columns={CURATION_COLUMNS}/>
+
         </div>
     )
 }
