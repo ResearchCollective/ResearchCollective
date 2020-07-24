@@ -28,7 +28,7 @@ class Resources extends Component {
              <PostItemModal className=" sectionBreak" />
              <p className="narrativeTitle"> passed by the DAO <a  rel="noopener noreferrer" target="_blank" href="https://mainnet.aragon.org/#/covidresearch">'covidresearch' <IconExternal style={{position: "relative", top: "-2px"}} size="large"/> </a>   </p>
              <Box  className=""  style={{display: "inline"}}>
-             <VoteTable network="rinkeby" type="vote" creatorId={COVIDRESEARCH_RINKEBY} columns={CURATION_COLUMNS} address={this.props.address}/>
+             <VoteTable network="rinkeby" type="vote" creatorId={COVIDRESEARCH_RINKEBY} columns={CURATION_COLUMNS}/>
              </Box>
           </div>
     );
