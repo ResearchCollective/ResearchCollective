@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Box, IconExternal} from '@aragon/ui';
-import Registry from './Registry';
+import VoteTable from './VoteTable';
 import PostItemModal from './credentials/RequestCredential';
 
 //You can get the right address by finding a vote using the Subgraph explorer
@@ -28,7 +28,7 @@ class Resources extends Component {
              <PostItemModal className=" sectionBreak" />
              <p className="narrativeTitle"> passed by the DAO <a  rel="noopener noreferrer" target="_blank" href="https://mainnet.aragon.org/#/covidresearch">'covidresearch' <IconExternal style={{position: "relative", top: "-2px"}} size="large"/> </a>   </p>
              <Box  className=""  style={{display: "inline"}}>
-             <Registry box={this.props.box} creatorId={COVIDRESEARCH_MAIN} columns={CURATION_COLUMNS} address={this.props.address}/>
+             <VoteTable box={this.props.box} network="rinkeby" type="vote" creatorId={COVIDRESEARCH_RINKEBY} columns={CURATION_COLUMNS} address={this.props.address}/>
              </Box>
           </div>
     );

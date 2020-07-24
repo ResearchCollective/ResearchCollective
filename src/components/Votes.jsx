@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {  Box, IconExternal, Split } from '@aragon/ui';
-import Registry from './Registry';
+import VoteTable from './VoteTable';
 import MemberTable from './MemberTable';
 
 class Votes extends Component {
@@ -25,7 +25,7 @@ render() {
              primary={
                <div>
                 <MemberTable/>
-                <Registry box={this.props.box} columns={this.state.columns} voteId={this.state.voteId} address={this.props.address}/>
+                <VoteTable box={this.props.box} columns={this.state.columns} voteId={this.state.voteId} address={this.props.address}/>
                </div>
                      }
              secondary={
