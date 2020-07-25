@@ -1,0 +1,203 @@
+// Common //
+.margins{
+    margin: auto;
+}
+
+.section-header {
+    margin-top: 8%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    color: white;
+    font-size: 3.7rem;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+.section-break{
+    margin-bottom: 20px;
+    border-bottom: 3px solid #8dd79a;
+}
+
+// Hero Element //
+.homepage{
+    margin-top: 10vh;
+}
+
+.logo-card{
+    background-color: #425176!important;
+    margin-bottom: 50px;
+}
+
+.logo{
+    width: 100%!important;
+}
+
+.hero-title {
+    margin: 2%;
+    font-weight: bold;
+    font-size: 4rem;
+}
+
+.exp-dao-button{
+    background-color: #425176;
+}
+  
+.exp-dao-button:hover{
+    opacity: 80%;
+}
+  
+.blue-button{
+    color: #29334b!important;
+    opacity: 80%;
+}
+  
+.blue-button:hover{
+    border: 0px solid #169363;
+    background-color: #bce7fd!important;
+    opacity: 100%;
+}
+
+// Resources Section //
+
+.resources-section {
+    text-align: center;
+}
+
+.resources-link {
+    margin: 2%;
+    background-color: #29334B;
+    border: none;
+    color: #38C6FE;
+    text-decoration: underline;
+}
+  
+.resources-section .btn:hover {
+    background-color: #38C6FE;
+}
+
+.homepage-resources-text {
+    color: white;
+    font-size: 16pt;
+    text-align: center;
+    margin-top: -13px;
+    margin-bottom: 5px;
+}
+
+.rc-button{
+    background: #8dd79a!important;
+    color: #29334b!important;
+    border: 2px solid white;
+}
+  
+.rc-button:hover{
+    background: #c4f1be!important;
+}
+
+// Method section//
+.method-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.method-card {
+    margin-top: 5%;
+    background-color: #29334B;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.method-glyph {
+    height: 100px;
+    width: 100px;
+    margin: auto;
+}
+  
+.method-title {
+    color: #8CAFFD;
+    font-weight: bold;
+    margin: 10%;
+    text-align: center;
+}
+  
+.method-body {
+    color: white;
+    height: 160px;
+    min-width: 100%;
+    text-align: center;
+}
+
+// Principles section//
+.homepage-principles {
+    margin: 5%;
+}
+
+.card-b{
+    background-color: #425176!important;
+    margin-bottom: 5%;
+    min-width: 250px;
+}
+
+.p-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.p-glyph {
+  height: 150px;
+  width: 150px;
+  margin: auto;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+.p-title {
+    color: #c4f1be;
+    font-weight: bold;
+    margin: 10%;
+    text-align: center;
+}
+  
+.p-body {
+    color: white;
+    font-weight: normal;
+    font-size: 12pt;
+    text-align: center;
+}
+
+// contact us//
+.contact-us {
+    text-align: center;
+}
+  
+.contact-form-input {
+    width: 50%;
+    margin: auto;
+}
+  
+.contact-form-input:focus {
+    border: none;
+}
+  
+.contact-send-btn {
+    color: white;
+    background-color: #169363;
+    border-radius: 25px;
+    width: 20%;
+    height: 50%;
+    opacity: 70%;
+    border: 0px solid #169363;
+    margin: 3%;
+    margin-bottom: 10%;
+}
+  
+.contact-send-btn:hover {
+    border: 0px solid #169363;
+    background-color: #169363;
+    opacity: 100%;
+}

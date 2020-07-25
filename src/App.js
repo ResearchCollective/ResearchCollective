@@ -2,19 +2,21 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Main, Box as AragonBox } from '@aragon/ui'
 import Box from '3box';
-import Votes from "./components/Votes";
-import Resources from "./components/Resources";
 import EditProfile from '3box-profile-edit-react';
-import Chat from "./components/Chat";
+import Chat from './components/Chat';
+import Experiments from './components/experiments/Experiments';
 import Notebook from './components/Notebook';
-import Experiments from './components/experiments/Experiments'
-import './styles/style.css';
 import Navbar from './components/Header/Header';
 import Home from './pages/Home';
 import Login from './components/Login';
+import Votes from './components/Votes';
+import Resources from './components/Resources';
+import Profile from './components/Profile';
 import Fortmatic from 'fortmatic';
 import Web3 from 'web3';
 import { Connect } from '@aragon/connect-react';
+
+import './styles/index.css';
 class App extends Component {
 
 state = {
@@ -120,9 +122,7 @@ render() {
                     <Chat  box={this.state.box} address={this.state.address}/>
                 </Route>
                <Route path="/profile">
-                  {this.state.box &&
                       <Profile  box={this.state.box} space={this.state.space} address={this.state.address}/>
-                    }
                 </Route>
               //  <Route path="/notes">
               //     <Notebook web3enabled={this.state.web3enabled} address={this.state.address} box={this.state.box} space={this.state.space}/>
@@ -146,33 +146,13 @@ render() {
             </Switch>
           </Main>
         </Router>
-        </Connect>
+      </Connect>
     )
-}
-}
-
-
-
-
-class Profile extends Component {
-  render() {
-    return (
-        <div>
-            <h1 className="sectionTitle"> Profile </h1>
-            <p className="sectionSubTitle"> Edit your 3Box and Research Collective Persona</p>
-            <AragonBox className="profileContainer">
-            {this.props.space && this.props.box &&
-                    <EditProfile
-                    // required
-                    box={this.props.box}
-                    space={this.props.space}
-                    currentUserAddr={this.props.address}
-                />
-                }
-            </AragonBox>
-        </div>
-    );
   }
 }
+
+
+
+
 
 export default App
