@@ -29,7 +29,7 @@ import Web3 from 'web3';
 import LoginModal from './components/auth/LoginModal';
 import Chat from './components/Chat';
 import Experiments from './components/experiments/Experiments';
-import Navbar from './components/Header/Header';
+import Header from './components/Header/Header';
 import Profile from './components/Profile';
 import Resources from './components/Resources';
 import Votes from './components/Votes';
@@ -133,7 +133,7 @@ render() {
     return(
         <Connect location="covidresearch.aragonid.eth" connector="thegraph">
         <Router>
-         <Navbar bg="light" expand="lg"   ethAddress={this.props.address} style={{ minHeight: '40px' }}/>
+        <Header loginMagic={this.loginMagic} loginMetamask={this.loginMetaMask} ethAddress={this.props.address} style={{ minHeight: '40px' }}/>
             <Main theme={'dark'}>
             <Switch>
                 <Route exact path='/' component={Home}/>
