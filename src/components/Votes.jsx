@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {  Box, IconExternal, Split } from '@aragon/ui';
 import VoteTable from './VoteTable';
-import * as Constants from './constants';
+import * as Constants from '../constants';
 
 class Votes extends Component {
   constructor(props) {
