@@ -2,6 +2,10 @@ import React, {  Component } from 'react';
 import ProfileHover from 'profile-hover';
 import {Button, Modal, SidePanel, IconExternal, Box} from '@aragon/ui';
 import EditProfile from '3box-profile-edit-react';
+import MemberTable from './MemberTable';
+
+const REVIEWBOARD_TOKEN_RINKEBY = "0xf7ed8e47ae69a0df6bcdff286035175bf66bcff1";
+const CURATION_COLUMNS = ['Member', 'Balance'];
 
 class Profile extends Component {
   constructor(props) {
@@ -17,6 +21,7 @@ class Profile extends Component {
   render() {
       return (
          <div>
+               <MemberTable network="rinkeby" appAddress={REVIEWBOARD_TOKEN_RINKEBY} columns={CURATION_COLUMNS}/>
                 <h1 className="sectionTitle pushUp"> Profile </h1>
                 <p className="sectionSubTitle pushUp"> Your Ethereal Appearance</p>
                 {this.props.address  && <h6>Address Online</h6>}

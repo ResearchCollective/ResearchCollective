@@ -6,7 +6,66 @@ body {
 
 #responsive-navbar-nav {
   z-index: 10 !important;
-  background: #425176;
+}
+
+.login-button {
+  background-color: #8DD89D !important;
+  color: #445175;
+}
+
+.login-modal {
+  height: 80vh;
+  width: 60vw;
+  background-color: #445175;
+  margin: auto;
+  margin-top: 12vh;
+}
+
+.login-modal-content {
+  text-align: center;
+}
+
+.login-modal-content h1 {
+  font-size: 18pt;
+  margin: 2%;
+  color: #8DD89D;
+  text-decoration: underline;
+}
+
+.login-option {
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 10%;
+}
+
+.login-option p {
+  margin: 5%;
+}
+
+.login-option button {
+  margin-top: 10%;
+  background-color: #8DD89D;
+  color: #445175;
+  width: 20vw;
+  opacity: 70%;
+}
+
+.login-option button:hover {
+  opacity: 100% !important;
+  background-color: #8DD89D;
+  color: #445175;
+}
+
+@media screen and (max-width: 650px) {
+  .login-modal {
+    height: 100%;
+    width: 80vw;
+    margin-top: 15vh;
+  }
+
+  .login-option button {
+    width: 50vw;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
