@@ -1,10 +1,11 @@
-import React, { Component, useState } from 'react';
+import React from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Button, Modal, Main } from '@aragon/ui';
-import LoginModal from './LoginModal';
 
-const Header = () => {
+import LoginModal from '../auth/LoginModal';
+
+const Header = (props) => {
+  const {loginMagic, loginMetamask} = props
   const docsURL = 'https://www.notion.so/ResearchCo-Covidathon-2ae1203029ed4c2cb4f5b6056ae7b89c'
   return(
     <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
@@ -18,7 +19,7 @@ const Header = () => {
           <Nav.Link href={`${docsURL}`}>Docs</Nav.Link>
           <Nav.Link href='/notes'>Notebook</Nav.Link>
           <Nav.Link href='/profile'>Profile</Nav.Link>
-          <Nav.Link href='/login'>Login</Nav.Link>
+          <LoginModal loginMagic={loginMagic} loginMetamask={loginMetamask}/>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

@@ -8,15 +8,15 @@ import Experiments from './components/experiments/Experiments';
 import Notebook from './components/Notebook';
 import Navbar from './components/Header/Header';
 import Home from './pages/Home';
-import Login from './components/Login';
 import Votes from './components/Votes';
 import Resources from './components/Resources';
 import Profile from './components/Profile';
+import LoginModal from './components/auth/LoginModal';
 import Fortmatic from 'fortmatic';
 import Web3 from 'web3';
-import { Connect } from '@aragon/connect-react';
-
+import { Connect } from '@aragon/connect-react'
 import './styles/index.css';
+
 class App extends Component {
 
 state = {
@@ -141,7 +141,7 @@ render() {
                     <Resources   box={this.state.box}  loginMagic={this.loginMagic} loginMetaMask={this.loginMetaMask} space={this.state.space} address={this.state.address} />
                 </Route>
                 <Route path="/login">
-                    <Login address={this.state.address} loginMagic={this.loginMagic} loginMetaMask={this.loginMetaMask} />
+                    <LoginModal address={this.state.address} loginMagic={this.loginMagic} loginMetaMask={this.loginMetaMask} />
                 </Route>
             </Switch>
           </Main>
