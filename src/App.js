@@ -3,17 +3,14 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Main, Box as AragonBox } from '@aragon/ui'
 import Box from '3box';
 import EditProfile from '3box-profile-edit-react';
-import { Box as AragonBox, Main } from '@aragon/ui';
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Chat from './components/Chat';
 import Experiments from './components/experiments/Experiments';
 import Notebook from './components/Notebook';
-import Experiments from './components/experiments/Experiments'
-import './styles/style.css';
 import Navbar from './components/Header/Header';
 import Home from './pages/Home';
 import Login from './components/Login';
+import Votes from './components/Votes';
+import Resources from './components/Resources';
 import Profile from './components/Profile';
 import Fortmatic from 'fortmatic';
 import Web3 from 'web3';
