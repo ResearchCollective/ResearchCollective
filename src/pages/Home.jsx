@@ -2,7 +2,6 @@ import { Button } from '@aragon/ui';
 import React, { useState } from 'react';
 import { Card, Col, Container, Form, FormControl, Image, InputGroup, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
 import Alert from '../components/Header/Alert';
 import sendEmail from '../functions/sendEmail';
 
@@ -196,7 +195,7 @@ const Home = () => {
                 <Col lg={8}>
                 <div className='contact-us'>
                     <p className='section-header sectionBreak'>Contact Us</p>
-                    {(mailSent) ?  <Alert msg='Thank you!!! We will get back to you soon'/> : null}
+                    {(mailSent) ?  <Alert msg='Thanks for reaching out - we will get back to you shortly'/> : null}
                         <InputGroup className='contact-form-input mb-3'>
                             <FormControl
                                 placeholder='Full Name'

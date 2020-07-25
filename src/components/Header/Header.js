@@ -17,8 +17,6 @@ const Header = (props) => {
           <Nav.Link href='/experiments'>Experiments</Nav.Link>
           <Nav.Link href='/votes'>Votes</Nav.Link>
           <Nav.Link href={`${docsURL}`}>Docs</Nav.Link>
-          <Nav.Link href='/notes'>Notebook</Nav.Link>
-          <Nav.Link href='/profile'>Profile</Nav.Link>
           <LoginModal loginMagic={loginMagic} loginMetamask={loginMetamask}/>
         </Nav>
       </Navbar.Collapse>

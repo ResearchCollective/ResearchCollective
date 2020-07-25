@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Main, Box as AragonBox } from '@aragon/ui'
-import Box from '3box';
-import EditProfile from '3box-profile-edit-react';
+import { Main } from '@aragon/ui'
+import Box from '3box'
 import Chat from './components/Chat';
 import Experiments from './components/experiments/Experiments';
-import Notebook from './components/Notebook';
 import Navbar from './components/Header/Header';
 import Home from './pages/Home';
 import Votes from './components/Votes';
 import Resources from './components/Resources';
-import Profile from './components/Profile';
+import Roster from './components/Roster';
 import LoginModal from './components/auth/LoginModal';
 import Fortmatic from 'fortmatic';
 import Web3 from 'web3';
@@ -121,12 +119,9 @@ render() {
                 <Route path="/chat">
                     <Chat  box={this.state.box} address={this.state.address}/>
                 </Route>
-               <Route path="/profile">
-                      <Profile  box={this.state.box} space={this.state.space} address={this.state.address}/>
+               <Route path="/daos">
+                      <Roster  box={this.state.box} space={this.state.space} address={this.state.address}/>
                 </Route>
-              //  <Route path="/notes">
-              //     <Notebook web3enabled={this.state.web3enabled} address={this.state.address} box={this.state.box} space={this.state.space}/>
-              //  </Route>
                 <Route path="/experiments">
                     <Experiments web3enabled={this.state.web3enabled} space={this.state.space}/>
                 </Route>
@@ -139,9 +134,6 @@ render() {
                 </Route>
                 <Route path="/resources">
                     <Resources   box={this.state.box}  loginMagic={this.loginMagic} loginMetaMask={this.loginMetaMask} space={this.state.space} address={this.state.address} />
-                </Route>
-                <Route path="/login">
-                    <LoginModal address={this.state.address} loginMagic={this.loginMagic} loginMetaMask={this.loginMetaMask} />
                 </Route>
             </Switch>
           </Main>

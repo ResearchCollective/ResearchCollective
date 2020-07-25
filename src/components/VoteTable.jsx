@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, IconExternal, Box, DataView} from '@aragon/ui';
+import {Button, IconExternal, DataView} from '@aragon/ui';
 import ApolloClient from 'apollo-boost';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { gql } from 'apollo-boost';
@@ -76,7 +76,7 @@ function processGraph(data) {
         //TODO: Add in check to see if the vote's duration has passed
         //TODO: Bug test to make sure the quorum check is working
         //TODO: Make the yea vs nay ratio reflect the DAO's voting threshold
-        if ((item.yea > item.nay) && (item.yea + item.nay > item.minAcceptQuorum)) {
+    //    if ((item.yea > item.nay) && (item.yea + item.nay > item.minAcceptQuorum)) {
       //throw out the test votes
       if (!item.metadata.includes("test vote"))  {
            try {
@@ -99,7 +99,7 @@ function processGraph(data) {
               processedData[processedData.length] = item;
               }
             }
-          }
+        //  }
         }
       }
     return processedData;
