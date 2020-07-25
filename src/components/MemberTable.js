@@ -5,21 +5,12 @@ import {Button, IconExternal, Box, DataView} from '@aragon/ui';
 import ProfileHover from 'profile-hover';
 import Loading from "./Loading";
 import ThreeBoxComments from '3box-comments-react';
-
-// Empty script; votes that do not execute any actions will contain this.
-const EMPTY_SCRIPT = "0x00000001";
-// The desiredDAO Address.
-//const DAO_ADDRESS = "0x9FDA9424B0d25aA3BED1157Ce834fC3A43a81150";
-const DAO_ADDRESS = "covidresearch.aragonid.eth";
-// The URL of the corresponding subgraph.
-const VOTING_SUBGRAPH_URL =
-//  "https://api.thegraph.com/subgraphs/name/aragon/aragon-voting-rinkeby";
-   "https://api.thegraph.com/subgraphs/name/aragon/aragon-tokens-mainnet";
+import * as Constants from './constants';
 
 // Helper function for processing votes
 async function processVote(vote, apps) {
   console.log("Processing vote: " + vote);
-  if (vote.script === EMPTY_SCRIPT) {
+  if (vote.script === Constants.EMPTY_SCRIPT) {
     return { ...vote, link: "link", poster:"poster"};
   }
 
@@ -42,7 +33,7 @@ export default function VoteTable(address) {
 
       const org = await connect(
         // Org address...
-        DAO_ADDRESS,
+        Constants.DAO_ADDRESS,
         // Connector type
         "thegraph",
         // Chain ID, if connecting to Rinkeby rather than mainnet.
@@ -57,7 +48,7 @@ export default function VoteTable(address) {
       // We'll need the voting app address and the Subgraph URL for voting.
       // The last parameter activates or disables verbose logging.
       // We'll set it to true to see what's happening under the hood.
-      const voting = new Voting(votingAppAddress, VOTING_SUBGRAPH_URL, true);
+      const voting = new Voting(votingAppAddress, Constants.VOTING_SUBGRAPH_URL, true);
 
       // To fetch the votes, just call votes(). :)
       // There's also pagination!

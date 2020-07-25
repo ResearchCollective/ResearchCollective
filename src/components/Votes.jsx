@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import {  Box, IconExternal, Split } from '@aragon/ui';
 import VoteTable from './VoteTable';
 import MemberTable from './MemberTable';
+import * as Constants from './constants';
 
 class Votes extends Component {
   constructor(props) {
       super(props);
       //the smart contract for the voting for the main research dao is specified below
        this.state = {
-            voteId: "0xc6c1725868210736c3bcb784b4c13c6412823096",
+            voteId: Constants.VOTE_ID,
             columns: ['Description','Link']
        };
    }
