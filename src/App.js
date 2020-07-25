@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Main, Box as AragonBox } from '@aragon/ui'
+import './styles/index.css';
+
 import Box from '3box';
-import EditProfile from '3box-profile-edit-react';
+import { Connect } from '@aragon/connect-react';
+import { Main } from '@aragon/ui';
+import Fortmatic from 'fortmatic';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Web3 from 'web3';
+
+import LoginModal from './components/auth/LoginModal';
 import Chat from './components/Chat';
 import Experiments from './components/experiments/Experiments';
-import Notebook from './components/Notebook';
 import Navbar from './components/Header/Header';
-import Home from './pages/Home';
-import Votes from './components/Votes';
-import Resources from './components/Resources';
 import Profile from './components/Profile';
-import LoginModal from './components/auth/LoginModal';
-import Fortmatic from 'fortmatic';
-import Web3 from 'web3';
-import { Connect } from '@aragon/connect-react'
-import './styles/index.css';
+import Resources from './components/Resources';
+import Votes from './components/Votes';
+import Home from './pages/Home';
 
 class App extends Component {
 
@@ -124,9 +124,9 @@ render() {
                <Route path="/profile">
                       <Profile  box={this.state.box} space={this.state.space} address={this.state.address}/>
                 </Route>
-              //  <Route path="/notes">
+              {/* //  <Route path="/notes">
               //     <Notebook web3enabled={this.state.web3enabled} address={this.state.address} box={this.state.box} space={this.state.space}/>
-              //  </Route>
+              //  </Route> */}
                 <Route path="/experiments">
                     <Experiments web3enabled={this.state.web3enabled} space={this.state.space}/>
                 </Route>
