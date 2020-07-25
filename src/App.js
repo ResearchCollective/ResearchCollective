@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Main, Box as AragonBox } from '@aragon/ui'
 import Box from '3box';
-import Votes from "./components/Votes";
-import Resources from "./components/Resources";
 import EditProfile from '3box-profile-edit-react';
-import Chat from "./components/Chat";
+import { Box as AragonBox, Main } from '@aragon/ui';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Chat from './components/Chat';
+import Experiments from './components/experiments/Experiments';
 import Notebook from './components/Notebook';
 import Experiments from './components/experiments/Experiments'
 import './styles/style.css';
@@ -16,6 +18,8 @@ import Profile from './components/Profile';
 import Fortmatic from 'fortmatic';
 import Web3 from 'web3';
 import { Connect } from '@aragon/connect-react';
+
+import './styles/index.css';
 class App extends Component {
 
 state = {
@@ -145,7 +149,7 @@ render() {
             </Switch>
           </Main>
         </Router>
-        </Connect>
+      </Connect>
     )
   }
 }

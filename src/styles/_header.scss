@@ -1,0 +1,46 @@
+.navbar{
+  min-height: 60px;
+  height: 10vh;
+  background-color: #425176 !important;
+  border-bottom: 3px solid #c4f1be;
+}
+
+.navbar-brand a{
+  font-weight: bold;
+  font-size: 21pt;
+  text-decoration: none !important;
+  font-family: 'Play', sans-serif;
+}
+
+.navbar-brand a:hover{
+  text-decoration: none !important;
+  color: #c4f1be;
+}
+
+.navbar-brand:active{
+  text-shadow: 1px 1px 1px rgba(141,215,154,0.37);
+}
+
+.nav-link{
+  margin-right: 3px;
+  color: green;
+}
+
+.nav-link:hover {
+  color: #C4F1BE !important;
+}
+
+// responsive navbar//
+#responsive-navbar-nav{
+  z-index: 10 !important;
+}
+
+.show {
+  z-index: 10 !important;
+  background-color: #425176;
+  margin-top: 0;
+  height: 48vh;
+  width: 100vw;
+  padding-left: 5%;
+  margin-top: 5%;
+}
