@@ -1,10 +1,43 @@
 import { Button } from '@aragon/ui';
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Col, Container, Form, FormControl, Image, InputGroup, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import Alert from '../components/Header/Alert';
+import sendEmail from '../functions/sendEmail';
 
 const Home = () => {
+
+    const [mailSent, setMailSent] = useState(false)
+    const [formData, setFormData] = useState({
+        fullName: '',
+        email: '',
+        message: ''
+    })
+
+    const handleContactFormInput = e => {
+        const {name, value} = e.target
+        console.log(name, value)
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+            })
+        )
+    }
+
+    const submitContactFormData = async (e) => {
+        e.preventDefault()
+        // TODO: add validation/sanitization
+        await sendEmail(formData)
+        // set status for user msg//
+        setMailSent(true)
+        setFormData(prevState => ({
+            ...prevState,
+            fullName: '',
+            email: '',
+            message: ''
+        }))
+    }
     return(
         //this div represents the 'whole' homepage//
         <div className='homepage'>
@@ -162,12 +195,16 @@ const Home = () => {
                 <Col lg={2}/>
                 <Col lg={8}>
                 <div className='contact-us'>
-                    <p className='section-header section-break'>Contact Us</p>
+                    <p className='section-header sectionBreak'>Contact Us</p>
+                    {(mailSent) ?  <Alert msg='Thank you!!! We will get back to you soon'/> : null}
                         <InputGroup className='contact-form-input mb-3'>
                             <FormControl
-                                placeholder='Name'
-                                aria-label='Enter Your Name'
+                                placeholder='Full Name'
+                                aria-label='Enter Your Full Name'
                                 aria-describedby='basic-addon2'
+                                name='fullName'
+                                value={formData.fullName}
+                                onChange={e => handleContactFormInput(e)}
                             />
                         </InputGroup>
                         <InputGroup className='contact-form-input mb-3'>
@@ -175,12 +212,22 @@ const Home = () => {
                                 placeholder='Email'
                                 aria-label='Enter Your Email'
                                 aria-describedby='basic-addon2'
+                                name='email'
+                                value={formData.email}
+                                onChange={e => handleContactFormInput(e)}
                             />
                         </InputGroup>
                         <Form.Group className='contact-form-input'>
-                            <Form.Control as='textarea' rows='5' placeholder='What is on your mind?'/>
+                            <Form.Control
+                                as='textarea'
+                                rows='5'
+                                placeholder='What is on your mind?'
+                                name='message'
+                                value={formData.message}
+                                onChange={e => handleContactFormInput(e)}
+                            />
                         </Form.Group>
-                          <a href="https://t.me/joinchat/EObaChML8AxqbUZtiyqeKQ" target="_blank" rel="noopener noreferrer">  <Button mode="strong" className='rc-button contact-send-btn'>Send</Button></a>
+                        <Button mode="strong" className='rc-button contact-send-btn' onClick={(e) => submitContactFormData(e)}>Send</Button>
                 </div>
                 </Col>
                   <Col lg={2}/>
