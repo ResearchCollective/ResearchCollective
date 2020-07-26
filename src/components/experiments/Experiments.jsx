@@ -1,12 +1,11 @@
 import { Button, Modal } from '@aragon/ui';
 import React, { useState } from 'react';
 
-import ExperimentsList from './ExperimentsList';
+import { Box, IconExternal} from '@aragon/ui';
 import ExperimentsModal from './ExperimentsModal';
 import VoteTable from '../VoteTable';
+import MemberTable from '../MemberTable';
 import * as Constants from '../../constants';
-
-const CURATION_COLUMNS = ['Title', 'Poster', 'URL'];
 
 const Experiments = ({experimentsThread}) => {
 
@@ -33,14 +32,24 @@ const Experiments = ({experimentsThread}) => {
     return(
         <div className='experiments'>
           <p className="sectionTitle"> Experiments </p>
-           <p className="sectionSubTitle">🚨 Under Construction 🚨 </p>
-          <p className=" sectionSubTitle sectionBreak">  You will be able to create a public thread on IPFS to track your experiments here soon.</p>
-            <Button className="rc-button" onClick={open}>Create New</Button>
+          <p className=" sectionSubTitle sectionBreak">  Experiments approved by the Research Collective are listed here.</p>
+            <Button className="rc-button" onClick={open}>List Experiment</Button>
             <Modal className='experiment-modal' visible={opened} onClose={close}>
                 <ExperimentsModal thread={ experimentsThread }/>
             </Modal>
-            <VoteTable network="rinkeby" type="vote" creatorId={Constants.REVIEWBOARD_RINKEBY} columns={CURATION_COLUMNS}/>
+            <Box>
+            <p className="sectionSubTitle"> Experiments submitted to the Rinkeby DAO  <a  rel="noopener noreferrer" target="_blank" href="https://rinkeby.aragon.org/#/researchco/0xa7ab603bf2ee5de01907724634349b51b29f0697/">'ReviewBoard' <IconExternal style={{position: "relative", top: "-2px"}} size="small"/> </a></p>
+            <VoteTable network="rinkeby" creatorId={Constants.REVIEWBOARD_RINKEBY} columns={Constants.COLUMNS_VOTES}/>
+            </Box>
+            <Box>
+            <p className="sectionSubTitle"> Experiments submitted to the Discourse/Rinkeby DAO  <a  rel="noopener noreferrer" target="_blank" href="https://rinkeby.aragon.org/#/researchco/0xa7ab603bf2ee5de01907724634349b51b29f0697/">'ResearchCo' <IconExternal style={{position: "relative", top: "-2px"}} size="small"/> </a></p>
 
+            <VoteTable network="rinkeby" creatorId={Constants.RESEARCHCO_RINKEBY} columns={Constants.COLUMNS_VOTES}/>
+            </Box>
+            <Box>
+            <p className="sectionSubTitle"> Reviewers of the  <a  rel="noopener noreferrer" target="_blank" href="https://rinkeby.aragon.org/#/researchco/0xa7ab603bf2ee5de01907724634349b51b29f0697/">'ResearchCo Discourse' <IconExternal style={{position: "relative", top: "-2px"}} size="small"/> </a></p>
+            <MemberTable network="rinkeby" columns={Constants.COLUMNS_MEMBERS} appAddress={Constants.RESEARCHCO_RINKEBY} />
+            </Box>
         </div>
     )
 }

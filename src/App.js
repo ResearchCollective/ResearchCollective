@@ -4,13 +4,11 @@ import { Main } from '@aragon/ui'
 import Box from '3box'
 import Chat from './components/Chat';
 import Experiments from './components/experiments/Experiments';
-import Navbar from './components/Header/Header';
 import Home from './pages/Home';
 import Header from './components/Header/Header';
 import Votes from './components/Votes';
 import Resources from './components/Resources';
 import Roster from './components/Roster';
-import LoginModal from './components/auth/LoginModal';
 import Fortmatic from 'fortmatic';
 import Web3 from 'web3';
 import { Connect } from '@aragon/connect-react'
@@ -105,8 +103,9 @@ async open3BoxSpace() {
   }
     if (this.state.account) {
       console.log("Metamask enabled")
-      // Now MetaMask's provider has been enabled, we can start working with 3Box
-}
+      //TODO:  Now MetaMask's provider has been enabled, we can start working with 3Box
+
+    }
 }
 
 
@@ -136,6 +135,9 @@ render() {
                 }}/>
                 <Route path="/votes">
                     <Votes   box={this.state.box} address={this.state.address} />
+                </Route>
+                <Route path="/roster">
+                    <Roster/>
                 </Route>
                 <Route path="/resources">
                     <Resources   box={this.state.box}  loginMagic={this.loginMagic} loginMetaMask={this.loginMetaMask} space={this.state.space} address={this.state.address} />

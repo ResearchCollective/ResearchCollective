@@ -6,7 +6,7 @@ import LoginModal from '../auth/LoginModal';
 
 const Header = (props) => {
   const {loginMagic, loginMetamask} = props
-  const docsURL = 'https://www.notion.so/ResearchCo-Covidathon-2ae1203029ed4c2cb4f5b6056ae7b89c'
+  const docsURL = 'https://www.notion.so/Research-Collective-2ae1203029ed4c2cb4f5b6056ae7b89c'
   return(
     <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
     <Navbar.Brand><Link to='/'>Research Collective</Link></Navbar.Brand>

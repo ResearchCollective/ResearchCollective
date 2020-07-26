@@ -5,6 +5,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { gql } from 'apollo-boost';
 import ProfileHover from 'profile-hover';
 import Loading from "./Loading";
+import * as Constants from '../constants';
 
 class Registry extends Component {
     state = {
@@ -25,7 +26,7 @@ loadData() {
            client.query({
             query: gql`
              {
-                votes(first:20, where: { creator: "${this.props.creatorId}"}){
+                votes(first:20, where: { orgAddress: "${this.props.creatorId}"}){
                 id
                 creator
                 metadata
@@ -46,7 +47,7 @@ render() {
              {this.state.graphData &&  <Loading data={this.state.graphData}/>}
              {this.state.graphData.length > 0 &&
                  <DataView  theme={'light'}
-                    fields={this.props.columns}
+                    fields={Constants.COLUMNS_VOTES}
                     entries={this.state.graphData}
                     renderEntryExpansion={({description}) => {
                           return [<h1 style={{width: "100%"}}>{description}</h1>]
@@ -74,24 +75,25 @@ function processGraph(data) {
         console.log(item);
         console.log("Yea Power: " + item.yea + " Nay Power: " + item.nay);
         //TODO: Add in check to see if the vote's duration has passed
-        //TODO: Bug test to make sure the quorum check is working
+        //TODO: Get minAcceptQuorum to work ... && (item.yea + item.nay > item.minAcceptQuorum)
         //TODO: Make the yea vs nay ratio reflect the DAO's voting threshold
-    //    if ((item.yea > item.nay) && (item.yea + item.nay > item.minAcceptQuorum)) {
-      //throw out the test votes
-      if (!item.metadata.includes("test vote"))  {
-           try {
+        //Throw out test votes; make sure the vote passed; ignore votes w/o human readable metadata
+        if (!item.metadata.includes("test vote") && (item.metadata.length > 0) && (item.yea > item.nay) ) {
+         try {
                 console.log("Trying to make JSON object for " + item.metadata);
                 var metadata = JSON.parse(item.metadata);
                 let composite = {
                     ...item,
                     ...metadata
                 };
+                //IF there is no title, we will use the description instead
                 if (!composite.hasOwnProperty("title")) {
                   composite.title = composite.description;
                   composite.description = "Additional details not provided; check link for more information."
                 }
                 processedData[processedData.length] = composite;
             } catch (e) {
+              //JSON format failed; let's fill in the blanks instead
               item.title = item.metadata;
               item.description = "Additional details not provided; check link for more information."
               item.owner = "N/A";
@@ -99,11 +101,11 @@ function processGraph(data) {
               processedData[processedData.length] = item;
               }
             }
-        //  }
+          }
         }
-      }
+        console.log("Finished Data from VoteTable: ")
+        console.log(processedData);
     return processedData;
   }
-
 
 export default Registry;

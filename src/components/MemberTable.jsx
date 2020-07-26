@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, IconExternal, Box, DataView} from '@aragon/ui';
+import { DataView} from '@aragon/ui';
 import ApolloClient from 'apollo-boost';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { gql } from 'apollo-boost';
@@ -25,7 +25,7 @@ loadData() {
            client.query({
             query: gql`
             {
-              miniMeTokens(first: 20, where: { appAddress: "${this.props.appAddress}"}) {
+              miniMeTokens(first: 20, where: { orgAddress: "${this.props.appAddress}"}) {
                 holders{
                   address
                   balance
@@ -33,8 +33,7 @@ loadData() {
               }
             }
         `
-      }).then(result =>  this.setState({graphData: processGraph(result.data.miniMeTokens[0].holders), client: client}))};
-
+      }).then(result =>  this.setState({graphData: result.data.miniMeTokens[0].holders, client: client}))};
 
 
 render() {
@@ -62,11 +61,6 @@ render() {
 }
 
 
-function processGraph(data) {
-  console.log("Token holders data:");
-  console.log(data);
-  return data;
-  }
 
 
 export default Registry;
