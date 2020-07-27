@@ -9,7 +9,6 @@ import * as Constants from '../../constants';
 
 const Experiments = ({experimentsThread}) => {
 
-    console.log('Experiements Thread:',experimentsThread)
 
     // state for opening and closing modal//
     const [opened, setOpened ] = useState(false)

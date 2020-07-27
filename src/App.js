@@ -57,13 +57,13 @@ account: null,
 //      }
 //}
 
-async auth3box() {
+async auth3box(provider) {
     const address = this.state.address;
     const spaces = ['researchCollective'];
-    const box = await Box.create(window.ethereum);
+    //const box = await Box.create(window.ethereum);
+    const box = await Box.create(provider);
     await box.auth(spaces, { address });
     await box.syncDone;
-    this.setState({address: address})
     this.setState({box: box });
 }
 
@@ -71,15 +71,28 @@ loginMagic = async () => {
      console.log('Attempting to login via magic');
      let fm = new Fortmatic('pk_test_FDABC9E0FE176C29');
      let web3 = new Web3(fm.getProvider());
+     let myAccount = "0Fx";
      fm.user.login().then(() => {
          web3.eth.getAccounts((error, accounts) => {
-             let myAccount = accounts.toString();
+             myAccount = accounts[0].toString();
              console.log('Magic account:', myAccount);
-             this.setState({address: this.address});
-             console.log('Magic address:', this.address);
-
+             console.log(myAccount);
+             this.setState({address: myAccount});
+             console.log('address state:', this.state.address);
          }).then(console.log);
      });
+     console.log('Opening 3Box Space');
+     const address = this.state.address;
+     const spaces = ['researchCollective'];
+     //const box = await Box.create(window.ethereum);
+     const box = await Box.create(web3);
+     await box.auth(spaces, { address });
+     await box.syncDone;
+     this.setState({box: box });
+     const space = await this.state.box.openSpace('researchCollective');
+     await space.syncDone;
+     this.setState({space: space});
+     console.log('Space set: ', this.state.space);
  }
 
 async open3BoxSpace() {
@@ -91,7 +104,7 @@ async open3BoxSpace() {
   console.log('Space set: ', this.state.space);
 }
 
- loginMetaMask = async () => {
+ async loginMetaMask() {
   if (typeof window.ethereum == "undefined") {
       this.setState({ noWeb3Browser: true });
   } else {
@@ -103,8 +116,9 @@ async open3BoxSpace() {
   }
     if (this.state.account) {
       console.log("Metamask enabled")
-      //TODO:  Now MetaMask's provider has been enabled, we can start working with 3Box
-
+      this.auth3box();
+      this.open3BoxSpace();
+      console.log("3box auth'd complete: " + this.state.space + this.state.box);
     }
 }
 
@@ -120,7 +134,7 @@ render() {
                 <Route path="/chat">
                     <Chat  box={this.state.box} address={this.state.address}/>
                 </Route>
-               <Route path="/daos">
+               <Route path="/roster">
                       <Roster  box={this.state.box} space={this.state.space} address={this.state.address}/>
                 </Route>
               {/* //  <Route path="/notes">

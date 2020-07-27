@@ -58,7 +58,7 @@ const Home = () => {
                              <h1 className="centerText hero-sub-title pushUp">a moderately friendly network of Expert DAOs</h1>
                              <div className="buttonContainer pushDown flex-container">
                                 <a  className="padding-right" target="_blank" rel="noopener noreferrer"  href="https://luisivan.net/posts/expert-daos"><Button label="What is an Expert DAO?" mode="neutral"/></a>
-                                <a className="padding-left" target="_blank" rel="noopener noreferrer"  href="https://tristanerr.typeform.com/to/VOEZ4F"><Button className="rc-button" label="Join an Expert DAO" /></a>
+                                <a className="padding-left" target="_blank" rel="noopener noreferrer"  href="https://t.me/joinchat/EObaChML8AxqbUZtiyqeKQ"><Button className="rc-button" label="Join the Discussion" /></a>
                              </div>
                         </Col>
                     </Row>
