@@ -37,8 +37,12 @@ const Experiments = ({experimentsThread}) => {
                 <ExperimentsModal thread={ experimentsThread }/>
             </Modal>
             <Box>
-            <p className="sectionSubTitle"> Experiments submitted to the Rinkeby DAO  <a  rel="noopener noreferrer" target="_blank" href="https://rinkeby.aragon.org/#/researchco/0xa7ab603bf2ee5de01907724634349b51b29f0697/">'ReviewBoard' <IconExternal style={{position: "relative", top: "-2px"}} size="small"/> </a></p>
+            <p className="sectionSubTitle"> Experiments submitted to the Rinkeby DAO  <a  rel="noopener noreferrer" target="_blank" href="https://rinkeby.aragon.org/#/reviewboard/">'ReviewBoard' <IconExternal style={{position: "relative", top: "-2px"}} size="small"/> </a></p>
             <VoteTable network="rinkeby" creatorId={Constants.REVIEWBOARD_RINKEBY} columns={Constants.COLUMNS_VOTES}/>
+            </Box>
+            <Box>
+            <p className="sectionSubTitle"> Reviewers of the  <a  rel="noopener noreferrer" target="_blank" href="https://rinkeby.aragon.org/#/researchco/0xa7ab603bf2ee5de01907724634349b51b29f0697/">'ResearchCo Discourse' <IconExternal style={{position: "relative", top: "-2px"}} size="small"/> </a></p>
+            <MemberTable network="rinkeby" columns={Constants.COLUMNS_MEMBERS} appAddress={Constants.REVIEWBOARD_RINKEBY} />
             </Box>
             <Box>
             <p className="sectionSubTitle"> Experiments submitted to the Discourse/Rinkeby DAO  <a  rel="noopener noreferrer" target="_blank" href="https://rinkeby.aragon.org/#/researchco/0xa7ab603bf2ee5de01907724634349b51b29f0697/">'ResearchCo' <IconExternal style={{position: "relative", top: "-2px"}} size="small"/> </a></p>
@@ -49,6 +53,7 @@ const Experiments = ({experimentsThread}) => {
             <p className="sectionSubTitle"> Reviewers of the  <a  rel="noopener noreferrer" target="_blank" href="https://rinkeby.aragon.org/#/researchco/0xa7ab603bf2ee5de01907724634349b51b29f0697/">'ResearchCo Discourse' <IconExternal style={{position: "relative", top: "-2px"}} size="small"/> </a></p>
             <MemberTable network="rinkeby" columns={Constants.COLUMNS_MEMBERS} appAddress={Constants.RESEARCHCO_RINKEBY} />
             </Box>
+            <div className="sectionBreak"/>
         </div>
     )
 }

@@ -78,7 +78,7 @@ function processGraph(data) {
         //TODO: Get minAcceptQuorum to work ... && (item.yea + item.nay > item.minAcceptQuorum)
         //TODO: Make the yea vs nay ratio reflect the DAO's voting threshold
         //Throw out test votes; make sure the vote passed; ignore votes w/o human readable metadata
-        if (!item.metadata.includes("test vote") && (item.metadata.length > 0) && (item.yea > item.nay) ) {
+      //  if (!item.metadata.includes("test vote") && (item.metadata.length > 0) && (item.yea > item.nay) ) {
          try {
                 console.log("Trying to make JSON object for " + item.metadata);
                 var metadata = JSON.parse(item.metadata);
@@ -98,10 +98,10 @@ function processGraph(data) {
               item.description = "Additional details not provided; check link for more information."
               item.owner = "N/A";
               item.url = "N/A";
-              processedData[processedData.length] = item;
+              //processedData[processedData.length] = item;
               }
             }
-          }
+      //    }
         }
         console.log("Finished Data from VoteTable: ")
         console.log(processedData);

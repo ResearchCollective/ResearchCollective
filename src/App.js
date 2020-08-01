@@ -82,11 +82,11 @@ loginMagic = async () => {
          }).then(console.log);
      });
      console.log('Opening 3Box Space');
-     const address = this.state.address;
+     myAccount = this.state.address;
      const spaces = ['researchCollective'];
      //const box = await Box.create(window.ethereum);
      const box = await Box.create(web3);
-     await box.auth(spaces, { address });
+     await box.auth(spaces, { myAccount });
      await box.syncDone;
      this.setState({box: box });
      const space = await this.state.box.openSpace('researchCollective');
